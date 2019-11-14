@@ -1,36 +1,20 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>
+ <?php
+/**
+ * Created by PhpStorm.
+ * User: tim11
+ * Date: 7-11-2019
+ * Time: 09:52
+ */
+include_once("../src/core/init.php");
+$pageTitle = "Home";
+include_once("../public/includes/header.php");
+?>
 
-        .card {
-            background-color: lightblue;
-            border: solid;
-            border-radius: 25px;
-            display: flex;
-        }
-        .card-img-top {
-        }
-        .card-body {
-        }
-        .card-title {
-        }
-        .card-text {
-        }
-        .btn-cart{
-        }
-        .btn-wishlist{
-        }
-
-    </style>
-
-</head>
-<body>
 <header>
-    <script src="https://kit.fontawesome.com/6756a99abc.js" crossorigin="anonymous"></script>
-    <div class=".header"></div>
-</header>
 
+<!--    <div class=".header"></div>-->
+<!--    <div include-html="includes/header.php"></div>-->
+</header>
 
 <div class="card" ;">
     <img src="" class="card-img-top" alt="">
@@ -44,8 +28,7 @@
 
 
 
-
 <!--put html footer here-->
-
-</body>
-</html>
+<?php
+include_once("../public/includes/footer.php");
+?>
