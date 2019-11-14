@@ -37,6 +37,7 @@ $pageTitle = "product"
         <div class="carousel-item">
             <img class="d-block w-100" src="test3.jpg" alt="Third slide">
         </div>
+
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,7 +47,9 @@ $pageTitle = "product"
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-<div class="">
+    <div class="panel-body">
+        Uitgebreide beschrijving van een product die over meerdere paginas kan gaan
+    </div>
 
 </div>
 </div>
