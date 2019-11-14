@@ -5,8 +5,8 @@
  * Date: 7-11-2019
  * Time: 09:52
  */
-include_once("init.php");
-include_once("includes/header.php");
+require_once("init.php");
+require_once("includes/header.php");
 ?>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="app"></div>
