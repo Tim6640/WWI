@@ -22,37 +22,31 @@
 <body>
 
 <nav class="navbar bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
         <div class="row">
-            <div class="sm-col-12">
-                <div class="row">
-                    <a class="col-2 pr-0" href="<?=__ROOT__?>/public/index.php">
-                        <img class="logo-small" src="images/wwi_logo_small.png" alt="">
-                    </a>
-                    <a class="col-7 my-auto" href="<?=__ROOT__?>/index.php">
-                        Wide World Importers
-                    </a>
-                    <span class="col-3 text-center my-auto icons">
-                        <a>
-                            <i class="fas fa-user-alt mr-1"></i>
-                        </a>
-                        <a>
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </span>
+            <a class="col-2 pr-0" href="<?=__ROOT__?>/public/index.php">
+                <img class="logo-small img-fluid" src="images/wwi_logo_small.png" alt="">
+            </a>
+            <a class="col-6 my-auto" href="<?=__ROOT__?>/index.php">
+                <h1 class="title">Wide World <span>Importers</span></h1>
+            </a>
+            <span class="col-4 my-auto icons text-center">
+                <a class="mr-3">
+                    <i class="fas fa-user-alt"></i>
+                </a>
+                <a>
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </span>
+            <a class="col-2 pr-0" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="menu-button my-auto"><i class="fas fa-bars black"></i></span>
+            </a>
+            <form class="col-10 pl-0 input-group" method="post">
+                <input class="search form-control mr-0" type="text" name="search" placeholder="Zoeken">
+                <div class="input-group-append">
+                    <span class="input-group-text icons"><i class="fas fa-filter"></i></span>
                 </div>
-            </div>
-            <div class="sm-col-12">
-                <div class="row">
-                    <a href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span><i class="fas fa-bars"></i></span>
-                    </a>
-                    <form method="post">
-                        <input type="text" name="search" placeholder="Zoeken">
-                        <span><i class="fas fa-filter"></i></span>
-                    </form>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </nav>
