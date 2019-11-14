@@ -6,7 +6,7 @@
  * Time: 09:52
  */
 include_once("../src/core/init.php");
-$pageTitle = "Home";
+$pageTitle = "overzicht";
 include_once("../public/includes/header.php");
 ?>
 
