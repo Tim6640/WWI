@@ -3,7 +3,7 @@
 <head>
     <!--    # benodigde meta tags-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <!--    # bootstrap aan php kopelen-->
     <link  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" media="all">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -17,41 +17,32 @@
 <div  class="container">
     <h1> Product naam</h1>
 </div>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-        <div class="item active">
-            <img src="la.jpg" alt="Los Angeles">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="test1.jpg" alt="First slide">
         </div>
-
-        <div class="item">
-            <img src="chicago.jpg" alt="Chicago">
+        <div class="carousel-item">
+            <img class="d-block w-100" src="test2.jpg" alt="Second slide">
         </div>
-
-        <div class="item">
-            <img src="ny.jpg" alt="New York">
+        <div class="carousel-item">
+            <img class="d-block w-100" src="test1.jpg" alt="Third slide">
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
-</div>
-<div class="media">
-    <img class="align-self-start mr-3" alt="placeholder" src="">
-    <div class="media-body">
-        <h5 class="mt-0">Product</h5>
-        Product beschrijving
-    </div>
+
 </div>
 
 
