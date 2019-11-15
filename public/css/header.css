@@ -1,5 +1,7 @@
 .logo-small {
     min-width: 61px;
+    max-width: 70%;
+    display: block;
 }
 
 .icons {
