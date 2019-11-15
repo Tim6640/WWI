@@ -1,0 +1,13 @@
+img {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+.content {
+    min-height: auto;
+    border: aqua;
+    border-style: hidden;
+}
+.button {
+
+}
