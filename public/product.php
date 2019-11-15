@@ -20,6 +20,7 @@ $pageTitle = "product"
 <body>
 <div  class="container">
     <h1> Product naam</h1>
+    <div class="">
 </div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -47,8 +48,8 @@ $pageTitle = "product"
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-    <div class="panel-body">
-        Uitgebreide beschrijving van een product die over meerdere paginas kan gaan
+    <div class="panel-body" align="centre" >
+        Uitgebreide beschrijving van een product die over meerdere paginas kan gaan over ee
     </div>
 
 </div>
