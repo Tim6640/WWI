@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head lang="eng">
-    <title>betalingsbevestiging</title>
+    <title>betalingbevestiging</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/3c0f9f28b6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="betaling.css">
+    <link rel="stylesheet" type="text/css" href="css/betaling.css">
     <?php
     /**
      * Created by PhpStorm.
