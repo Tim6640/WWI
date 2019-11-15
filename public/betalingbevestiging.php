@@ -21,20 +21,52 @@
 </head>
 <body>
 <div class="container my-5 text-center" role="alert" style="">
-    <div class="row">
-        <div class="col-12">
-            <div class="m-auto alert alert-success">
-                <p class="text-center">U heeft succesvol betaald</p>
-                <img src="images/betaald.png" class="img-fluid m-auto" alt="Responsive image">
+    <?php
+    if(isset($_GET['bevestiging'])) {
+        $bevestiging = $_GET['bevestiging'];
+        if ($bevestiging == "true") {
+            print('
+        <div class="row">
+            <div class="col-12">
+                <div class="m-auto alert alert-success">
+                    <p class="text-center">U heeft succesvol betaald</p>
+                    <img src="images/betaald.png" class="img-fluid m-auto" alt="Responsive image">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row mt-3">
-        <div class="col-12">
-            <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
+        <div class="row mt-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
+            </div>
+        </div>');
+        } else {
+            print('
+        <div class="row">
+            <div class="col-12">
+                <div class="m-auto alert alert-danger">
+                    <p class="text-center">Betaling mislukt</p>
+                    <img src="images/geweigerd.png" class="img-fluid m-auto" alt="Responsive image">
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
+            </div>
+        </div>');
+        }
+    }
+    else
+    {
+        print("404");
+    }
+
+        ?>
+
+
+
 </body>
 </html>
 
