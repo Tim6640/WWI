@@ -65,7 +65,17 @@
             </a>
         </div>
     </div>
-    <div
+    <div class="row">
+        <div class="col-3">
+            <img class="img-fluid" src="test1.jpg" alt="">
+        </div>
+        <div class="col-3">
+            <img class="img-fluid" src="test2.jpg" alt="">
+        </div>
+        <div class="col-3">
+            <img class="img-fluid" src="test3.jpg" alt="">
+        </div>
+    </div>
     <div class="row">
         <div class="col-4">
             <h2>Prijs</h2>
