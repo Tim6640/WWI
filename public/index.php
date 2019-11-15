@@ -9,4 +9,4 @@ include_once("../src/core/init.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
 
-//include_once(PUBLIC_ROOT."includes/footer.php");
+include_once("../public/includes/footer.php");
