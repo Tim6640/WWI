@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * Created by PhpStorm.
  * User: tim11
@@ -9,16 +8,7 @@ session_start();
 include_once("../src/core/init.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
-?>
 
-<header>
-
-<!--    <div class=".header"></div>-->
-<!--    <div include-html="includes/header.php"></div>-->
-</header>
-
- <?php
- //placeholder
 
  $results = array(1,10, 20, 30, 40, 50, 227);
 if (isset($results)) {
@@ -53,7 +43,7 @@ if (isset($results)) {
 
             //print product image
             print "<div class=\"d-flex\" style='position: static'>";
-            print "<a href='/productPagina.php?pid=".$productNummer."/'<br>";
+            print "<a href='review.php?pid=".$productNummer."'<br>";
             print "<div class='p-2'>";
             //            print "<img src=\"data:image/jpeg;base64, '.base64_encode($photo).'\" class=\"card-img-top\">";
             print "<img src='images\wwi_logo.png' align='left' width='80px' height='auto'>";
