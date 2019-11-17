@@ -9,63 +9,113 @@ include_once("../src/core/init.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
 
-?>
+//start review page
+$succesfulReview=false;
 
+if (isset($validation)) {
+    //start connection---------------
+    $host = "localhost";
+    $databasename = "wideworldimporters";
+    $user = "root";
+    $pass = null;
+    $port = 3306;
+    $connection = mysqli_connect($host, $user, $pass, $databasename, $port);
 
+//input data-----------------------------------------------------------------------------------------------
+    $userId=$_session["UserId"];
+    $productNummer = $_GET["pid"];
+    $rating= $_POST["rating"];
+    $review= $_POST["review"];
 
-<?php
-//start connection
-$host = "localhost";
-$databasename = "wideworldimporters";
-$user = "root";
-$pass = null;
-$port = 3306;
-$connection = mysqli_connect($host, $user, $pass, $databasename, $port);
+    //check if review already exists
+    $sql = "SELECT COUNT(*) AS 'count' FROM review WHERE customerId=? AND StockItemID=?";
+    $statement = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statement, 'ii', $userId, $productNummer);
+    mysqli_stmt_execute($statement);
+    $result = mysqli_stmt_get_result($statement);
 
-//gather data
-$productNummer=$_GET["pid"];
-$sql = "SELECT StockItemName, Photo FROM stockitems WHERE StockItemID=?";
-$statement = mysqli_prepare($connection, $sql);
-mysqli_stmt_bind_param($statement, 'i', $productNummer);
-mysqli_stmt_execute($statement);
-$result = mysqli_stmt_get_result($statement);
+    if ($result['count'] = 0) {
+        //if review doesn't exist yet use insert
+        $sql = "INSERT userId, ProductID, rating, review INTO review VALUES (rating=?, review=?)";
+        $statement = mysqli_prepare($connection, $sql);
+        mysqli_stmt_bind_param($statement, 'is', $rating, $review);
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
 
-//show product image/name/additional info
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-$name = $row["StockItemName"];
-$photo = $row["Photo"];
+    } else {
+        //if review already exist yet use update
+        $sql = "UPDATE review SET (rating=?, review=?) WHERE UserId=? AND ProductID=? ";
+        $statement = mysqli_prepare($connection, $sql);
+        mysqli_stmt_bind_param($statement, 'is', $rating, $review);
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
 
-//print "$photo";
-print "<img src='images\wwi_logo.png' align='left' width='80px' height='auto' style='display:block'><br>";
-print "$name<br><br><br><br>";
+    }
+    $succesfulReview=true;
 
-//close connection
-mysqli_stmt_close($statement);
-mysqli_free_result($result);
-mysqli_close($connection);
+//close connection---------------
+    mysqli_stmt_close($statement);
+    mysqli_free_result($result);
+    mysqli_close($connection);
+}
 
+// check if review is set. if not then show form----------------------------------------------------------------
+if (!$succesfulReview) {
+    if (isset($_GET["pid"])) {
+        //start connection-----------------
+        $host = "localhost";
+        $databasename = "wideworldimporters";
+        $user = "root";
+        $pass = null;
+        $port = 3306;
+        $connection = mysqli_connect($host, $user, $pass, $databasename, $port);
 
+//gather data------------------------------------------------------------------
+        $productNummer = $_GET["pid"];
+        $sql = "SELECT StockItemName, Photo FROM stockitems WHERE StockItemID=?";
+        $statement = mysqli_prepare($connection, $sql);
+        mysqli_stmt_bind_param($statement, 'i', $productNummer);
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
 
+//show product image/name/additional info------------------------------------
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $name = $row["StockItemName"];
+        $photo = $row["Photo"];
+        print "<div class='card'>";
+        print "<img src='images\wwi_logo_small.png' width='160px' height='auto'>";
+        print "$name";
+        print "</div>";
 
+//close connection--------------------
+        mysqli_stmt_close($statement);
+        mysqli_free_result($result);
+        mysqli_close($connection);
 
-//review process
+//review process-------------------------------------------
 //form start
-print "<form method='get' action='insertReview.php'>";
-
+        $validation=true;
+        print "<br><form method='post' action='review.php'>";
 //input rating
-print "score<br>";
-print "<input type='text' value='5,0' name='rating'><br>";
-
+        print "score<br>";
+        print "<input type='text' value='5,0' name='rating'><br>";
 //input reviewtext
-print "Review<br>";
-print "<input type='text' value='Schrijf hier uw review' name='review'><br><br>";
-
+        print "Review<br>";
+        print "<textarea id='review' rows='6' cols='37'>Plaats hier uw review</textarea><br><br>";
 //input review button
-print "<input type='submit' value='Plaatsen'>";
-
+        print "<input type='submit' value='Plaatsen'>";
 //form end
-print "</form>";
+        print "</form>";
 
+        //if pid is not set-----------------------------------------------------
+    } else {
+        print "Deze pagina bestaat niet<br>";
+        print "klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+    }
+} else {
+    print "review is succesvol gemaakt";
+    print "klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+}
 
 
 include_once("../public/includes/footer.php");

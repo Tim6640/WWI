@@ -37,16 +37,14 @@ if (isset($results)) {
 
             //start card body
             print "<div class=\"card\" ;\">";
-/*            print "<a href='/productPagina.php?id=<?php echo $productNummer; ?>' style='display:block; text-decoration: none'>";*/
             print "<div class=\"card-body\">";
-//            print "<h5 class=\"card-title\">" . $name ."</h5>";
 
             //print product image
             print "<div class=\"d-flex\" style='position: static'>";
             print "<a href='review.php?pid=".$productNummer."'<br>";
             print "<div class='p-2'>";
             //            print "<img src=\"data:image/jpeg;base64, '.base64_encode($photo).'\" class=\"card-img-top\">";
-            print "<img src='images\wwi_logo.png' align='left' width='80px' height='auto'>";
+            print "<img src='images\wwi_logo_small.png' align='left' width='80px' height='auto'>";
             print "</div>";
             print "</a>";
 
@@ -58,8 +56,6 @@ if (isset($results)) {
             print "<h6>€ ".$price."</h6>";
             print "</div>";
             print "</a>";
-
-//            print "<a href='/winkelwagen.php?pid=".$productNummer."/'<i class=\"fas fa-cart-plus fa-2x\"></i></button><br>";
 
             //print icons
             print "<div class='p-2 ml-auto'>";
@@ -76,23 +72,10 @@ if (isset($results)) {
     mysqli_close($connection);
 
 } else {
-    print "helaas bestaat het gezochte product niet";
+    print "helaas bestaat het gezochte product niet<br>";
+    print "klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
 }
- ?>
-
-<!--<div class="card" ;">-->
-<!--    <img src="//plaatjeslocatie/product/plaatje1.png" class="card-img-top" alt="">-->
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title">Titel | Rating | Prijs</h5>-->
-<!--        <p class="card-text">Hier komt de product beschrijving zoals wat het kan, welke kleur het heeft of het kan vliegen etc</p>-->
-<!--        <a href="#" class="btn-cart">winkelwagen</a>-->
-<!--        <a href="#" class="btn-wishlist">wishlist</a>-->
-<!--    </div>-->
-<!--</div>-->
 
 
-
-<!--put html footer here-->
-<?php
 include_once("../public/includes/footer.php");
 ?>
