@@ -1,3 +1,28 @@
 .container {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
+    border-width: 0px;
+    padding:0px;
+
+}
+.dropdown-menu {
+    border: none !important;
+}
+.card{
+    display: block;
+    border: none;
+}
+.circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #70ddff;
+    padding-top: 15px;
+}
+.card{
+    border: none !important;
+}
+.navbar-fixed-top {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

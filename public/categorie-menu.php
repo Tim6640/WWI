@@ -24,86 +24,53 @@ include_once("../public/includes/header.php");
 //include_once(PUBLIC_ROOT."includes/footer.php");
 ?>
 
+<!-- dropdown Menu -->
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+<nav class="navbar navbar-default navbar-slide-nav">
+    <div class="container">
+        <div id="navbar" class="navbar-slide offcanvas" style="width: 100%;">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fas fa-bars fa-2x"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="card text-center" id="123">
+                                    <button class="btn"><i class="fas fa-gamepad fa-3x rounded-circle circle"></i></button>
+                                    <span class="h5"><h5>1</h5></span>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <button class="btn"><i class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
+                                    <span class="h5"><h5>2</h5></span>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <button class="btn"><i class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>
+                                    <span class="h5"><h5>3</h5></span>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <button class="btn"><i class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>
+                                    <h5>4</h5>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <button class="btn"><i class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>
+                                    <h5>5</h5>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <button class="btn"><i class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>
+                                    <h5>6</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+    </div><!--/.nav-collapse -->
     </div>
-</div>
+</nav>
 
-<h3>Productcategorieën:</h3>
-<div class="container text-center">
-    <div class="row">
-        <div class="col my-md-lg">
-            <i class="fas fa-gamepad fa-4x"></i>
-            <h5>Categorie 1</h5>
-        </div>
-        <div class="col my-md-lg">
-            <i class="fas fa-laptop fa-4x"></i>
-            <h5>Categorie 2</h5>
-        </div>
-        <div class="col my-md-lg">
-            <i class="fas fa-baby-carriage fa-4x"></i>
-            <h5>Categorie 3</h5>
-        </div>
-    </div>
-</div>
 
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <i class="fas fa-band-aid fa-4x"></i>
-            <h5>Categorie 4</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-basketball-ball fa-4x"></i>
-            <h5>Categorie 5</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-cannabis fa-4x"></i>
-            <h5>Categorie 6</h5>
-        </div>
-    </div>
-</div>
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <i class="fas fa-gamepad fa-4x"></i>
-            <h5>Categorie 7</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-bong fa-4x"></i>
-            <h5>Categorie 8</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-cat fa-4x"></i>
-            <h5>Categorie 9</h5>
-        </div>
-    </div>
-</div>
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <i class="fab fa-apple fa-4x"></i>
-            <h5>Categorie 10</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-birthday-cake fa-4x"></i>
-            <h5>Categorie 11</h5>
-        </div>
-        <div class="col">
-            <i class="fas fa-bus fa-4x"></i>
-            <h5>Categorie 12</h5>
-        </div>
-    </div>
-</div>
 <!-- Dit is zijn de body-includes -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
