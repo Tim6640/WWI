@@ -24,6 +24,10 @@ if (!empty($_POST["submit"])) {
     $port = 3306;
     $connection = mysqli_connect($host, $user, $pass, $databasename, $port);
 
+    if (!$connection) {
+        die('Connect Error: ' . mysqli_connect_error());
+    }
+
 //input data to database--------------------------------------------------------------------------------------------
 //    $customerId=$_session["CustomerId"];
     $customerId=1;
@@ -33,29 +37,31 @@ if (!empty($_POST["submit"])) {
     $review= $_POST["review"];
 
     //check if review already exists
-    $sql = "SELECT COUNT(*) AS \"count\" FROM review WHERE customerId=? AND StockItemID=?";
+    $sql = "SELECT COUNT(*) AS 'count' FROM review WHERE customerId=? AND StockItemID=?";
     $statement = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statement, 'ii', $customerId, $productNummer);
     mysqli_stmt_execute($statement);
-    $result = mysqli_stmt_get_result($statement);
 
-    if ($result['count'] = 0) {
+    if(mysqli_stmt_affected_rows($statement) != 1) {
+        die("<br>issues");
+    }
+
+    $result = mysqli_stmt_get_result($statement);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+    if ($row['count'] = 0) {
         //if review doesn't exist yet use insert
         $sql = "INSERT CustomerId, ProductID, rating, review INTO review VALUES (rating=?, review=?)";
-        $statement = mysqli_prepare($connection, $sql);
-        mysqli_stmt_bind_param($statement, 'ds', $rating, $review);
-        mysqli_stmt_execute($statement);
-        $result = mysqli_stmt_get_result($statement);
-
     } else {
         //if review already exist yet use update
         $sql = "UPDATE review SET (rating=?, review=?) WHERE CustomerId=? AND ProductID=? ";
-        $statement = mysqli_prepare($connection, $sql);
-        mysqli_stmt_bind_param($statement, 'ds', $rating, $review);
-        mysqli_stmt_execute($statement);
-        $result = mysqli_stmt_get_result($statement);
-
     }
+    $statement = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statement, 'ds', $rating, $review);
+    mysqli_stmt_execute($statement);
+    $result = mysqli_stmt_get_result($statement);
+
+
     $succesfulReview=true;
     print "review is gepost";
 
@@ -107,7 +113,7 @@ if (!$succesfulReview) {
         print "<input type='text' value='5,0' name='rating'><br>";
 //input reviewtext
         print "Review<br>";
-        print "<textarea name='review' rows='6' cols='37'>Plaats hier uw review</textarea><br><br>";
+        print "<input name='review' rows='6' cols='37'>Plaats hier uw review</input><br><br>";
 //input review button
         print "<input type='submit' name='submit' value='Plaatsen'>";
 //form end
