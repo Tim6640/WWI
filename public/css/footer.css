@@ -3,7 +3,8 @@
     height: 150px;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 30%;
+    max-width: 50%;
     background-color: #00BDF3;
     text-align: center;
     overflow: hidden;
