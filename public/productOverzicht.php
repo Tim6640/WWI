@@ -41,7 +41,7 @@ if (isset($results)) {
 
             //print product image
             print "<div class=\"d-flex\" style='position: static'>";
-            print "<a href='review.php?pid=".$productNummer."'<br>";
+            print "<a href='/productPagina.php?pid=".$productNummer."/'<br>";
             print "<div class='p-2'>";
             //            print "<img src=\"data:image/jpeg;base64, '.base64_encode($photo).'\" class=\"card-img-top\">";
             print "<img src='images\wwi_logo_small.png' align='left' width='80px' height='auto'>";
@@ -52,7 +52,28 @@ if (isset($results)) {
             print "<a style='color: #000000' href='/productPagina.php?pid=".$productNummer."/'<br>";
             print "<div class='p-2'>";
             print "<b class=\"card-title\">" . $name ."</b>";
+
+            //look up review----------------------------------------------------------------------------------
+//            $reviewHost = "localhost";
+//            $reviewDatabasename = "wideworldimporters";
+//            $reviewUser = "root";
+//            $reviewPass = null;
+//            $reviewPort = 3306;
+//            $reviewConnection = mysqli_connect($reviewHost, $reviewUser, $reviewPass, $reviewDatabasename, $reviewPort);
+//
+//            $reviewSql = "SELECT AVG(rating) FROM review WHERE StockItemId=? AND CustomerId=?";
+//            $reviewStatement = mysqli_prepare($reviewConnection, $reviewSql);
+//            mysqli_stmt_bind_param($reviewStatement, 'ii', $productNummer, $customerId);
+//            mysqli_stmt_execute($reviewStatement);
+//            $reviewResult = mysqli_stmt_get_result($reviewStatement);
+
             print "<h6> Review *****</h6>";
+
+//            mysqli_stmt_close($reviewStatement);
+//            mysqli_free_result($reviewResult);
+//            mysqli_close($reviewConnection);
+            //----------------------------------------------------------------------------------------------
+
             print "<h6>€ ".$price."</h6>";
             print "</div>";
             print "</a>";
