@@ -80,7 +80,7 @@ if (isset($results)) {
 
             //print icons
             print "<div class='p-2 ml-auto'>";
-            print "<a href='/winkelwagen.php?pid=".$productNummer."/'<i class=\"fas fa-cart-plus fa-2x\"></i><br>";
+            print "<a href='/winkelwagen.php?pid=".$productNummer."/'<i class=\"fas fa-cart-plus fa-2x\"></i></a><br>";
             print "<a href=\"/wishlist.php?pid=".$productNummer."/\"><i class=\"fas fa-heart fa-2x\"></i></a>";
             print "</div>";
             print "</div>";
