@@ -33,7 +33,7 @@ if (!empty($_POST["submit"])) {
     $review= $_POST["review"];
 
     //check if review already exists
-    $sql = "SELECT COUNT(*) AS 'count' FROM review WHERE customerId=? AND StockItemID=?";
+    $sql = "SELECT COUNT(*) AS \"count\" FROM review WHERE customerId=? AND StockItemID=?";
     $statement = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statement, 'ii', $customerId, $productNummer);
     mysqli_stmt_execute($statement);
