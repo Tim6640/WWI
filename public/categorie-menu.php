@@ -23,53 +23,74 @@ include_once("../public/includes/header.php");
 
 //include_once(PUBLIC_ROOT."includes/footer.php");
 ?>
-
-<!-- dropdown Menu -->
-
-<nav class="navbar navbar-default navbar-slide-nav">
-    <div class="container">
-        <div id="navbar" class="navbar-slide offcanvas" style="width: 100%;">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fas fa-bars fa-2x"></i> <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <div class="text-center">
-                            <div class="row">
-                                <div class="card text-center" id="123">
-                                    <button class="btn"><i class="fas fa-gamepad fa-3x rounded-circle circle"></i></button>
-                                    <span class="h5"><h5>1</h5></span>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <button class="btn"><i class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
-                                    <span class="h5"><h5>2</h5></span>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <button class="btn"><i class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>
-                                    <span class="h5"><h5>3</h5></span>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <button class="btn"><i class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>
-                                    <h5>4</h5>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <button class="btn"><i class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>
-                                    <h5>5</h5>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <button class="btn"><i class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>
-                                    <h5>6</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </li>
-        </ul>
-    </div><!--/.nav-collapse -->
+<div class="container">
+<div class="dropdown show">
+    <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"><i class="fas fa-bars fa-2x"></i>
+    </a>
+    <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+<!--        <button type="button" class="close">&times;</button>-->
+        <h5 class="">Productcategorieën</h5>
+            <div class="row">
+                <div class="col text-center">
+                    <a class="btn" href='/productOverzicht.php?category='"><i class="fas fa-gamepad fa-3x rounded-circle circle"></i></a>
+                    <h5>1</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
+                    <h5>2</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>
+                    <h5>3</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>
+                    <h5>4</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>
+                    <h5>5</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>
+                    <h5>6</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>
+                    <h5>3</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>
+                    <h5>4</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>
+                    <h5>5</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>
+                    <h5>6</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>
+                    <h5>3</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>
+                    <h5>4</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>
+                    <h5>5</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'https://www.windesheim.nl/'"><i class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>
+                    <h5>6</h5>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
-
+</div>
 
 <!-- Dit is zijn de body-includes -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
