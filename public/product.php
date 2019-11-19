@@ -61,36 +61,48 @@ $price = $row["RecommendedRetailPrice"];
 <body>
 <div class="container">
     <div class="row">
+        <div class="col-12">
+            <h6 class="text-center" style="font-size: x-large">
+                <?php print($name); ?>
+            </h6>
+        </div>
+    </div>
+    <div class="row" style="font-size: larger">
         <div class="col-9">
-            <h2> <?php print($name); ?></h2>
+            Score:
+            <i class="fas fa-star" style="color: gold"></i>
+            <i class="fas fa-star" style="color: gold"></i>
+            <i class="fas fa-star" style="color: gold"></i>
+            <i class="fas fa-star" style="color: gold"></i>
+            <i class="fas fa-star" style="color: gold"></i>
         </div>
         <div class="col-3">
-            <a href="betalingbevestiging.php"> <i class="fas fa-cart-plus" style="font-size:10vw;"></i> </a>
-            <a href="betalingbevestiging.php"> <i class="fas fa-heart" style="font-size:10vw;"></i> </a>
+            <a href="betalingbevestiging.php">
+                <i class="fas fa-cart-plus"></i>
+            </a>
+            <a href="betalingbevestiging.php">
+                <i class="fas fa-heart"></i> </a>
         </div>
     </div>
 <!--    Carrousel start-->
+    <div class="row">
     <div class="col-12">
-        <div id="carousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselIndicators" data-slide-to="2"></li>
-                <li data-target="#carouselIndicators" data-slide-to="3"></li>
-            </ol>
+        <div id="carousel" class="carousel slide" data-ride="carousel" data-pause="hover" style=" width:100%; height: 100%; !important;">
 <!--            Carrousel inner items-->
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="margin-bottom:10%; height: 100%">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="test1.jpg" alt="First slide">
+                    <img class="img-fluid" src="test1.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="test2.jpg" alt="Second slide">
+                    <img class="img-fluid" src="test2.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="test3.jpg" alt="Third slide">
+                    <img class="img-fluid" src="test3.jpg" alt="Third slide">
                 </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="test3.jpg" alt="Third slide">
+                <div class="carousel-item" style="video{ width:100%; height: auto}">
+                    <video width="100%" height="auto" autoplay>
+                        <source src="test4.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 <!--            Carrousel controls-->
@@ -102,30 +114,32 @@ $price = $row["RecommendedRetailPrice"];
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-<!--            Carrousel small indicators help me with the scaling-->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel" data-slide-to="0" class="active">
+<!--            Carrousel small indicators !!help me with the scaling!!-->
+            <ol class="carousel-indicators" style="height: available">
+                <li data-target="#carousel" data-slide-to="0" class="active" style="width: 20%;">
                     <img class="d-block w-100" src="test1.jpg">
                 </li>
-                <li data-target="#carousel" data-slide-to="1">
+                <li data-target="#carousel" data-slide-to="1" style="width: 20%">
                     <img class="d-block w-100" src="test2.jpg">
                 </li>
-                <li data-target="#carousel" data-slide-to="2">
+                <li data-target="#carousel" data-slide-to="2" style="width: 20%">
                     <img class="d-block w-100" src="test3.jpg">
                 </li>
-                <li data-target="#carousel" data-slide-to="2">
+                <li data-target="#carousel" data-slide-to="3" style="width: 20%">
                     <img class="d-block w-100" src="test3.jpg">
                 </li>
             </ol>
         </div>
     </div>
+    </div>
+    <div class="h-divider" style="margin-top: 5%; border-top: white ">
 <!--    items under the carrousel-->
     <div class="row">
         <div class="col-4">
             <h2><?php print("€" . $price); ?></h2>
         </div>
         <div class="col-6">
-            <h2>Bezorginformatie</h2>
+            <h2>Voorraad</h2>
         </div>
     </div>
 <!--    style for css needs to be moved-->
@@ -142,7 +156,7 @@ $price = $row["RecommendedRetailPrice"];
     </div>
 <!--    needs intermediate database  -->
     <div class="col-12">
-        <h4>Productbeschrijving</h4>
+        <h4>Productcatogorie</h4>
     </div>
     <div class="col-12">
         <div class="panel-body" align="centre">
@@ -150,11 +164,11 @@ $price = $row["RecommendedRetailPrice"];
             filler
         </div>
     </div>
-    <div class="col-12" align="middle">
+    <div class="col-12" align="middle" style="margin-top: 5px">
         <div class="text-centre">
-            <button type="button" class="btn btn-primary btn-lg bnt-block">
-                <a class="fas fa-cart-plus" href="winkelmandje.php"> Shopping Cart </a>
-            </button>
+            <a type="button" class="btn btn-primary btn-lg bnt-block" href="winkelmandje.php">
+                <i class="fas fa-cart-plus"></i> Voeg toe aan winkelwagen
+            </a>
         </div>
         <div class="h-divider">
         </div>
