@@ -6,17 +6,12 @@
 
 .icons {
     font-size: 1.5em;
-    color: black;
 }
 
 .title {
     font-size: 1.7rem;
     line-height: 1;
     color: #00BDF3;
-}
-
-.title span {
-    color: #7A7A7A;
 }
 
 .search {
@@ -27,4 +22,8 @@
 .menu-button {
     font-size: 1.9em;
     width: 200px;
+}
+
+.header a{
+    text-decoration: none;
 }
