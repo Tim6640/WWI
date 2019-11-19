@@ -15,9 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="WideWorldImporters">
         <meta name="keywords" content="WWI, WideWorldImporters">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <!-- Bootstrap stylesheet include -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <!-- Project stylesheet includes -->
         <link rel="stylesheet" href="css/header.css">
         <!-- Fontawesome, handles the icons -->
@@ -27,7 +26,7 @@
     </head>
 <body>
 <!-- Header start -->
-<div class="header bg-primary">
+<div class="header bg-info">
     <div class="container p-3">
         <div class="row">
             <!-- Logo -->
@@ -36,20 +35,20 @@
             </a>
             <!-- Title -->
             <a class="col-6 col-md-7 my-auto pl-md-0" href="index.php">
-                <h1 class="title">Wide World <span>Importers</span></h1>
+                <h1 class="title">Wide World <span class="text-secondary">Importers</span></h1>
             </a>
             <!-- Account & shopping cart icons -->
             <span class="col-4 my-auto icons text-right">
-                <a class="mr-3 mr-md-5" href="#">
+                <a class="mr-3 mr-md-5 text-white" href="#">
                     <i class="fas fa-user-alt"></i>
                 </a>
                 <a class="mr-md-3" href="#">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-shopping-cart text-white"></i>
                 </a>
             </span>
             <!-- Menu icon -->
             <a class="col-2 col-md-1 pr-0 text-center" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="menu-button my-auto"><i class="fas fa-bars black"></i></span>
+                <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post">
