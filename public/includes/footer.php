@@ -18,7 +18,7 @@
 <!-- webpagina code-->
 <!-- Footer -->
 
-<footer class="bg-primary page-footer">
+<footer class="bg-info page-footer">
     <div class="container pt-3">
         <div class="row">
             <!-- logo -->
@@ -32,16 +32,16 @@
                 <h6 class="text-uppercase">over ons</h6>
                 <ul class="list-unstyled">
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fas fa-at"> E-mail</i></a>
+                        <a class="text-white" href="#!"><i class="fas fa-at"> E-mail</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fas fa-phone-alt"> Telefoon</i></a>
+                        <a class="text-white" href="#!"><i class="fas fa-phone-alt"> Telefoon</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fas fa-map-marker"> Adres</i></a>
+                        <a class="text-white" href="#!"><i class="fas fa-map-marker"> Adres</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="far fa-newspaper"> Nieuwsbrief</i></a>
+                        <a class="text-white" href="#!"><i class="far fa-newspaper"> Nieuwsbrief</i></a>
                     </li>
                 </ul>
             </div>
@@ -51,16 +51,16 @@
                 <h6 class="text-uppercase">Overig</h6>
                 <ul class="list-unstyled">
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fab fa-facebook"> Facebook</i></a>
+                        <a class="text-white" href="#!"><i class="fab fa-facebook"> Facebook</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fab fa-twitter-square"> Twitter</i></a>
+                        <a class="text-white" href="#!"><i class="fab fa-twitter-square"> Twitter</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fab fa-instagram"> Instagram</i></a>
+                        <a class="text-white" href="#!"><i class="fab fa-instagram"> Instagram</i></a>
                     </li>
                     <li>
-                        <a class="text-secondary" href="#!"><i class="fas fa-question-circle"></i> FAQ</i></a>
+                        <a class="text-white" href="#!"><i class="fas fa-question-circle"></i> FAQ</i></a>
                     </li>
                 </ul>
             </div>

@@ -18,7 +18,8 @@
         <!-- Bootstrap stylesheet include -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <!-- Project stylesheet includes -->
-        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
         <!-- Fontawesome, handles the icons -->
         <script src="https://kit.fontawesome.com/6756a99abc.js" crossorigin="anonymous"></script>
         <!-- Bootstrap javascript include -->
