@@ -1,5 +1,5 @@
 $blue:    #00BDF3 !default;
-$grey: #7C7C7C !default;
+$grey:    #7C7C7C !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
@@ -13,8 +13,6 @@ $cyan:    #17a2b8 !default;
 $primary:       $blue !default;
 $secondary:     $grey !default;
 $success:       $green !default;
-$info:          $cyan !default;
+$info:          #0000CB !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
