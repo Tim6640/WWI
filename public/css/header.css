@@ -28,3 +28,7 @@
     font-size: 1.9em;
     width: 200px;
 }
+
+.header a{
+    text-decoration: none;
+}
