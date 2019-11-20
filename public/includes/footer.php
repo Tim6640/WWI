@@ -29,7 +29,7 @@
             <!-- logo -->
             <!-- Over ons -->
             <div class="col-4">
-                <h6 class="text-uppercase">over ons</h6>
+                <h6 class="text-uppercase text-white">over ons</h6>
                 <ul class="list-unstyled">
                     <li>
                         <a class="text-white" href="#!"><i class="fas fa-at"> E-mail</i></a>
@@ -48,7 +48,7 @@
             <!-- Over ons -->
             <!-- Overig -->
             <div class="col-4">
-                <h6 class="text-uppercase">Overig</h6>
+                <h6 class="text-uppercase text-white">Overig</h6>
                 <ul class="list-unstyled">
                     <li>
                         <a class="text-white" href="#!"><i class="fab fa-facebook"> Facebook</i></a>
@@ -60,7 +60,7 @@
                         <a class="text-white" href="#!"><i class="fab fa-instagram"> Instagram</i></a>
                     </li>
                     <li>
-                        <a class="text-white" href="#!"><i class="fas fa-question-circle"></i> FAQ</i></a>
+                        <a class="text-white text-decoration-none" href="#!"><i class="fas fa-question-circle"></i> FAQ</i></a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Copyright -->
-    <div class="footer-copyright bg-secondary text-center">© ICT1ME2 Windesheim
+    <div class="footer-copyright bg-secondary text-center">© ICTM1e2 Windesheim
     </div>
     <!-- Copyright -->
 
