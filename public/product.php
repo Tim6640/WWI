@@ -1,9 +1,10 @@
 <!doctype html>
 <?php
+session_start()
 //add include
 //$pageTitle = "product"
 ?>
-<html lang="Ne">
+<html lang="Ne" xmlns="http://www.w3.org/1999/html">
 <head>
     <!--    # benodigde meta tags-->
     <meta charset="utf-8">
@@ -30,8 +31,6 @@
 // Logica
 if (isset($_GET["pid"])) {
     $productNummer = $_GET["pid"];
-
-
 } else {
     print ("helaas bestaat het gezochte product niet<br>");
     print ("klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina");
@@ -58,6 +57,7 @@ $price = $row["RecommendedRetailPrice"];
 ?>
 <!--# einde voorwerk-->
 <!--# begin pagina-->
+<
 <body>
 <div class="container">
     <div class="row">
@@ -69,7 +69,7 @@ $price = $row["RecommendedRetailPrice"];
     </div>
 <!--    Stars TODO-->
     <div class="row" style="font-size: larger">
-        <div class="col-9">
+        <div class="col-7">
             Score:
             <i class="fas fa-star" style="color: gold"></i>
             <i class="fas fa-star" style="color: gold"></i>
@@ -78,12 +78,14 @@ $price = $row["RecommendedRetailPrice"];
             <i class="fas fa-star" style="color: gold"></i>
         </div>
 <!--        Links naar winkelmand en verlanglijstje-->
-        <div class="col-3">
-            <a href="winkelmandje.php">
-                <i class="fas fa-cart-plus"></i>
+        <div class="col-5">
+            <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product">
+                <i class="fas fa-cart-plus fa-2x"></i>
             </a>
-            <a href="betalingbevestiging.php">
-                <i class="fas fa-heart"></i> </a>
+<!--            Niet doorsturen maar toevoegen-->
+            <input>
+                <i class="fas fa-heart fa-2x" ></i>
+            </input>
         </div>
     </div>
 <!--    Carrousel start-->
@@ -167,39 +169,41 @@ $price = $row["RecommendedRetailPrice"];
         </div>
     </div>
     <div class="col-12" align="middle" style="margin-top: 5px">
+        <!--        Door winkelen of naar winkelwagen op klik-->
+        </div>
         <div class="text-centre">
-            <a type="button" class="btn btn-primary btn-lg bnt-block" data-toggle="modal" data-target="#product">
+            <a type="button" class="btn btn-primary btn-lg bnt-block" data-toggle="modal" data-target="#product" onclick="$_SESSION["shoppingCart"] = $_GET["pid"];">
                 <i class="fas fa-cart-plus"></i> Voeg toe aan winkelwagen
             </a>
-        </div>
-        <!--        Door winkelen of naar winkelwagen op klik-->
-        <div class="modal" id="product">
-            <div class="modal-dialog">
-                <div class="model-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Wilt u verder winkelen of doorgaan naar de winkelwagen</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                            <a href="winkelmandje.php">
-                                Doorgaan naar de winkelwagen
-                            </a>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                            <a href="productpagina.php">
-                                Verder winkelen
-                            </a>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="h-divider">
         </div>
 <!--        Reviews to be added-->
         <div>
             <h1>review space</h1>
+        </div>
+        <div class="modal" tabindex="-1" id="product" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Wilt u verder winkelen of doorgaan naar de winkelwagen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <a type="button" class="btn btn-primary btn-lg bnt-block my-3" href="winkelmandje.php">
+                            Doorgaan naar de winkelwagen
+                        </a>
+                        <a type="button" class="btn btn-primary btn-lg bnt-block" href="productpagina.php">
+                            Verder winkelen
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -208,6 +212,7 @@ $price = $row["RecommendedRetailPrice"];
 mysqli_stmt_close($statement);
 mysqli_free_result($result);
 mysqli_close($connection);
+print($_SESSION["shoppingCart"])
 ?>
 </body>
 
