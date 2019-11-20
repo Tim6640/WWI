@@ -56,16 +56,16 @@ if (isset($products)) {
 
             <!--print product image-->
             <div class='d-flex'>
-            <a href='/productPagina.php?pid=" . $pid . "/'<br>
+            <a href='productPagina.php?pid=" . $pid . "/'<br>
             <div class='p-2'>
-            <img src='images\wwi_logo_small.png' class='product_image'>
-            </div>
+            <img src='images\productPlaceholder.png' class='product_image'>
             </a>
+            </div>
 
             <!--print title, review and price-->
-            <a class='a_text' href='/productPagina.php?pid=" . $pid . "/'<br>
+            <a class='a_text' href='productPagina.php?pid=" . $pid . "'<br>
             <div class='p-2'>
-            <b class=\"card-title\">" . $name . "</b>";
+            <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
         print "<h6> Review *****</h6>";
@@ -77,7 +77,7 @@ if (isset($products)) {
             <!--print icons-->
             <div class='ml-auto my-auto'>
             <form method='post' type='hidden' value='addToCart'>
-            <a class='winkelwagen' href='productOverzicht.php?productgroep=".$groep."'><i class='fas fa-cart-plus fa-2x'></i></a><br>
+            <a class='winkelwagen' href='winkelwagen.php?pid=".$pid."'><i class='fas fa-cart-plus fa-2x'></i></a><br>
             </form>
             <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'><i class='fas fa-heart fa-2x'></i></a>
             </div>
@@ -90,9 +90,6 @@ print "hier komen de search results";
 } else {
     print "helaas bestaat het gezochte product niet<br>
     klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
-}
-if (isset($_POST["addToCart"])) {
-    print "<br>it works";
 }
 
 print "</div>";
