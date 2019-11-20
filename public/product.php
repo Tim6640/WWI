@@ -67,6 +67,7 @@ $price = $row["RecommendedRetailPrice"];
             </h6>
         </div>
     </div>
+<!--    Stars TODO-->
     <div class="row" style="font-size: larger">
         <div class="col-9">
             Score:
@@ -76,8 +77,9 @@ $price = $row["RecommendedRetailPrice"];
             <i class="fas fa-star" style="color: gold"></i>
             <i class="fas fa-star" style="color: gold"></i>
         </div>
+<!--        Links naar winkelmand en verlanglijstje-->
         <div class="col-3">
-            <a href="betalingbevestiging.php">
+            <a href="winkelmandje.php">
                 <i class="fas fa-cart-plus"></i>
             </a>
             <a href="betalingbevestiging.php">
@@ -166,12 +168,36 @@ $price = $row["RecommendedRetailPrice"];
     </div>
     <div class="col-12" align="middle" style="margin-top: 5px">
         <div class="text-centre">
-            <a type="button" class="btn btn-primary btn-lg bnt-block" href="winkelmandje.php">
+            <a type="button" class="btn btn-primary btn-lg bnt-block" data-toggle="modal" data-target="#product">
                 <i class="fas fa-cart-plus"></i> Voeg toe aan winkelwagen
             </a>
         </div>
+        <!--        Door winkelen of naar winkelwagen op klik-->
+        <div class="modal" id="product">
+            <div class="modal-dialog">
+                <div class="model-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Wilt u verder winkelen of doorgaan naar de winkelwagen</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                            <a href="winkelmandje.php">
+                                Doorgaan naar de winkelwagen
+                            </a>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                            <a href="productpagina.php">
+                                Verder winkelen
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="h-divider">
         </div>
+<!--        Reviews to be added-->
         <div>
             <h1>review space</h1>
         </div>
@@ -187,3 +213,4 @@ mysqli_close($connection);
 
 
 </html>
+<!--End of html-->
