@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 /**
  * Created by PhpStorm.
  * User: tim11
@@ -15,6 +17,8 @@ print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 print "<div class='container'>";
 
 
+
+//lookup groupitems from wwi database
 if (isset($_GET["productgroep"])) {
     $groep = $_GET["productgroep"];
     //establish connection
@@ -63,8 +67,8 @@ if (isset($products)) {
             </div>
 
             <!--print title, review and price-->
-            <a class='a_text' href='productPagina.php?pid=" . $pid . "'<br>
-            <div class='p-2'>
+            <a href='productPagina.php?pid=" . $pid . "'<br>
+            <div class='ml-auto p-2 a_text'>
             <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
@@ -75,10 +79,12 @@ if (isset($products)) {
             </a>
 
             <!--print icons-->
-            <div class='ml-auto my-auto'>
-            <form method='post' type='hidden' value='addToCart'>
-            <a class='winkelwagen' href='winkelwagen.php?pid=".$pid."'><i class='fas fa-cart-plus fa-2x'></i></a><br>
-            </form>
+            <div class='ml-auto my-auto'>";
+
+        //send session page to shopping cart
+        print "<form><button name='button' formmethod='post' value=".$pid." type='submit'><i class='fas fa-cart-plus fa-2x'></i></button></form>
+            <br>
+            <!--add function to add product to cart-->
             <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'><i class='fas fa-heart fa-2x'></i></a>
             </div>
             </div>
@@ -86,7 +92,7 @@ if (isset($products)) {
             </div>";
     }
 } else if (isset ($_post["search"])) {
-print "hier komen de search results";
+    print "hier komen de search results";
 } else {
     print "helaas bestaat het gezochte product niet<br>
     klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
@@ -94,5 +100,19 @@ print "hier komen de search results";
 
 print "</div>";
 
+//if (isset($_GET['addToCart'])) {
+//    if (isset($_SESSION['item'])) {
+//        $pid=$_GET['addToCart'];
+////        $cart = array($_SESSION['item']);
+////        array_push($cart, $pid);
+//        array_push($_SESSION['item'], $pid);
+//    } else {
+//        $_SESSION['item'] = $_GET['addToCart'];
+//    }
+//}
+//
+//print_r($_SESSION['item']);
+
 include_once("../public/includes/footer.php");
+
 ?>
