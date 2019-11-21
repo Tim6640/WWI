@@ -17,7 +17,6 @@ print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 print "<div class='container'>";
 
 
-
 //lookup groupitems from wwi database
 if (isset($_GET["productgroep"])) {
     $groep = $_GET["productgroep"];
@@ -82,7 +81,11 @@ if (isset($products)) {
             <div class='ml-auto my-auto'>";
 
         //send session page to shopping cart
-        print "<form><button name='button' formmethod='post' value=".$pid." type='submit'><i class='fas fa-cart-plus fa-2x'></i></button></form>
+        print " <!--<form><button name='button' formmethod='post' value=".$pid." type='submit'> -->
+            <a class='winkelwagen' href='winkelwagen.php?pid=" . $pid . "'>
+            <i class='fas fa-cart-plus fa-2x'></i></button>
+            </a>
+            <!--</form>-->
             <br>
             <!--add function to add product to cart-->
             <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'><i class='fas fa-heart fa-2x'></i></a>
