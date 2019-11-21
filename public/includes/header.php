@@ -8,23 +8,27 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- $pageTitle is defined on the page visited -->
-        <title><?= $pageTitle ?></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="WideWorldImporters">
-        <meta name="keywords" content="WWI, WideWorldImporters">
-        <!-- Bootstrap stylesheet include -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <!-- Project stylesheet includes -->
-        <link rel="stylesheet" type="text/css" href="css/header.css">
-        <link rel="stylesheet" type="text/css" href="css/footer.css">
-        <!-- Fontawesome, handles the icons -->
-        <script src="https://kit.fontawesome.com/6756a99abc.js" crossorigin="anonymous"></script>
-        <!-- Bootstrap javascript include -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <!-- $pageTitle is defined on the page visited -->
+    <title><?= $pageTitle ?></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WideWorldImporters">
+    <meta name="keywords" content="WWI, WideWorldImporters">
+    <!-- Bootstrap stylesheet include -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!-- Project stylesheet includes -->
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <!-- Fontawesome, handles the icons -->
+    <script src="https://kit.fontawesome.com/6756a99abc.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap javascript include -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
 <body>
 <!-- Header start -->
 <div class="header bg-info">
@@ -48,12 +52,70 @@
                 </a>
             </span>
             <!-- Menu icon -->
-            <a class="col-2 col-md-1 pr-0 text-center" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="col-2 col-md-1 pr-0 text-center" id="dropdownMenuLink" role="button" data-toggle="dropdown"
+               aria-haspopup="true">
                 <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
+            <div style="position: relative;" class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+                <h5 class="">Menu</h5>
+                <div class="row">
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=1'"><i
+                                    class="fas fa-newspaper fa-3x rounded-circle circle"></i></button>
+                        <h5>1</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=2'"><i
+                                    class="fas fa-user-tie fa-3x rounded-circle circle"></i></button>
+                        <h5>2</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=3'"><i
+                                    class="fas fa-mug-hot fa-3x rounded-circle circle"></i></button>
+                        <h5>3</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=4'"><i
+                                    class="fas fa-tshirt fa-3x rounded-circle circle"></i></button>
+                        <h5>4</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=5'"><i
+                                    class="fas fa-plane fa-3x rounded-circle circle"></i></button>
+                        <h5>5</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=6'"><i
+                                    class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
+                        <h5>6</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=7'"><i
+                                    class="fab fa-usb fa-3x rounded-circle circle"></i></button>
+                        <h5>7</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=8'"><i
+                                    class="fas fa-shoe-prints fa-3x rounded-circle circle"></i></button>
+                        <h5>8</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=9'"><i
+                                    class="fas fa-gamepad fa-3x rounded-circle circle"></i></button>
+                        <h5>9</h5>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=10'"><i
+                                    class="fas fa-box-open fa-3x rounded-circle circle"></i></button>
+                        <h5>10</h5>
+                    </div>
+                </div>
+            </div>
+
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post">
-                <input class="search form-control mr-0" type="text" name="search" placeholder="Zoeken" aria-label="none">
+                <input class="search form-control mr-0" type="text" name="search" placeholder="Zoeken"
+                       aria-label="none">
                 <div class="input-group-append">
                     <span class="input-group-text icons"><i class="fas fa-filter"></i></span>
                 </div>

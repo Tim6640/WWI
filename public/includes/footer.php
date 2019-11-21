@@ -8,14 +8,6 @@
 
 ?>
 <!-- webpagina code-->
-...
-<br>
-...
-<br>
-...
-<br>
-...
-<!-- webpagina code-->
 <!-- Footer -->
 
 <footer class="bg-info page-footer">

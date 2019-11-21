@@ -24,7 +24,7 @@
     <?php
     if(isset($_GET['bevestiging'])) {
         $bevestiging = $_GET['bevestiging'];
-        if ($bevestiging == "true") {
+        if ($bevestiging == "proceed to checkout") {
             print('
         <div class="row">
             <div class="col-12">

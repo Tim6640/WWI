@@ -4,10 +4,10 @@ session_start();
 
 # $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
     if (empty($_SESSION["shoppingCart"])) {
-        $leeg = FALSE;
+        $leeg = TRUE;
     }else{
         $_SESSION["shoppingCart"] = array();
-        $leeg = TRUE;
+        $leeg = FALSE;
     }
 
 
@@ -54,25 +54,6 @@ if (!empty($_GET)) {
 include_once("../src/core/init.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
-?>
-<!doctype html>
-<html lang="en">
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="scherm.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Hello, world!</title>
-</head>
-<body>
-<?php
 # reken bedragen voor het eindbedrag
 $totaal = 0;
 $shipping = 10;
@@ -255,6 +236,6 @@ elseif($leeg){
     </a>
     </div>
 </div>
-    <?php } ?>
-</body>
-</html>
+    <?php }
+
+    include_once("includes/footer.php")?>
