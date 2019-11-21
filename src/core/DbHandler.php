@@ -14,7 +14,7 @@ class DbHandler
 
     public function __construct()
     {
-        $config = parse_ini_file("private/dbConfig.ini");
+        $config = parse_ini_file("../config/dbConfig.ini");
         $host = $config['host'];
         $database = $config['database'];
         $charset = $config['charset'];
