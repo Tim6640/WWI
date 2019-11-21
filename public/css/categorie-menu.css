@@ -1,0 +1,17 @@
+.circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #70ddff;
+    padding-top: 15px;
+}
+
+.navbar-fixed-top {
+    position: relative;
+    top: 10px;
+    right: 20px;
+}
+
+.dropdown {
+    position: relative;
+}
