@@ -1,9 +1,10 @@
-<!doctype html>
+
 <?php
 session_start()
 //add include
 //$pageTitle = "product"
 ?>
+<!doctype html>
 <html lang="Ne" xmlns="http://www.w3.org/1999/html">
 <head>
     <!--    # benodigde meta tags-->
@@ -13,9 +14,11 @@ session_start()
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
           media="all">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -34,6 +37,9 @@ if (isset($_GET["pid"])) {
 } else {
     print ("helaas bestaat het gezochte product niet<br>");
     print ("klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina");
+}
+if(isset($_POST["wagen"])) {
+    $_SESSION["shoppingCart"] = $_POST["wagen"];
 }
 
 // SQL SETUP
@@ -57,7 +63,6 @@ $price = $row["RecommendedRetailPrice"];
 ?>
 <!--# einde voorwerk-->
 <!--# begin pagina-->
-<
 <body>
 <div class="container">
     <div class="row">
@@ -79,15 +84,28 @@ $price = $row["RecommendedRetailPrice"];
         </div>
 <!--        Links naar winkelmand en verlanglijstje-->
         <div class="col-5">
-            <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product">
+            <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
 <!--            Niet doorsturen maar toevoegen-->
-            <input>
+            <button>
                 <i class="fas fa-heart fa-2x" ></i>
-            </input>
+            </button>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var carousel = $('#carousel');
+            carousel.on('slid.bs.carousel', function () {
+                var div = $('div.active');
+                if(div.find("video").get(0))
+                {
+                    var video = div.find("video").get(0);
+                    video.play();
+                }
+            });
+        });
+    </script>
 <!--    Carrousel start-->
     <div class="row">
     <div class="col-12">
@@ -170,11 +188,28 @@ $price = $row["RecommendedRetailPrice"];
     </div>
     <div class="col-12" align="middle" style="margin-top: 5px">
         <!--        Door winkelen of naar winkelwagen op klik-->
+        <script>
+            function startAjax() {
+                $.ajax({
+                        type: "POST",
+                        url: "product.php",
+                        data: "wagen= <?php echo($productNummer); ?>",
+                        success: function(result){
+                            console.log("Yes!");
+                            console.log(<?= $productNummer ?>)
+                        }
+                    }
+                );
+            }
+        </script>
+
         </div>
         <div class="text-centre">
-            <a type="button" class="btn btn-primary btn-lg bnt-block" data-toggle="modal" data-target="#product" onclick="$_SESSION["shoppingCart"] = $_GET["pid"];">
-                <i class="fas fa-cart-plus"></i> Voeg toe aan winkelwagen
-            </a>
+            <form>
+                <button formmethod="post" name="wagen" type="button" value="<?php print($productNummer); ?>" class="btn btn-primary btn-lg bnt-block" data-toggle="modal" data-target="#product" onclick="startAjax();">
+                    <i class="fas fa-cart-plus"></i> Voeg toe aan winkelwagen
+                </button>
+            </form>
         </div>
         <div class="h-divider">
         </div>
