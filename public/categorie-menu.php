@@ -21,8 +21,6 @@ include_once("../src/core/init.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
 
-$groepen = array(1, 2, 3, 4, 5, 6);
-
 //include_once(PUBLIC_ROOT."includes/footer.php");
 ?>
 <div class="container">
@@ -34,100 +32,61 @@ $groepen = array(1, 2, 3, 4, 5, 6);
             <!--        <button type="button" class="close">&times;</button>-->
             <h5 class="">Menu</h5>
             <div class="row">
-                <?php
-                foreach ($groepen as $groep) {
-                    print("
-                <div class='col text-center'>
-                    <a class='btn' href='productPagina.php?productgroep=".$groep."'><i
-                            class='fas fa-gamepad fa-3x rounded-circle circle'></i></a>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=1'"><i
+                                class="fas fa-newspaper fa-3x rounded-circle circle"></i></button>
                     <h5>1</h5>
-                </div> )";
-                }
-                ?>
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-laptop fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>2</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>3</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>4</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>5</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>6</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>3</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>4</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>5</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>6</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-baby-carriage fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>3</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-band-aid fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>4</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-basketball-ball fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>5</h5>-->
-<!--                </div>-->
-<!--                <div class="col text-center">-->
-<!--                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i-->
-<!--                                class="fas fa-cannabis fa-3x rounded-circle circle"></i></button>-->
-<!--                    <h5>6</h5>-->
-<!--                </div>-->
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=2'"><i
+                                class="fas fa-user-tie fa-3x rounded-circle circle"></i></button>
+                    <h5>2</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=3'"><i
+                                class="fas fa-mug-hot fa-3x rounded-circle circle"></i></button>
+                    <h5>3</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=4'"><i
+                                class="fas fa-tshirt fa-3x rounded-circle circle"></i></button>
+                    <h5>4</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=5'"><i
+                                class="fas fa-plane fa-3x rounded-circle circle"></i></button>
+                    <h5>5</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=6'"><i
+                                class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
+                    <h5>6</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=7'"><i
+                                class="fab fa-usb fa-3x rounded-circle circle"></i></button>
+                    <h5>7</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=8'"><i
+                                class="fas fa-shoe-prints fa-3x rounded-circle circle"></i></button>
+                    <h5>8</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=9'"><i
+                                class="fas fa-gamepad fa-3x rounded-circle circle"></i></button>
+                    <h5>9</h5>
+                </div>
+                <div class="col text-center">
+                    <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=10'"><i
+                                class="fas fa-box-open fa-3x rounded-circle circle"></i></button>
+                    <h5>10</h5>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php
-$db = new DbHandler();
-$connection = $db->connect();
-$sql = "SELECT StockGroupID from stockgroups";
-$stmt = $connection->prepare($sql);
-$stmt->execute();
-$groepen = $stmt->fetchAll();
-                $db->disconnect();
-                $db = null;
-
-                foreach($groepen as $groep){
-                    print($groep['StockGroupId']);
-                }
-                ?>
 <!-- Dit is zijn de body-includes -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
