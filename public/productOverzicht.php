@@ -12,14 +12,13 @@ $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
 print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 print "<script
-            src=\"https://code.jquery.com/jquery-3.4.1.min.js\"
-            integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\"
-            crossorigin=\"anonymous\"></script>";
-//include_once("css/productOverzicht.css");
-
-
+            src='https://code.jquery.com/jquery-3.4.1.min.js'
+            integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+            crossorigin='anonymous'></script>
+       <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'
+            integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1'
+            crossorigin='anonymous'></script>";
 print "<div class='container'>";
-
 
 //lookup groupitems from wwi database
 if (isset($_GET["productgroep"])) {
@@ -58,7 +57,6 @@ if (isset($products)) {
         $name = $product["StockItemName"];
         $price = $product["RecommendedRetailPrice"];
         $pid = $product["StockItemID"];
-//          $photo=$row["Photo"];
 
         //start card body
         print "<div class='card no_border'>
@@ -88,25 +86,8 @@ if (isset($products)) {
             <div class='ml-auto my-auto'>";
 
         //send session page to shopping cart
-        ?>
-        <script>
-            function startAjax() {
-                $.ajax({
-                        type: "POST",
-                        url: "productOverzicht.php",
-                        data: "wagen= <?php echo($pid); ?>",
-                        success: function(result){
-                            console.log("Yes!");
-                            console.log(<?= $pid ?>)
-                        }
-                    }
-                );
-            }
-        </script>
-<?php
-
-        print " <!--<form><button name='button' formmethod='post' value=".$pid." type='submit'> -->
-             <form>
+// link naar winkelmand en verlanglijstje
+        print "<form>
                 <button formmethod='post' name='wagen' type='button' class='btn shoppingcart fa-2x' data-toggle='modal' data-target='#product' onclick='startAjax()'>
                     <i class='fas fa-cart-plus'></i>
                 </button>
@@ -117,24 +98,24 @@ if (isset($products)) {
             <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'><i class='fas fa-heart fa-2x'></i></a>
             </div>
             </div>
-            <div class='modal' tabindex=\"-1\" id=\"product\" role=\"dialog\">
-            <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">
-                <div class=\"modal-content\">
-                    <div class=\"modal-header\">
-                        <h5 class=\"modal-title\">Wilt u verder winkelen of doorgaan naar de winkelwagen</h5>
-                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
-                            <span aria-hidden=\"true\">&times;</span>
+            <div class='modal' tabindex='-1' id='product' role='dialog'>
+            <div class='modal-dialog modal-dialog-centered' role='document'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h5 class='modal-title'>Wilt u verder winkelen of doorgaan naar de winkelwagen</h5>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
                         </button>
                     </div>
-                    <div class=\"modal-body\">
-                        <a type=\"button\" class=\"btn btn-primary btn-lg bnt-block my-3\" href=\"winkelmandje.php\">
+                    <div class='modal-body'>
+                        <a type='button' class='btn btn-primary btn-lg bnt-block my-3' href='winkelmandje.php'>
                             Doorgaan naar de winkelwagen
                         </a>
-                        <a type=\"button\" class=\"btn btn-primary btn-lg bnt-block\" href=\"productpagina.php\">
+                        <a type='button' class='btn btn-primary btn-lg bnt-block' href='productpagina.php'>
                             Verder winkelen
                         </a>
                     </div>
-                    <div class=\"modal-footer\">
+                    <div class='modal-footer'>
 
                     </div>
                 </div>
@@ -154,6 +135,26 @@ if (isset($products)) {
 
 
 print "</div>";
+
+?>
+
+    <script>
+        function startAjax() {
+            $.ajax({
+                    type: "POST",
+                    url: "productOverzicht.php",
+                    data: "wagen= <?php echo($pid); ?>",
+                    success: function(result){
+                        console.log("Yes!");
+                        console.log(<?= $pid ?>)
+                    }
+                }
+            );
+        }
+    </script>
+
+<?php
+
 
 //if (isset($_GET['addToCart'])) {
 //    if (isset($_SESSION['item'])) {
