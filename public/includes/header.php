@@ -67,12 +67,7 @@ $db = null;
                aria-haspopup="true">
                 <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
-            <div class="dropdown show">
-                <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"><i
-                            class="fas fa-bars fa-2x"></i>
-                </a>
-                <div class="col-12">
-                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 100%">
+                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 80%">
                     <!--        <button type="button" class="close">&times;</button>-->
                     <div class="row">
                         <?php
@@ -87,9 +82,8 @@ $db = null;
                         }
                         ?>
                     </div>
+
                 </div>
-                </div>
-            </div>
 
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post">
