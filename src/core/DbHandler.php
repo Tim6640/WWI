@@ -12,15 +12,18 @@ class DbHandler
 
     private $connection;
 
-    public function __construct()
+    private $database;
+
+    public function __construct($database)
     {
-        $config = parse_ini_file("../config/dbConfig.ini");
-        $host = $config['host'];
-        $database = $config['database'];
-        $charset = $config['charset'];
-        $username = $config['username'];
-        $password = $config['password'];
-        $dns = "mysql:host=$host;dbname=$database;charset=$charset";
+        $config = parse_ini_file("../config/dbConfig.ini", true);
+        $this->database = $database;
+        $host = $config[$database]['host'];
+        $databaseName = $config[$database]['database'];
+        $charset = $config[$database]['charset'];
+        $username = $config[$database]['username'];
+        $password = $config[$database]['password'];
+        $dns = "mysql:host=$host;dbname=$databaseName;charset=$charset";
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -37,7 +40,7 @@ class DbHandler
     public function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new DbHandler();
+            self::$instance = new DbHandler($this->database);
         }
         return self::$instance;
     }
