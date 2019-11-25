@@ -44,9 +44,34 @@
             </a>
             <!-- Account & shopping cart icons -->
             <span class="col-4 my-auto icons text-right">
-                <a class="mr-3 mr-md-5 text-white" href="#">
-                    <i class="fas fa-user-alt"></i>
-                </a>
+                <a class="col-2 col-md-1 pr-0 text-center" id="dropdownMenuLink" role="button" data-toggle="dropdown"
+                   aria-haspopup="true">
+        <span class="mr-md-3"><i class="fas fa-user text-white"></i></span>
+    </a>
+    <div class="dropdown-menu">
+        <form class="px-4 py-3">
+            <div class="form-group">
+                <label for="exampleDropdownFormEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleDropdownFormPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                        Remember me
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">New around here? Sign up</a>
+        <a class="dropdown-item" href="#">Forgot password?</a>
+    </div>
                 <a class="mr-md-3" href="#">
                     <i class="fas fa-shopping-cart text-white"></i>
                 </a>
