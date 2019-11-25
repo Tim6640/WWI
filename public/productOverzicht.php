@@ -11,13 +11,10 @@ include_once("../src/core/DbHandler.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
 print "<link href='css/productOverzicht.css' rel='stylesheet'>";
-//include_once("css/productOverzicht.css");
-
-
 print "<div class='container'>";
 
 
-//lookup groupitems from wwi database
+//lookup groupitems from WWI database
 if (isset($_GET["productgroep"])) {
     $groep = $_GET["productgroep"];
     //establish connection
@@ -71,8 +68,27 @@ if (isset($products)) {
             <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
+            $reviewHost = "localhost";
+            $reviewDatabasename = "wideworldimporters";
+            $reviewUser = "root";
+            $reviewPass = null;
+            $reviewPort = 3306;
+            $reviewConnection = mysqli_connect($reviewHost, $reviewUser, $reviewPass, $reviewDatabasename, $reviewPort);
+
+            $reviewSql = "SELECT AVG(rating) FROM review WHERE StockItemId=? AND CustomerId=?";
+            $reviewStatement = mysqli_prepare($reviewConnection, $reviewSql);
+            mysqli_stmt_bind_param($reviewStatement, 'ii', $productNummer, $customerId);
+            mysqli_stmt_execute($reviewStatement);
+            $reviewResult = mysqli_stmt_get_result($reviewStatement);
+
         print "<h6> Review *****</h6>";
 
+            mysqli_stmt_close($reviewStatement);
+            mysqli_free_result($reviewResult);
+            mysqli_close($reviewConnection);
+
+
+        //look up and print price
         print "<h6>€ " . $price . "</h6>
             </div>
             </a>
@@ -85,7 +101,6 @@ if (isset($products)) {
             <a class='winkelwagen' href='winkelwagen.php?pid=" . $pid . "'>
             <i class='fas fa-cart-plus fa-2x'></i></button>
             </a>
-            <!--</form>-->
             <br>
             <!--add function to add product to cart-->
             <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'><i class='fas fa-heart fa-2x'></i></a>
