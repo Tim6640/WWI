@@ -68,24 +68,24 @@ if (isset($products)) {
             <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
-            $reviewHost = "localhost";
-            $reviewDatabasename = "wideworldimporters";
-            $reviewUser = "root";
-            $reviewPass = null;
-            $reviewPort = 3306;
-            $reviewConnection = mysqli_connect($reviewHost, $reviewUser, $reviewPass, $reviewDatabasename, $reviewPort);
-
-            $reviewSql = "SELECT AVG(rating) FROM review WHERE StockItemId=? AND CustomerId=?";
-            $reviewStatement = mysqli_prepare($reviewConnection, $reviewSql);
-            mysqli_stmt_bind_param($reviewStatement, 'ii', $productNummer, $customerId);
-            mysqli_stmt_execute($reviewStatement);
-            $reviewResult = mysqli_stmt_get_result($reviewStatement);
+//            $reviewHost = "localhost";
+//            $reviewDatabasename = "wideworldimporters";
+//            $reviewUser = "root";
+//            $reviewPass = null;
+//            $reviewPort = 3306;
+//            $reviewConnection = mysqli_connect($reviewHost, $reviewUser, $reviewPass, $reviewDatabasename, $reviewPort);
+//
+//            $reviewSql = "SELECT AVG(rating) FROM review WHERE StockItemId=? AND CustomerId=?";
+//            $reviewStatement = mysqli_prepare($reviewConnection, $reviewSql);
+//            mysqli_stmt_bind_param($reviewStatement, 'ii', $productNummer, $customerId);
+//            mysqli_stmt_execute($reviewStatement);
+//            $reviewResult = mysqli_stmt_get_result($reviewStatement);
 
         print "<h6> Review *****</h6>";
 
-            mysqli_stmt_close($reviewStatement);
-            mysqli_free_result($reviewResult);
-            mysqli_close($reviewConnection);
+//            mysqli_stmt_close($reviewStatement);
+//            mysqli_free_result($reviewResult);
+//            mysqli_close($reviewConnection);
 
 
         //look up and print price
