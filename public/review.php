@@ -37,12 +37,12 @@ if (isset($_POST["submit"])) {
         //if review doesn't exist yet use insert
         $sql = "INSERT CustomerId, ProductID, rating, review INTO review VALUES (rating=?, review=?)";
         $stmt = $connection->prepare($sql);
-        $stmt->execute([':id' => $rating, ':id' => $review]]);
+        $stmt->execute([':id' => $rating, ':id' => $review]);
     } else {
         //if review already exist yet use update
         $sql = "UPDATE review SET (rating=?, review=?) WHERE CustomerId=? AND ProductID=? ";
         $stmt = $connection->prepare($sql);
-        $stmt->execute([':id' => $rating, ':id' => $review]]);
+        $stmt->execute([':id' => $rating, ':id' => $review]);
     }
     $succesfulReview=true;
     print "review is gepost";
