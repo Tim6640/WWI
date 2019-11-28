@@ -67,23 +67,23 @@ $db = null;
                aria-haspopup="true">
                 <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
-                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 80%">
-                    <!--        <button type="button" class="close">&times;</button>-->
-                    <div class="row">
-                        <?php
-                        foreach ($groepen as $groep) {
-                            print("
-                     <div class='col text-center'>
-                    <a class='btn' href='productPagina.php?productgroep=".$groep['StockGroupID']."'>
-                    <img class='center' style='width:60px' src=images/categorieicons/groep".$groep['StockGroupID'].".png >
-                    <h5>".$groep['StockGroupName']."</h5>
+            <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 97%">
+                <!--        <button type="button" class="close">&times;</button>-->
+                <div class="row">
+                    <?php
+                    foreach ($groepen as $groep) {
+                        print("
+                     <div class='col-6 col-md-4 text-center'>
+                    <a class='btn' href='productPagina.php?productgroep=" . $groep['StockGroupID'] . "'>
+                    <img class='center' style='width:55px' src=images/categorieicons/groep" . $groep['StockGroupID'] . ".png >
+                    <h5>" . $groep['StockGroupName'] . "</h5>
                     </a>
                 </div> ");
-                        }
-                        ?>
-                    </div>
-
+                    }
+                    ?>
                 </div>
+
+            </div>
 
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post">
