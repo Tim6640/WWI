@@ -10,7 +10,6 @@ session_start();
         $leeg = FALSE;
     }
 
-
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
