@@ -64,9 +64,7 @@ if (isset($_GET["pid"])) {
 
 if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCart"])) {
     array_push($_SESSION["shoppingCart"], $_POST["wagen"]);
-
 }
-print_r($_SESSION["shoppingCart"]);
 
 ?>
 <!--# einde voorwerk-->
