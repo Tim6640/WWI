@@ -1,6 +1,22 @@
 <?php
 session_start();
+// checking if post has been recieved setting session min max for search
+if(isset($_POST["min"])) {
+    $_SESSION["min"] = $_POST["min"];
+}
+if(isset($_POST["max"])) {
+    $_SESSION["max"] = $_POST["max"];
+}
 
+// default price variables
+if(isset($_SESSION["min"])) {
+} else {
+    $_SESSION["min"] = 0;
+}
+if(isset($_SESSION["max"])) {
+} else {
+    $_SESSION["max"] = 10000;
+}
 /**
  * Created by PhpStorm.
  * User: tim11
@@ -41,10 +57,30 @@ if (isset($_GET["productgroep"])) {
 //    $products = $stmt->fetchAll();
 //    $db->disconnect();
 //    $db = null;
+    // Als er geen groupitem wordt gebruikt maar een zoekterm en filters
+} elseif (isset($_POST["search"])) {
+    $search = $_POST["search"];
+    // min price
+    if(is_numeric($_POST["min"])) {
+        $filter1 = "and RecommendedRetailPrice >=" . $_POST["min"];
+    } else $filter1 = "and True";
+    // max price
+    if(is_numeric($_POST["max"])) {
+        $filter2 = "and RecommendedRetailPrice <=" . $_POST["max"];
+    } else $filter2 = "and True";
+    // databasing
+    $db = new DbHandler();
+    $connection = $db->connect();
+    // check if filters for price used
+    $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemName like '%$search%' $filter1 $filter2";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute();
+    $products = $stmt->fetchAll();
+    $db->disconnect();
+    $db = null;
 }
-
 //    var_dump($products);
-if (isset($products)) {
+if (isset($products) and !($products == array())) {
 //start of loop for printing searchresults
     foreach ($products as $product) {
 //submit query
@@ -81,7 +117,7 @@ if (isset($products)) {
             <div class='ml-auto my-auto'>";
 
         //send session page to shopping cart
-        print " <!--<form><button name='button' formmethod='post' value=".$pid." type='submit'> -->
+        print " <!--<form><button name='button' formmethod='post' value=" . $pid . " type='submit'> -->
             <a class='winkelwagen' href='winkelwagen.php?pid=" . $pid . "'>
             <i class='fas fa-cart-plus fa-2x'></i></button>
             </a>
@@ -94,11 +130,9 @@ if (isset($products)) {
             </div>
             </div>";
     }
-} else if (isset ($_post["search"])) {
-    print "hier komen de search results";
 } else {
-    print "helaas bestaat het gezochte product niet<br>
-    klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+        print "helaas bestaat het gezochte product niet<br>
+        klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
 }
 
 print "</div>";
