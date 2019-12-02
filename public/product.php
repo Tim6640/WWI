@@ -194,7 +194,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         </div>
         <div class="col-12" align="middle" style="margin-top: 5px">
             <!--        Door winkelen of naar winkelwagen op klik-->
-            <script>
+            <script type="text/javascript">
                 function startAjax() {
                     $.ajax({
                             type: "POST",

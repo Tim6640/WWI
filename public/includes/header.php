@@ -14,6 +14,21 @@ if(isset($_SESSION["max"])) {
 } else {
     $_SESSION["max"] = 10000;
 }
+$db = new DbHandler();
+$connection = $db->connect();
+if(isset($_POST["query"])) {
+    $query = $_POST["query"];
+}
+if(isset($query)) {
+    $sql = "SELECT StockItemName FROM stockitems WHERE StockItemName like '$query%' LIMIT 10";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute();
+    $productname = $stmt->fetchAll();
+}
+$db->disconnect();
+$db = null;
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,11 +138,25 @@ if(isset($_SESSION["max"])) {
                     </div>
                 </div>
             </div>
-
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post" action="../public/productOverzicht.php">
-                <input class="search form-control mr-0" type="text" name="search" placeholder="Zoeken" autocomplete="on"
-                       aria-label="none" >
+                <!--            Javascript for the autocomplete function-->
+                <script type="text/javascript">
+                    function startSearch(str) {
+                        $.ajax({
+                                type: "POST",
+                                url: "product.php",
+                                data: "query=" + str,
+                                success: function(result){
+                                    console.log("Yes!");
+                                    console.log(<?= $productname ?>);
+                                }
+                            }
+                        );
+                    }
+                </script>
+                <input class="search form-control mr-0" type="text" name="search" id="search" placeholder="Zoeken" autocomplete="off"
+                       aria-label="none" onkeyup="startSearch(this.value);">
                 <input type="submit" style="display: none">
                 <div class="input-group-append">
                     <div class="btn-group dropleft" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -136,10 +165,16 @@ if(isset($_SESSION["max"])) {
                     <div class="dropdown-menu">
 <!--                        Filters-->
                         <div class="row">
-                            Min:<input type="text" name="min" maxlength="5" value="<?php print($_SESSION["min"]) ?>">
+                            <div class="col-1"></div>
+                            <div class="col-6">
+                            Mininimale prijs:<input type="text" name="min" maxlength="5" value="<?php print($_SESSION["min"]) ?>">
+                            </div>
                         </div>
                         <div class="row">
-                            Max:<input type="text" name="max" maxlength="5"  value="<?php print($_SESSION["max"]) ?>">
+                            <div class="col-1"></div>
+                            <div class="col-6">
+                            Maximale prijs:<input type="text" name="max" maxlength="5"  value="<?php print($_SESSION["max"]) ?>">
+                            </div>
                         </div>
                     </div>
                 </div>
