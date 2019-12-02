@@ -5,6 +5,11 @@
  * Date: 7-11-2019
  * Time: 09:52
  */
+
+//to do
+//change db connection
+//edit review to accept star rating input
+
 include_once("../src/core/DbHandler.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
@@ -13,36 +18,36 @@ $succesfulReview=false;
 
 if (isset($_POST["submit"])) {
     //start connection---------------
-    $db = new DbHandler();
+    $db = new DbHandler("USER");
     $connection = $db->connect();
 
 //input data to database--------------------------------------------------------------------------------------------
 //get customerId from session
-//    $customerId=$_session["CustomerId"];
+//$customerId=$_session["CustomerId"];
     $customerId=1;
-//    $productNummer = $_GET["pid"];
+//$productNummer = $_GET["pid"];
     $productNummer=23;
 
     //check if review already exists
-    $sql = "SELECT COUNT(*) AS 'count' FROM review WHERE customerId=? AND StockItemID=?";
+    $sql = "SELECT COUNT(*) AS 'count' FROM Review WHERE customerId=? AND productID=?";
     mysqli_stmt_bind_param($statement, 'ii', $customerId, $productNummer);
     $stmt = $connection->prepare($sql);
-    $stmt->execute([':id' => $customerId, ':id' => $pid]);
-    $products = $stmt->fetchAll();
+    $stmt->execute([':id' => $customerId, ':id' => $productNummer]);
+    $result = $stmt->fetchAll();
 
     //insert rating and review
     $rating= $_POST["rating"];
     $review= $_POST["review"];
     if ($result['count'] = 0) {
         //if review doesn't exist yet use insert
-        $sql = "INSERT CustomerId, ProductID, rating, review INTO review VALUES (rating=?, review=?)";
+        $sql = "INSERT CustomerId, score, description, productID INTO review VALUES (CustomerID=?, ProductID=?, score=?, description=?)";
         $stmt = $connection->prepare($sql);
-        $stmt->execute([':id' => $rating, ':id' => $review]);
+        $stmt->execute([':id'=>$customerId, ':id'=>$rating, ':id'=>$review, ':id'=>$productNummer]);
     } else {
         //if review already exist yet use update
-        $sql = "UPDATE review SET (rating=?, review=?) WHERE CustomerId=? AND ProductID=? ";
+        $sql = "UPDATE review SET (CustomerID=?, ProductID=?, score=?, description=?) WHERE CustomerId=? AND ProductID=? ";
         $stmt = $connection->prepare($sql);
-        $stmt->execute([':id' => $rating, ':id' => $review]);
+        $stmt->execute([':id'=>$customerId, ':id'=>$rating, ':id'=>$review, ':id'=>$productNummer]);
     }
     $succesfulReview=true;
     print "review is gepost";
@@ -56,7 +61,7 @@ if (isset($_POST["submit"])) {
 if (!$succesfulReview) {
     if (isset($_GET["pid"])) {
         $pid=$_GET["pid"];
-        $db = new DbHandler();
+        $db = new DbHandler("ERP");
         $connection = $db->connect();
 //gather data
         $sql = "SELECT StockItemName, Photo FROM stockitems WHERE StockItemID=:id";
@@ -69,7 +74,6 @@ if (!$succesfulReview) {
         $name=($product["StockItemName"]);
         $photo=($product["Photo"]);
 
-        //        $name = $product["StockItemName"];
         ?>
 <!--        start of form-------------------------------------------------------------------------->
         <div class="content" style="text-align:center;align-item:center">
@@ -77,13 +81,18 @@ if (!$succesfulReview) {
         <img src='images\productPlaceholder.png' width='50%'>
          <h3><?php print "$name";?></h3>
         </div>
-        <br><form method='post' action='review.php'>
-        score<br>
-        <input type='text' value='5,0' name='rating'><br>
-        Review<br>
-        <textarea name='review' rows='6' cols='37'>Plaats hier uw review</textarea><br><br>
-        <input type='submit' name='submit' value='Plaatsen'>
-        </form>
+        <br>
+            <form method='post' action='review.php'>
+                <div>
+                    <label for="rating">Score</label>
+                    <input type='text' value='5,0' id='rating'><br>
+                </div>
+                <div class="form-group text-center  w-75">
+                    <label for="review">Review</label>
+                    <textarea type="text" class="form-control" id="review" rows="3" placeholder="Vul hier uw opinie in *optioneel"></textarea>
+                </div>
+                <input type="submit" value="verwerken">
+            </form>
         </div>
         <?php
         //if pid is not set-----------------------------------------------------

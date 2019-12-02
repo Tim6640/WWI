@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 include_once("C:/xampp/htdocs/WWI/src/core/DbHandler.php");
-$db = new DbHandler();
+$db = new DbHandler("ERP");
 $connection = $db->connect();
 $sql = "SELECT StockGroupID, StockGroupName from stockgroups ";
 $stmt = $connection->prepare($sql);
