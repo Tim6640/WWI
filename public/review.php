@@ -49,7 +49,7 @@ if (isset($_POST['rating'])) {
         }
         $succesfulReview = true;
         print "review is succesvol gepost<br>";
-        print "klik <a href='/wwi/public/product?pid=" . $productNummer . "'>hier</a> om terug te gaan naar de productpagina";
+        print "klik <a href='/wwi/public/product.php?pid=" . $productNummer . "'>hier</a> om terug te gaan naar de productpagina";
 
         //close connection
         $db->disconnect();
@@ -89,7 +89,7 @@ if (!$succesfulReview){
                 <br>
                 <form method='post' action=''>
                     <label for="rating" class="control-label">Score (1-5)</label>
-                    <input type="number" id="rating" name="rating" data-show-clear="false" data-show-caption="true" step="0.5" min="1" max="5">
+                    <input type="number" id="rating" name="rating" data-show-clear="false" data-show-caption="true" min="1" max="5">
                     <div class="form-group w-75% col-lg-3 center-block" style="text-align:center">
                         <?php if (isset($wrongRate)) {
                             if ($wrongRate==true){
@@ -98,7 +98,7 @@ if (!$succesfulReview){
                         }
                             ?>
                         <label for="review">Review</label>
-                        <textarea class="form-control rounded-0" id="review" name="review" rows="5" placeholder="Vul hier uw mening in *optioneel"></textarea>
+                        <textarea class="form-control rounded-0" id="review" name="review" rows="5" placeholder="Vul hier uw mening in (optioneel)"></textarea>
                     </div>
                     <input style="margin-bottom:10px" type="submit" value="verwerken">
                 </form>

@@ -78,6 +78,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
     </div>
     <!--    Stars TODO-->
     <div class="row" style="font-size: larger">
+        <div class="col-7">
         <?php
         $db = new DbHandler("USER");
         $connection = $db->connect();
@@ -86,16 +87,17 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         $stmt->execute([':pid'=>$productNummer]);
         $result = $stmt->fetch();
         if ($result["score"]==0) {
-        print "<div><h6>Score: onbeoordeeld</h6></div>";
+        print "<h6>Score: onbeoordeeld</h6>";
         } else {
-        print "<div><h6> Score: ";
+        print " Score: ";
             for ($i=0;$i<(round($result["score"], 0));$i++) {
-            print "<span class='fa fa-star' style='color:gold'></span></h6></div>";
+            print "<i class='fa fa-star' style='color:gold'></i>";
             }
         }
         $db->disconnect();
         $db = null;
         ?>
+        </div>
         <!--        Links naar winkelmand en verlanglijstje-->
         <div class="col-5">
             <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
@@ -243,21 +245,16 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
 
 //            print_r ($reviews);
                         foreach ($reviews as $review){
-                            print ($review["firstname"])." ".($review["lastname"]);
-                            print "<div> score: ".($review["score"]);
-                            print ($review["description"]);
+                            print "<div>".($review["firstname"])." ".($review["lastname"])."&nbsp&nbsp&nbspscore: ".($review["score"]);
+                            print "<br>".($review["description"]);
                             print "</div><br>";
                         }
 
             ?>
-            <form action="review.php" method="post">
-                <input style="margin-bottom:10px" type="submit" value="schrijf een review" class="btn btn-primary btn-lg bnt-block">
-                </input>
-            </form>
+            <a class="btn btn-primary btn-lg bnt-block" href="review.php?pid=<?=$productNummer?>">Schrijf een review</a>
 
 
         </div>
-
         <div class="modal" tabindex="-1" id="product" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
