@@ -98,8 +98,8 @@ if (isset($products)) {
 } else if (isset ($_post["search"])) {
     print "hier komen de search results";
 } else {
-    print "helaas bestaat het gezochte product niet<br>
-    klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+    print "<div style='text-align:center'>helaas bestaat het gezochte product niet<br>
+    klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
 }
 
 print "</div>";

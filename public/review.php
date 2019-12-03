@@ -48,8 +48,8 @@ if (isset($_POST['rating'])) {
             $stmt->execute([':sid' => $rating, ':did' => $review, ':cid' => $customerId, ':pid' => $productNummer]);
         }
         $succesfulReview = true;
-        print "review is succesvol gepost<br>";
-        print "klik <a href='/wwi/public/product.php?pid=" . $productNummer . "'>hier</a> om terug te gaan naar de productpagina";
+        print "<div style='text-align:center'>review is succesvol gepost<br>
+        klik <a href='/wwi/public/product.php?pid=" . $productNummer . "'>hier</a> om terug te gaan naar de productpagina</div>";
 
         //close connection
         $db->disconnect();
@@ -61,7 +61,7 @@ if (isset($_POST['rating'])) {
 
 // check if review is set. if not then show form---------------------------------------------------------------------
 if (!$succesfulReview){
-    if (isset($_GET["pid"])) {
+    if (!empty($_GET["pid"])) {
         $pid=$_GET["pid"];
         $db = new DbHandler("ERP");
         $connection = $db->connect();
@@ -97,8 +97,8 @@ if (!$succesfulReview){
                             }
                         }
                             ?>
-                        <label for="review">Review</label>
-                        <textarea class="form-control rounded-0" id="review" name="review" rows="5" placeholder="Vul hier uw mening in (optioneel)"></textarea>
+                        <label for="review">Opmerking</label>
+                        <textarea class="form-control rounded-0" id="review" name="review" rows="5" placeholder="(optioneel) Vul hier uw mening in over dit product"></textarea>
                     </div>
                     <input style="margin-bottom:10px" type="submit" value="verwerken">
                 </form>
@@ -111,8 +111,8 @@ if (!$succesfulReview){
         //if pid is not set-----------------------------------------------------
     } else {
         print "";
-        print "Deze pagina bestaat niet<br>";
-        print "klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+        print "<div style='text-align:center'>Deze pagina bestaat niet<br>
+        klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
     }
 
 }

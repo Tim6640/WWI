@@ -76,7 +76,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             </h6>
         </div>
     </div>
-    <!--    Stars TODO-->
+<!--    div showing the current rating-->
     <div class="row" style="font-size: larger">
         <div class="col-7">
         <?php
@@ -230,7 +230,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         <div class="h-divider">
         </div>
         <!--        Reviews to be added-->
-
+<!--insert review on bottom of page--------------------->
         <div>
             <h3 class="col-12">review</h3>
             <?php
@@ -245,14 +245,16 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
 
 //            print_r ($reviews);
                         foreach ($reviews as $review){
-                            print "<div>".($review["firstname"])." ".($review["lastname"])."&nbsp&nbsp&nbspscore: ".($review["score"]);
+                            print "<div><strong>".($review["firstname"])." ".($review["lastname"])
+                            ."</strong><br>Score: ";
+                            for ($i=0;$i<(round($review["score"], 0));$i++) {
+                                print "<span class='fa fa-star' style='color:gold'></span>";
+                            }
                             print "<br>".($review["description"]);
                             print "</div><br>";
                         }
-
             ?>
-            <a class="btn btn-primary btn-lg bnt-block" href="review.php?pid=<?=$productNummer?>">Schrijf een review</a>
-
+            <a class="btn btn-primary btn-lg bnt-block" style="margin-bottom: 10px" href="review.php?pid=<?=$productNummer?>"><i class="fas fa-pen-nib"></i> Schrijf een review</a>
 
         </div>
         <div class="modal" tabindex="-1" id="product" role="dialog">
