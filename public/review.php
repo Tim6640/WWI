@@ -11,7 +11,6 @@ $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
 
 
-$succesfulReview=false;
 
 if (isset($_POST['rating'])) {
     //start connection---------------
@@ -21,38 +20,45 @@ if (isset($_POST['rating'])) {
 //input data to database--------------------------------------------------------------------------------------------
 //get customerId from session
 //$customerId=$_session["CustomerId"];
-    $customerId=1;
+    $customerId = 1;
 //$productNummer = $_GET["pid"];
-    $productNummer=$_GET["pid"];
-
-    //check if review already exists
-    $sql = "SELECT COUNT(*) as count FROM Review WHERE customerId=:cid AND productID=:pid";
-    $stmt = $connection->prepare($sql);
-    $stmt->execute([':cid' => $customerId, ':pid' => $productNummer]);
-    $result = $stmt->fetch();
-    $count = $result['count'];
-    //insert rating and review
-    $rating= $_POST["rating"];
-    $review= $_POST["review"];
-    if ($count == 0) {
-        //if review doesn't exist yet use insert
-        $sql = "INSERT INTO review (CustomerId, score, description, productID) VALUES (:cid, :sid, :did, :pid)";
-        $stmt = $connection->prepare($sql);
-        $stmt->execute([':cid'=>$customerId, ':sid'=>$rating, ':did'=>$review, ':pid'=>$productNummer]);
+    $productNummer = $_GET["pid"];
+    if (!isset($_POST["review"]) || (($_POST["rating"])<1 || ($_POST["rating"])>5)) {
+        $wrongRate = true;
     } else {
-        //if review already exist yet use update
-        $sql = "UPDATE review SET score=:sid, description=:did WHERE CustomerId=:cid AND ProductID=:pid ";
+        $wrongRate = false;
+        //check if review already exists
+        $sql = "SELECT COUNT(*) as count FROM Review WHERE customerId=:cid AND productID=:pid";
         $stmt = $connection->prepare($sql);
-        $stmt->execute([':sid'=>$rating, ':did'=>$review, ':cid'=>$customerId, ':pid'=>$productNummer]);
-    }
-    $succesfulReview=true;
-    print "review is succesvol gepost<br>";
-    print "klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+        $stmt->execute([':cid' => $customerId, ':pid' => $productNummer]);
+        $result = $stmt->fetch();
+        $count = $result['count'];
+        //insert rating and review
+        $rating = $_POST["rating"];
+        $review = $_POST["review"];
+        if ($count == 0) {
+            //if review doesn't exist yet use insert
+            $sql = "INSERT INTO review (CustomerId, score, description, productID) VALUES (:cid, :sid, :did, :pid)";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':cid' => $customerId, ':sid' => $rating, ':did' => $review, ':pid' => $productNummer]);
+        } else {
+            //if review already exist yet use update
+            $sql = "UPDATE review SET score=:sid, description=:did WHERE CustomerId=:cid AND ProductID=:pid ";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':sid' => $rating, ':did' => $review, ':cid' => $customerId, ':pid' => $productNummer]);
+        }
+        $succesfulReview = true;
+        print "review is succesvol gepost<br>";
+        print "klik <a href='/wwi/public/product?pid=" . $productNummer . "'>hier</a> om terug te gaan naar de productpagina";
 
-    //close connection
-    $db->disconnect();
-    $db = null;
+        //close connection
+        $db->disconnect();
+        $db = null;
+    }
+} else {
+    $succesfulReview=false;
 }
+
 // check if review is set. if not then show form---------------------------------------------------------------------
 if (!$succesfulReview){
     if (isset($_GET["pid"])) {
@@ -74,21 +80,27 @@ if (!$succesfulReview){
         <!--        start of form-------------------------------------------------------------------------->
 
 
-        <div class="container"}>
+        <div class="container">
             <div class="content" style="text-align:center;align-item:center">
                 <div class='mx-auto text-center'>
-                    <img src='images\productPlaceholder.png' width='50%'>
+                    <img src='images\productPlaceholder.png' style="margin-top:5px" width='50%'>
                     <h3><?php print "$name";?></h3>
                 </div>
                 <br>
                 <form method='post' action=''>
-                    <label for="input-4" class="control-label">Rate This</label>
-                    <input id="input-4" name="input-4" class="rating rating-loading" data-show-clear="false" data-show-caption="true">
+                    <label for="rating" class="control-label">Score (1-5)</label>
+                    <input type="number" id="rating" name="rating" data-show-clear="false" data-show-caption="true" step="0.5" min="1" max="5">
                     <div class="form-group w-75% col-lg-3 center-block" style="text-align:center">
+                        <?php if (isset($wrongRate)) {
+                            if ($wrongRate==true){
+                                print "<h6 style='color:red'>Vul een nummer in van 1 tot 5</h6>";
+                            }
+                        }
+                            ?>
                         <label for="review">Review</label>
-                        <textarea class="form-control rounded-0" id="review" rows="5" placeholder="Vul hier uw opinie in *optioneel"></textarea>
+                        <textarea class="form-control rounded-0" id="review" name="review" rows="5" placeholder="Vul hier uw mening in *optioneel"></textarea>
                     </div>
-                    <input type="submit" value="verwerken">
+                    <input style="margin-bottom:10px" type="submit" value="verwerken">
                 </form>
             </div>
 

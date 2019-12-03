@@ -18,7 +18,7 @@ print "<div class='container'>";
 if (isset($_GET["productgroep"])) {
     $groep = $_GET["productgroep"];
     //establish connection
-    $db = new DbHandler();
+    $db = new DbHandler("ERP");
     $connection = $db->connect();
     $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemID IN ( SELECT StockItemID FROM stockitemstockgroups WHERE StockGroupID=:id)";
     $stmt = $connection->prepare($sql);
@@ -68,25 +68,25 @@ if (isset($products)) {
             <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
-//            $reviewHost = "localhost";
-//            $reviewDatabasename = "wideworldimporters";
-//            $reviewUser = "root";
-//            $reviewPass = null;
-//            $reviewPort = 3306;
-//            $reviewConnection = mysqli_connect($reviewHost, $reviewUser, $reviewPass, $reviewDatabasename, $reviewPort);
-//
-//            $reviewSql = "SELECT AVG(rating) FROM review WHERE StockItemId=? AND CustomerId=?";
-//            $reviewStatement = mysqli_prepare($reviewConnection, $reviewSql);
-//            mysqli_stmt_bind_param($reviewStatement, 'ii', $productNummer, $customerId);
-//            mysqli_stmt_execute($reviewStatement);
-//            $reviewResult = mysqli_stmt_get_result($reviewStatement);
+        $db = new DbHandler("USER");
+        $connection = $db->connect();
+        $sql = "SELECT AVG(score) as score FROM review WHERE productID=:pid";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':pid'=>$pid]);
+        $result = $stmt->fetch();
+        if ($result["score"]==0) {
+            print "<h6>Score: onbeoordeeld</h6>";
+        } else {
+            print "<h6> Score: ";
+            for ($i=0;$i<(round($result["score"], 0));$i++) {
+                print "<span class='fa fa-star' style='color:orange'></span>";
+            }
 
-        print "<h6> Review *****</h6>";
 
-//            mysqli_stmt_close($reviewStatement);
-//            mysqli_free_result($reviewResult);
-//            mysqli_close($reviewConnection);
-
+        print "</h6>";
+        }
+        $db->disconnect();
+        $db = null;
 
         //look up and print price
         print "<h6>€ " . $price . "</h6>
