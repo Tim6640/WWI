@@ -14,21 +14,6 @@ if(isset($_SESSION["max"])) {
 } else {
     $_SESSION["max"] = 10000;
 }
-$db = new DbHandler();
-$connection = $db->connect();
-if(isset($_POST["query"])) {
-    $query = $_POST["query"];
-}
-if(isset($query)) {
-    $sql = "SELECT StockItemName FROM stockitems WHERE StockItemName like '$query%' LIMIT 10";
-    $stmt = $connection->prepare($sql);
-    $stmt->execute();
-    $productname = $stmt->fetchAll();
-}
-$db->disconnect();
-$db = null;
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,22 +123,43 @@ $db = null;
                     </div>
                 </div>
             </div>
+
             <!-- Search bar -->
             <form class="col-10 col-md-11 pl-0 input-group" method="post" action="../public/productOverzicht.php">
                 <!--            Javascript for the autocomplete function-->
                 <script type="text/javascript">
                     function startSearch(str) {
+                        // send post to the server for the query
                         $.ajax({
-                                type: "POST",
-                                url: "product.php",
-                                data: "query=" + str,
-                                success: function(result){
-                                    console.log("Yes!");
-                                    console.log(<?= $productname ?>);
-                                }
+                            type: "POST",
+                            url: "../public/getproduct.php",
+                            data: "query=" + str,
+                            success: function (result) {
+                                console.log("Yes!");
+                                console.log(str);
                             }
-                        );
+                        }).done(function( data, textStatus, jqXHR) {
+                                console.log(data);
+                                console.log(jqXHR.responseText);
+                            // if typed stuff is 0 long disable the box
+                            if (str.length===0) {
+                                document.getElementById("display").innerHTML = "";
+                                document.getElementById("display").style.border = "0px";
+                                // javascript isset
+                            } else {
+                                try {
+                                    // try to get products to display
+                                    document.getElementById("display").innerHTML= data;
+                                } catch (e) {
+                                    // display no result
+                                    document.getElementById("display").innerHTML= "Geen resultaat"
+                                } {
+                                } document.getElementById("display").style.border="1px solid #A5ACB2";
+                            }
+                        }
+                        )
                     }
+
                 </script>
                 <input class="search form-control mr-0" type="text" name="search" id="search" placeholder="Zoeken" autocomplete="off"
                        aria-label="none" onkeyup="startSearch(this.value);">
@@ -180,6 +186,8 @@ $db = null;
                 </div>
             </form>
         </div>
+        <!--display the live search-->
+        <div id="display"></div>
     </div>
 </div>
 <!-- Header end -->
