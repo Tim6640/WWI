@@ -26,18 +26,6 @@ if (isset($_GET["productgroep"])) {
     $products = $stmt->fetchAll();
     $db->disconnect();
     $db = null;
-//} else if (isset($_GET["pid"])) {
-//    $pid = ($_GET["pid"]);
-//    $pid = array(1, 2, 3, 4, 5, 6, 7, 8);
-//    //establish connection
-//    $db = new DbHandler();
-//    $connection = $db->connect();
-//    $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemID IN (:id)";
-//    $stmt = $connection->prepare($sql);
-//    $stmt->execute([':id' => $pid]);
-//    $products = $stmt->fetchAll();
-//    $db->disconnect();
-//    $db = null;
 }
 
 //    var_dump($products);
@@ -56,14 +44,14 @@ if (isset($products)) {
 
             <!--print product image-->
             <div class='d-flex'>
-            <a href='productPagina.php?pid=" . $pid . "/'<br>
+            <a href='product.php?pid=" . $pid . "/'<br>
             <div class='p-2'>
             <img src='images\productPlaceholder.png' class='product_image'>
             </a>
             </div>
 
             <!--print title, review and price-->
-            <a href='productPagina.php?pid=" . $pid . "'<br>
+            <a href='product.php?pid=" . $pid . "'<br>
             <div class='ml-auto p-2 a_text'>
             <b class='card-title'>" . $name . "</b>";
 
@@ -79,10 +67,8 @@ if (isset($products)) {
         } else {
             print "<h6> Score: ";
             for ($i=0;$i<(round($result["score"], 0));$i++) {
-                print "<span class='fa fa-star' style='color:orange'></span>";
+                print "<span class='fa fa-star' style='color:gold'></span>";
             }
-
-
         print "</h6>";
         }
         $db->disconnect();
@@ -98,7 +84,7 @@ if (isset($products)) {
 
         //send session page to shopping cart
         print " <!--<form><button name='button' formmethod='post' value=".$pid." type='submit'> -->
-            <a class='winkelwagen' href='winkelwagen.php?pid=" . $pid . "'>
+            <a class='winkelwagen' href='winkelmand.php?pid=" . $pid . "'>
             <i class='fas fa-cart-plus fa-2x'></i></button>
             </a>
             <br>
