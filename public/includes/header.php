@@ -187,7 +187,10 @@ if(isset($_SESSION["max"])) {
             </form>
         </div>
         <!--display the live search-->
-        <div id="display"></div>
+        <row>
+            <div class="col-2"></div>
+        <div id="display" style="background: white"></div>
+        </row>
     </div>
 </div>
 <!-- Header end -->

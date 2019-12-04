@@ -10,7 +10,7 @@ if(isset($query)) {
     // database connection
     $db = new DbHandler();
     $connection = $db->connect();
-    $sql = "SELECT StockItemName FROM stockitems WHERE StockItemName like '$query%' LIMIT 6";
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, StockItemID FROM stockitems WHERE StockItemName like '%$query%' limit 6";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
     $productsName = $stmt->fetchAll();
@@ -19,7 +19,8 @@ if(isset($query)) {
 }
 
 foreach ($productsName as $productName) {
-    print("<div></div><row>" . $productName["StockItemName"] . "</row>,");
+    $name = $productName["StockItemID"];
+    print("<div style='border: 1px black'><row><col-8><a style='color: black' href='product.php?pid=$name'  >"  . $productName["StockItemName"] . "</col-8>       <col-2><b> €" .  $productName["RecommendedRetailPrice"] . "</b></col-2></row></div>");
 }
 
 ?>
