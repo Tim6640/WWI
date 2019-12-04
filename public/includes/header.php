@@ -5,6 +5,7 @@
  * Date: 13-11-2019
  * Time: 12:12
  */
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,9 +45,9 @@
             </a>
             <!-- Account & shopping cart icons -->
             <span class="col-4 my-auto icons text-right">
-                <a class="mr-3 mr-md-5 text-white" href="#">
-                    <i class="fas fa-user-alt"></i>
-                </a>
+                <a class="col-2 col-md-1 pr-0 text-center" role="button" href="<?php if (array_key_exists("logged_in", $_SESSION)){print "accountinformatie.php";}else{print "login.php";} ?>" >
+        <span class="mr-md-3"><i class="fas fa-user text-white"></i></span>
+
                 <a class="mr-md-3" href="#">
                     <i class="fas fa-shopping-cart text-white"></i>
                 </a>
