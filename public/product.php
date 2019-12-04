@@ -1,5 +1,4 @@
 <?php
-session_start();
 //add include
 //$pageTitle = "product"
 include_once("../src/core/DbHandler.php");
