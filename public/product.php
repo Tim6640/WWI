@@ -244,15 +244,19 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             $db = null;
 
 //            print_r ($reviews);
-                        foreach ($reviews as $review){
-                            print "<div><strong>".($review["firstname"])." ".($review["lastname"])
-                            ."</strong><br>Score: ";
-                            for ($i=0;$i<(round($review["score"], 0));$i++) {
-                                print "<span class='fa fa-star' style='color:gold'></span>";
-                            }
-                            print "<br>".($review["description"]);
-                            print "</div><br>";
-                        }
+            if (empty($reviews)){
+                print "<h6>Er zijn nog geen reviews geschreven over dit product</h6>";
+            } else {
+            foreach ($reviews as $review){
+                print "<div><strong>".($review["firstname"])." ".($review["lastname"])
+                    ."</strong><br>Score: ";
+                for ($i=0;$i<(round($review["score"], 0));$i++) {
+                    print "<span class='fa fa-star' style='color:gold'></span>";
+                }
+                print "<br>".($review["description"]);
+                print "</div><br>";
+            }
+            }
             ?>
             <a class="btn btn-primary btn-lg bnt-block" style="margin-bottom: 10px" href="review.php?pid=<?=$productNummer?>"><i class="fas fa-pen-nib"></i> Schrijf een review</a>
 
