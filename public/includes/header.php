@@ -6,6 +6,16 @@
  * Time: 12:12
  */
 session_start();
+include_once("C:/xampp/htdocs/WWI/src/core/DbHandler.php");
+$db = new DbHandler("ERP");
+$connection = $db->connect();
+$sql = "SELECT StockGroupID, StockGroupName from stockgroups ";
+$stmt = $connection->prepare($sql);
+$stmt->execute();
+$groepen = $stmt->fetchAll();
+$db->disconnect();
+$db = null;
+
 // default price variables
 if(isset($_SESSION["min"])) {
 } else {
@@ -43,6 +53,7 @@ if(isset($_SESSION["max"])) {
             crossorigin="anonymous"></script>
 </head>
 <body>
+
 <!-- Header start -->
 <div class="header bg-info">
     <div class="container p-3">
@@ -69,59 +80,27 @@ if(isset($_SESSION["max"])) {
                aria-haspopup="true">
                 <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
-            <div style="position: relative;" class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
-                <h5 class="">Menu</h5>
-                <div class="row">
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=1'"><i
-                                    class="fas fa-newspaper fa-3x rounded-circle circle"></i></button>
-                        <h5>1</h5>
+            <div class="dropdown show">
+                <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"><i
+                            class="fas fa-bars fa-2x"></i>
+                </a>
+                <div class="col-12">
+                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 100%">
+                    <!--        <button type="button" class="close">&times;</button>-->
+                    <div class="row">
+                        <?php
+                        foreach ($groepen as $groep) {
+                            print("
+                     <div class='col text-center'>
+                    <a class='btn' href='productPagina.php?productgroep=".$groep['StockGroupID']."'>
+                    <img class='center' style='width:60px' src=images/categorieicons/groep".$groep['StockGroupID'].".png >
+                    <h5>".$groep['StockGroupName']."</h5>
+                    </a>
+                </div> ");
+                        }
+                        ?>
                     </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=2'"><i
-                                    class="fas fa-user-tie fa-3x rounded-circle circle"></i></button>
-                        <h5>2</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=3'"><i
-                                    class="fas fa-mug-hot fa-3x rounded-circle circle"></i></button>
-                        <h5>3</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=4'"><i
-                                    class="fas fa-tshirt fa-3x rounded-circle circle"></i></button>
-                        <h5>4</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=5'"><i
-                                    class="fas fa-plane fa-3x rounded-circle circle"></i></button>
-                        <h5>5</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=6'"><i
-                                    class="fas fa-laptop fa-3x rounded-circle circle"></i></button>
-                        <h5>6</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=7'"><i
-                                    class="fab fa-usb fa-3x rounded-circle circle"></i></button>
-                        <h5>7</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productPagina.php?productgroep=8'"><i
-                                    class="fas fa-shoe-prints fa-3x rounded-circle circle"></i></button>
-                        <h5>8</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=9'"><i
-                                    class="fas fa-gamepad fa-3x rounded-circle circle"></i></button>
-                        <h5>9</h5>
-                    </div>
-                    <div class="col text-center">
-                        <button class="btn" onclick=" window.location.href = 'productOverzicht.php?productgroep=10'"><i
-                                    class="fas fa-box-open fa-3x rounded-circle circle"></i></button>
-                        <h5>10</h5>
-                    </div>
+                </div>
                 </div>
             </div>
 

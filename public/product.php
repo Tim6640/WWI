@@ -19,7 +19,8 @@ include_once("../public/includes/header.php");
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -35,20 +36,18 @@ include_once("../public/includes/header.php");
 
 // SQL SETUP
 $productNummer=$_GET["pid"];
-$host = "localhost";
-$databasename = "wideworldimporters";
-$user = "root";
-$pass = null;
-$port = 3306;
-$connection = mysqli_connect($host, $user, $pass, $databasename, $port);
-$sql = "SELECT StockItemName, RecommendedRetailPrice FROM stockitems WHERE StockItemID=?";
-$statement = mysqli_prepare($connection, $sql);
-mysqli_stmt_bind_param($statement, 'i', $productNummer);
-mysqli_stmt_execute($statement);
-$result = mysqli_stmt_get_result($statement);
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-$name = $row["StockItemName"];
-$price = $row["RecommendedRetailPrice"];
+
+$db = new DbHandler("ERP");
+$connection = $db->connect();
+$sql = "SELECT StockItemName, RecommendedRetailPrice FROM stockitems WHERE StockItemID=:pid";
+$stmt = $connection->prepare($sql);
+$stmt->execute([':pid' => $productNummer]);
+$result = $stmt->fetch();
+$db->disconnect();
+$db = null;
+
+$name = $result["StockItemName"];
+$price = $result["RecommendedRetailPrice"];
 
 // Logica
 if(!isset($_SESSION["verlanglijstje"])) {
@@ -86,22 +85,34 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             </h6>
         </div>
     </div>
-    <!--    Stars TODO-->
+<!--    div showing the current rating-->
     <div class="row" style="font-size: larger">
         <div class="col-7">
-            Score:
-            <i class="fas fa-star" style="color: gold"></i>
-            <i class="fas fa-star" style="color: gold"></i>
-            <i class="fas fa-star" style="color: gold"></i>
-            <i class="fas fa-star" style="color: gold"></i>
-            <i class="fas fa-star" style="color: gold"></i>
-        </div>
+        <?php
+        $db = new DbHandler("USER");
+        $connection = $db->connect();
+        $sql = "SELECT AVG(score) as score FROM review WHERE productID=:pid";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':pid'=>$productNummer]);
+        $result = $stmt->fetch();
+        if ($result["score"]==0) {
+        print "<h6>Score: onbeoordeeld</h6>";
+        } else {
+        print " Score: ";
+            for ($i=0;$i<(round($result["score"], 0));$i++) {
+            print "<i class='fa fa-star' style='color:gold'></i>";
+            }
+        }
+        $db->disconnect();
+        $db = null;
+        ?>
+       </div>
         <!--        Links naar winkelmand en verlanglijstje-->
         <div class="col-5">
             <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
-            <!--            Niet doorsturen maar toevoegen-->
+            <!-- Niet doorsturen maar toevoegen-->
             <button onclick="startVerlanglijst()">
                 <i class="fas fa-heart fa-2x" ></i>
             </button>
@@ -153,16 +164,16 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                 <!--            Carrousel small indicators !!help me with the scaling!!-->
                 <ol class="carousel-indicators" style="height: available">
                     <li data-target="#carousel" data-slide-to="0" class="active" style="width: 20%;">
-                        <img class="d-block w-100" src="test1.jpg">
+                        <img class="d-block w-100" src="images/product/test1.jpg">
                     </li>
                     <li data-target="#carousel" data-slide-to="1" style="width: 20%">
-                        <img class="d-block w-100" src="test2.jpg">
+                        <img class="d-block w-100" src="images/product/test2.jpg">
                     </li>
                     <li data-target="#carousel" data-slide-to="2" style="width: 20%">
-                        <img class="d-block w-100" src="test3.jpg">
+                        <img class="d-block w-100" src="images/product/test3.jpg">
                     </li>
                     <li data-target="#carousel" data-slide-to="3" style="width: 20%">
-                        <img class="d-block w-100" src="test3.jpg">
+                        <img class="d-block w-100" src="images/product/test3.jpg">
                     </li>
                 </ol>
             </div>
@@ -192,7 +203,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         </div>
         <!--    needs intermediate database  -->
         <div class="col-12">
-            <h4>Productcatogorie</h4>
+            <h4>Productcategorie</h4>
         </div>
         <div class="col-12">
             <div class="panel-body" align="centre">
@@ -240,8 +251,34 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         <div class="h-divider">
         </div>
         <!--        Reviews to be added-->
+<!--insert review on bottom of page--------------------->
         <div>
-            <h1>review space</h1>
+            <h3 class="col-12">review</h3>
+            <?php
+            $db = new DbHandler("USER");
+            $connection = $db->connect();
+            $sql = "SELECT R.score, R.description, C.firstname, C.lastname FROM review R JOIN customer C ON R.customerID=C.customerID WHERE productID=:pid";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':pid' => $productNummer]);
+            $reviews = $stmt->fetchAll();
+            $db->disconnect();
+            $db = null;
+
+            if (empty($reviews)){
+                print "<h6>Er zijn nog geen reviews geschreven over dit product</h6>";
+            } else {
+            foreach ($reviews as $review){
+                print "<div><strong>".($review["firstname"])." ".($review["lastname"])
+                    ."</strong><br>Score: ";
+                for ($i=0;$i<(round($review["score"], 0));$i++) {
+                    print "<span class='fa fa-star' style='color:gold'></span>";
+                }
+                print "<br>".($review["description"]);
+                print "</div><br>";
+            }
+            }
+            ?>
+            <a class="btn btn-primary btn-lg bnt-block" style="margin-bottom: 10px" href="review.php?pid=<?=$productNummer?>"><i class="fas fa-pen-nib"></i> Schrijf een review</a>
         </div>
         <div class="modal" tabindex="-1" id="product" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -269,14 +306,5 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
     </div>
 </div>
 <?PHP
-//close connection
-mysqli_stmt_close($statement);
-mysqli_free_result($result);
-mysqli_close($connection);
-//include_once("../public/includes/footer.php");
+include_once("../public/includes/footer.php");
 ?>
-</body>
-
-
-</html>
-<!--End of html-->

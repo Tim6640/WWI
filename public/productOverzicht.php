@@ -71,11 +71,11 @@ if (isset($_POST["wagen"]) AND !in_array($_POST["wagen"], $_SESSION["shoppingCar
     array_push($_SESSION["shoppingCart"], $_POST["wagen"]);
 }
 
-//lookup groupitems from wwi database
+//lookup groupitems from WWI database
 if (isset($_GET["productgroep"])) {
     $groep = $_GET["productgroep"];
     //establish connection
-    $db = new DbHandler();
+    $db = new DbHandler("ERP");
     $connection = $db->connect();
     $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemID IN ( SELECT StockItemID FROM stockitemstockgroups WHERE StockGroupID=:id)";
     $stmt = $connection->prepare($sql);
@@ -83,18 +83,6 @@ if (isset($_GET["productgroep"])) {
     $products = $stmt->fetchAll();
     $db->disconnect();
     $db = null;
-//} else if (isset($_GET["pid"])) {
-//    $pid = ($_GET["pid"]);
-//    $pid = array(1, 2, 3, 4, 5, 6, 7, 8);
-//    //establish connection
-//    $db = new DbHandler();
-//    $connection = $db->connect();
-//    $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemID IN (:id)";
-//    $stmt = $connection->prepare($sql);
-//    $stmt->execute([':id' => $pid]);
-//    $products = $stmt->fetchAll();
-//    $db->disconnect();
-//    $db = null;
     // Als er geen groupitem wordt gebruikt maar een zoekterm en filters
 } elseif (isset($_POST["search"])) {
     $search = $_POST["search"];
@@ -107,7 +95,7 @@ if (isset($_GET["productgroep"])) {
         $filter2 = "and RecommendedRetailPrice <=" . $_POST["max"];
     } else $filter2 = "and True";
     // databasing
-    $db = new DbHandler();
+    $db = new DbHandler("ERP");
     $connection = $db->connect();
     // check if filters for price used
     $sql = "SELECT StockItemID, StockItemName, RecommendedRetailPrice, Photo FROM stockitems WHERE StockItemName like '%$search%' $filter1 $filter2";
@@ -132,20 +120,37 @@ if (isset($products) and !($products == array())) {
 
             <!--print product image-->
             <div class='d-flex'>
-            <a href='productPagina.php?pid=" . $pid . "/'<br>
+            <a href='product.php?pid=" . $pid . "/'<br>
             <div class='p-2'>
             <img src='images\productPlaceholder.png' class='product_image'>
             </a>
             </div>
 
             <!--print title, review and price-->
-            <a href='productPagina.php?pid=" . $pid . "'<br>
+            <a href='product.php?pid=" . $pid . "'<br>
             <div class='ml-auto p-2 a_text'>
             <b class='card-title'>" . $name . "</b>";
 
         //look up review----------------------------------------------------------------------------------
-        print "<h6> Review *****</h6>";
+        $db = new DbHandler("USER");
+        $connection = $db->connect();
+        $sql = "SELECT AVG(score) as score FROM review WHERE productID=:pid";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':pid'=>$pid]);
+        $result = $stmt->fetch();
+        if ($result["score"]==0) {
+            print "<h6>Score: onbeoordeeld</h6>";
+        } else {
+            print "<h6> Score: ";
+            for ($i=0;$i<(round($result["score"], 0));$i++) {
+                print "<span class='fa fa-star' style='color:gold'></span>";
+            }
+        print "</h6>";
+        }
+        $db->disconnect();
+        $db = null;
 
+        //look up and print price
         print "<h6>€ " . $price . "</h6>
             </div>
             </a>
@@ -170,8 +175,8 @@ if (isset($products) and !($products == array())) {
             </div>";
     }
 } else {
-        print "helaas bestaat het gezochte product niet<br>
-        klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina";
+    print "<div style='text-align:center'>helaas bestaat het gezochte product niet<br>
+    klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
 }
 print "</div>";
 //start script to send pid to post
