@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+if(!isset($_COOKIE["PHPSESSID"]))
+{
+    session_start();
+}
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
