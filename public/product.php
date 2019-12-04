@@ -17,9 +17,10 @@ include_once("../public/includes/header.php");
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
           media="all">
     <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -49,6 +50,14 @@ $name = $result["StockItemName"];
 $price = $result["RecommendedRetailPrice"];
 
 // Logica
+if(!isset($_SESSION["verlanglijstje"])) {
+    $_SESSION["verlanglijstje"] = array();
+}
+
+if(isset($_POST["verlang"]) AND !in_array($_POST["verlang"] , $_SESSION["verlanglijstje"])) {
+    array_push($_SESSION["verlanglijstje"], $_POST["verlang"]);
+}
+
 if(!isset($_SESSION["shoppingCart"])) {
     $_SESSION["shoppingCart"] = array();
 }
@@ -97,14 +106,14 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         $db->disconnect();
         $db = null;
         ?>
-        </div>
+       </div>
         <!--        Links naar winkelmand en verlanglijstje-->
         <div class="col-5">
             <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
-            <!--            Niet doorsturen maar toevoegen-->
-            <button>
+            <!-- Niet doorsturen maar toevoegen-->
+            <button onclick="startVerlanglijst()">
                 <i class="fas fa-heart fa-2x" ></i>
             </button>
         </div>
@@ -204,12 +213,24 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         </div>
         <div class="col-12" align="middle" style="margin-top: 5px">
             <!--        Door winkelen of naar winkelwagen op klik-->
-            <script>
+            <script type="text/javascript">
                 function startAjax() {
                     $.ajax({
                             type: "POST",
                             url: "product.php",
                             data: "wagen= <?php echo($productNummer); ?>",
+                            success: function(result){
+                                console.log("Yes!");
+                                console.log(<?= $productNummer ?>);
+                            }
+                        }
+                    );
+                }
+                function startVerlanglijst() {
+                    $.ajax({
+                            type: "POST",
+                            url: "product.php",
+                            data: "verlang= <?php echo($productNummer); ?>",
                             success: function(result){
                                 console.log("Yes!");
                                 console.log(<?= $productNummer ?>);
@@ -243,7 +264,6 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             $db->disconnect();
             $db = null;
 
-//            print_r ($reviews);
             if (empty($reviews)){
                 print "<h6>Er zijn nog geen reviews geschreven over dit product</h6>";
             } else {
@@ -259,7 +279,6 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             }
             ?>
             <a class="btn btn-primary btn-lg bnt-block" style="margin-bottom: 10px" href="review.php?pid=<?=$productNummer?>"><i class="fas fa-pen-nib"></i> Schrijf een review</a>
-
         </div>
         <div class="modal" tabindex="-1" id="product" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -287,9 +306,5 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
     </div>
 </div>
 <?PHP
-//include_once("../public/includes/footer.php");
+include_once("../public/includes/footer.php");
 ?>
-</body>
-
-</html>
-<!--End of html-->
