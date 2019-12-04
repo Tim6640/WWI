@@ -20,7 +20,7 @@ if (isset($_POST['rating'])) {
 //input data to database--------------------------------------------------------------------------------------------
 //get customerId from session
 //$customerId=$_session["CustomerId"];
-    $customerId = 1;
+    $customerId = ($_SESSION["id"]);
 //$productNummer = $_GET["pid"];
     $productNummer = $_GET["pid"];
     if (!isset($_POST["review"]) || (($_POST["rating"])<1 || ($_POST["rating"])>5)) {

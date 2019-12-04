@@ -12,15 +12,13 @@ include_once("../public/includes/header.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <!--    # bootstrap aan php kopelen-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
-          media="all">
+<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"-->
+<!--          media="all">-->
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous">
-    </script>
-
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -30,6 +28,11 @@ include_once("../public/includes/header.php");
 </head>
 
 <?php
+
+if(!isset($_COOKIE["PHPSESSID"]))
+{
+    session_start();
+}
 
 // SQL SETUP
 $productNummer=$_GET["pid"];
@@ -74,7 +77,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
 <!--# einde voorwerk-->
 <!--# begin pagina-->
 <body>
-<div class="container">
+<div class="container" style="min-height:100vh">
     <div class="row">
         <div class="col-12">
             <h6 class="text-center" style="font-size: x-large">
