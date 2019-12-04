@@ -51,6 +51,14 @@ $name = $row["StockItemName"];
 $price = $row["RecommendedRetailPrice"];
 
 // Logica
+if(!isset($_SESSION["verlanglijstje"])) {
+    $_SESSION["verlanglijstje"] = array();
+}
+
+if(isset($_POST["verlang"]) AND !in_array($_POST["verlang"] , $_SESSION["verlanglijstje"])) {
+    array_push($_SESSION["verlanglijstje"], $_POST["verlang"]);
+}
+
 if(!isset($_SESSION["shoppingCart"])) {
     $_SESSION["shoppingCart"] = array();
 }
@@ -94,7 +102,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
             <!--            Niet doorsturen maar toevoegen-->
-            <button>
+            <button onclick="startVerlanglijst()">
                 <i class="fas fa-heart fa-2x" ></i>
             </button>
         </div>
@@ -200,6 +208,18 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                             type: "POST",
                             url: "product.php",
                             data: "wagen= <?php echo($productNummer); ?>",
+                            success: function(result){
+                                console.log("Yes!");
+                                console.log(<?= $productNummer ?>);
+                            }
+                        }
+                    );
+                }
+                function startVerlanglijst() {
+                    $.ajax({
+                            type: "POST",
+                            url: "product.php",
+                            data: "verlang= <?php echo($productNummer); ?>",
                             success: function(result){
                                 console.log("Yes!");
                                 console.log(<?= $productNummer ?>);
