@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_COOKIE["PHPSESSID"]))
+{
+    session_start();
+}
 // checking if post has been recieved setting session min max for search
 if(isset($_POST["min"])) {
     $_SESSION["min"] = $_POST["min"];
