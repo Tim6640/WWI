@@ -8,7 +8,7 @@ if(isset($_POST["query"])) {
 // send query yo database
 if(isset($query)) {
     // database connection
-    $db = new DbHandler();
+    $db = new DbHandler("ERP");
     $connection = $db->connect();
     $sql = "SELECT StockItemName, RecommendedRetailPrice, StockItemID FROM stockitems WHERE StockItemName like '%$query%' limit 6";
     $stmt = $connection->prepare($sql);
