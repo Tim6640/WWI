@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 session_start();
-include_once("C:/xampp/htdocs/WWI/src/core/DbHandler.php");
+include_once("../src/core/DbHandler.php");
 $db = new DbHandler("ERP");
 $connection = $db->connect();
 $sql = "SELECT StockGroupID, StockGroupName from stockgroups ";
@@ -25,6 +25,7 @@ if(isset($_SESSION["max"])) {
 } else {
     $_SESSION["max"] = 10000;
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,27 +81,20 @@ if(isset($_SESSION["max"])) {
                aria-haspopup="true">
                 <span class="menu-button my-auto text-white"><i class="fas fa-bars black"></i></span>
             </a>
-            <div class="dropdown show">
-                <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"><i
-                            class="fas fa-bars fa-2x"></i>
-                </a>
-                <div class="col-12">
-                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 100%">
-                    <!--        <button type="button" class="close">&times;</button>-->
-                    <div class="row">
-                        <?php
-                        foreach ($groepen as $groep) {
-                            print("
-                     <div class='col text-center'>
-                    <a class='btn' href='productPagina.php?productgroep=".$groep['StockGroupID']."'>
-                    <img class='center' style='width:60px' src=images/categorieicons/groep".$groep['StockGroupID'].".png >
-                    <h5>".$groep['StockGroupName']."</h5>
+            <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink" style="width: 97%">
+                <!--        <button type="button" class="close">&times;</button>-->
+                <div class="row">
+                    <?php
+                    foreach ($groepen as $groep) {
+                        print("
+                     <div class='col-6 col-md-4 text-center'>
+                    <a class='btn' href='productPagina.php?productgroep=" . $groep['StockGroupID'] . "'>
+                    <img class='center' style='width:55px' src=images/categorieicons/groep" . $groep['StockGroupID'] . ".png >
+                    <h5>" . $groep['StockGroupName'] . "</h5>
                     </a>
                 </div> ");
-                        }
-                        ?>
-                    </div>
-                </div>
+                    }
+                    ?>
                 </div>
             </div>
 
