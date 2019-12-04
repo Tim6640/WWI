@@ -78,7 +78,7 @@
         <div class="carousel-slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <?php
-                $db = new DbHandler();
+                $db = new DbHandler("ERP");
                 $connection = $db->connect();
                 $query = "SELECT distinct si.StockItemName, si.Photo FROM stockitems si JOIN orderlines ol ON si.StockItemID = ol.StockItemID ORDER BY ol.Quantity LIMIT 12;";
                 $stmt = $connection->prepare($query);
