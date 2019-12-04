@@ -14,8 +14,13 @@ if (array_key_exists("action", $_GET)) {
         $_SESSION["shoppingCart"] = array();
         $leeg = FALSE;
     }
-print_r($_SESSION["shoppingCart"]);
-$_SESSION["shoppingCart"] = array(87 => 38);
+
+# verwijderen van de shopping cart
+if (array_key_exists("action", $_GET)) {
+    $delete = $_GET["id"];
+    unset($_SESSION["shoppingCart"][$delete]);
+}
+
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
     if (!in_array($_GET["id"], $_SESSION["verlanglijstje"])) {
