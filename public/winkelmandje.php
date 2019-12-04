@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+# verwijderen van de shopping cart
+if (array_key_exists("action", $_GET)) {
+    $delete = $_GET["id"];
+    unset($_SESSION["shoppingCart"][$delete]);
+}
 
 # $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
     if (empty($_SESSION["shoppingCart"])) {
@@ -15,6 +20,7 @@ if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
     unset($_SESSION["shoppingCart"][$delete]);
 }
+
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
     if (!in_array($_GET["id"], $_SESSION["verlanglijstje"])) {
@@ -131,19 +137,19 @@ if(!empty($_SESSION["shoppingCart"])) {
                                                                     <h6>
                                                                         <form>
                                                                             <!-- opmaak voor de knoppen: hartje, prullenbak en combobox -->
-                                                                            <a href="scherm.php?wishlist=add&id=<?php print $row["StockItemID"]; ?>">
+                                                                            <a href="winkelmandje.php?wishlist=add&id=<?php print $row["StockItemID"]; ?>">
                                                                                 <img src="images/hartje.png"
                                                                                      class="img-responsive"
                                                                                      style="width: 20px;height: 20px "
                                                                                      alt="verlanglijstje"></a>
-                                                                            <a href="scherm.php?action=delete&id=<?php print $row["StockItemID"]; ?>">
+                                                                            <a href="winkelmandje.php?action=delete&id=<?php print $row["StockItemID"]; ?>">
                                                                                 <img src="images/vuilnisbak.png"
                                                                                      class="img-responsive"
                                                                                      style="width: 20px;height: 20px "
                                                                                      alt="delete"></a>
                                                                             <!-- combobox -->
                                                                             <a>
-                                                                                <form action="scherm.php" method="get">
+                                                                                <form action="winkelmandje.php" method="get">
                                                                                     <select name="<?php print $row["StockItemID"] ?>"
                                                                                             onchange="this.form.submit()">
                                                                                         <?php
@@ -218,7 +224,7 @@ if(!empty($_SESSION["shoppingCart"])) {
     </div>
     <?php
 }
-elseif($leeg){
+else{
 ?>
 <div class="px-4 px-lg-0">
     <!-- For demo purpose -->
