@@ -88,7 +88,7 @@ if(isset($_SESSION["max"])) {
                     foreach ($groepen as $groep) {
                         print("
                      <div class='col-6 col-md-4 text-center'>
-                    <a class='btn' href='productPagina.php?productgroep=" . $groep['StockGroupID'] . "'>
+                    <a class='btn' href='productOverzicht.php?productgroep=" . $groep['StockGroupID'] . "'>
                     <img class='center' style='width:55px' src=images/categorieicons/groep" . $groep['StockGroupID'] . ".png >
                     <h5>" . $groep['StockGroupName'] . "</h5>
                     </a>
