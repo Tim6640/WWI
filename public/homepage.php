@@ -151,8 +151,40 @@
     </div>
 
     <!--end of banner carousel-->
+    <!--added subscription section-->
+    <br>
+    <div class="row">
+        <h5>Inschrijven Nieuwsbrief&nbsp</h5>
+        <form method="post" action="">
+            <input type="email" name="email" placeholder="bla@bla.nl">
+            <p>Ik geef toestemming dat WWI mij e-mails verstuurt
+                <input type="checkbox" id="termsChkbx " onclick="change_button(this,'sub1')"></p>
+            <p><input type="submit" name="submit" value="verzenden" id="sub1" disabled="disabled"></p>
+        </form>
+        <script type = "text/javascript">
+            function change_button(checkbx,button_id) {
+                var btn = document.getElementById(button_id);
+                if (checkbx.checked == true) {
+                    btn.disabled = "";
+                } else {
+                    btn.disabled = "disabled";
+                }
+            }
+        </script>
+    </div>
 </div>
 <?php
+
+if (isset($_POST["email"])) {
+    $db = new DbHandler("USER");
+    $connection = $db->connect();
+    $sql = "INSERT INTO newsletter (email) VALUES (:id)";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([':id' => $_POST["email"]]);
+    $db->disconnect();
+    $db = null;
+}
+
 include_once("../public/includes/footer.php");
 ?>
 </body>
