@@ -80,7 +80,7 @@
                 <?php
                 $db = new DbHandler("ERP");
                 $connection = $db->connect();
-                $query = "SELECT distinct si.StockItemName, si.Photo FROM stockitems si JOIN orderlines ol ON si.StockItemID = ol.StockItemID ORDER BY ol.Quantity LIMIT 12;";
+                $query = "SELECT distinct si.StockItemID, si.StockItemName, si.Photo FROM stockitems si JOIN orderlines ol ON si.StockItemID = ol.StockItemID ORDER BY ol.Quantity LIMIT 12;";
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
                 $resultaten = $stmt->fetchAll();
@@ -89,18 +89,18 @@
                     if ($i == 0) {
                         ?>
                         <div class="carousel-item active">
-                            <img src="images/wijn3.png" alt="Wijnen! Wijnen! Wijnen!">
+                            <a href="product.php?pid=<?=$resultaat["StockItemID"]?>"><img src="images/wijn3.png" alt="Wijnen! Wijnen! Wijnen!">
                             <h5> <?php print($resultaat['StockItemName']); ?></h5>
-                            <button type="button" class="btn btn-primary" href="#" role="button">Bekijken</button>
+                                <button type="button" class="btn btn-primary" href="#" role="button">Bekijken</button></a>
                         </div>
                         <?php
                         $i++;
                     } else {
                         ?>
                         <div class="carousel-item">
-                            <img src="images/wijn2.jpg" alt="Wijnen! Wijnen! Wijnen!">
+                            <a href="product.php?pid=<?=$resultaat["StockItemID"]?>"><img src="images/wijn2.jpg" alt="Wijnen! Wijnen! Wijnen!">
                             <h5> <?php print($resultaat['StockItemName']); ?></h5>
-                            <button type="button" class="btn btn-primary" href="#" role="button">Bekijken</button>
+                            <button type="button" class="btn btn-primary" href="#" role="button">Bekijken</button></a>
                         </div>
                         <?php
                     }
@@ -153,11 +153,10 @@
     <!--end of banner carousel-->
     <!--added subscription section-->
     <br>
-    <div class="row">
         <h5>Inschrijven Nieuwsbrief&nbsp</h5>
         <form method="post" action="">
             <input type="email" name="email" placeholder="bla@bla.nl">
-            <p>Ik geef toestemming dat WWI mij e-mails verstuurt
+            <p>Ik sta toe dat WWI mij e-mails verstuurt
                 <input type="checkbox" id="termsChkbx " onclick="change_button(this,'sub1')"></p>
             <p><input type="submit" name="submit" value="verzenden" id="sub1" disabled="disabled"></p>
         </form>
@@ -171,7 +170,6 @@
                 }
             }
         </script>
-    </div>
 </div>
 <?php
 

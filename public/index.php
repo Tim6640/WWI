@@ -9,7 +9,6 @@
 include_once("../src/core/init.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
-include_once("../public/includes/footer.php");
 
 if (isset($_POST["email"])) {
     $db = new DbHandler("USER");
@@ -26,8 +25,8 @@ if (isset($_POST["email"])) {
         <div class="row">
             <h5>Inschrijven Nieuwsbrief&nbsp</h5>
             <form method="post" action="">
-                <input type="email" name="email" placeholder="bla@bla.nl">
-                <p>Ik geef toestemming dat WWI mij e-mails verstuurt
+                <input type="email" name="email" placeholder="gebruiker@outlook.com">
+                <p>Ik sta toe dat WWI mij e-mails verstuurt
                     <input type="checkbox" id="termsChkbx " onclick="change_button(this,'sub1')"></p>
                 <p><input type="submit" name="submit" value="verzenden" id="sub1" disabled="disabled"></p>
             </form>

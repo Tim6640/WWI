@@ -87,10 +87,10 @@ if (!$succesfulReview){
                     <h3><?php print "$name";?></h3>
                 </div>
                 <br>
-                <form method='post' action=''>
+                <form style method='post' action=''>
                     <label for="rating" class="control-label">Score (1-5)</label>
                     <input type="number" id="rating" name="rating" data-show-clear="false" data-show-caption="true" min="1" max="5">
-                    <div class="form-group w-75% col-lg-3 center-block" style="text-align:center">
+                    <div class="form-group w-75% col-lg-3 center-block" style="align:center-align">
                         <?php if (isset($wrongRate)) {
                             if ($wrongRate==true){
                                 print "<h6 style='color:red'>Vul een nummer in van 1 tot 5</h6>";
