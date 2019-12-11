@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+if(!isset($_COOKIE["PHPSESSID"]))
+{
+    session_start();
+}
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
@@ -47,6 +49,7 @@ if (!empty($_GET)) {
     $aantallen = 1;
     $_SESSION["aantallen"] = array();
 }
+
 //if(empty($_SESSION["prijs"])){
 //    $_SESSION["prijs"] = array();
 //}else{
@@ -65,16 +68,8 @@ $shipping = 10;
 
 #connectie met de database
 ini_set('display_errors', 1);
-$host = "localhost";
-$databasename = "wideworldimporters";
-$user = "root";
-$pass = "";
-$port = 3306;
-$conn = new mysqli($host, $user, $pass, $databasename, $port);
-if ($conn->error) {
-    user_error('Onze error ' . $conn->error);
-    die();
-}
+$db = new DbHandler("ERP");
+$connection = $db->connect();
 
 ?>
 <?php
@@ -115,8 +110,11 @@ if(!empty($_SESSION["shoppingCart"])) {
                                 if (!empty($_SESSION["shoppingCart"])) {
                                     foreach ($_SESSION["shoppingCart"] as $stockNumber => $recommendPrice) {
                                         if (!empty($stockNumber)) {
-                                            $result = $conn->query("SELECT * FROM stockitems where StockItemID = '$stockNumber'");
-                                            foreach ($result as $row) {
+                                            $sql="SELECT * FROM stockitems where StockItemID = '$stockNumber'";
+                                            $stmt = $connection->prepare($sql);
+                                            $stmt->execute();
+                                            $products = $stmt->fetchAll();
+                                            foreach ($products as $row) {
                                                 if ($numbers == $row["StockItemID"]) {
                                                     $recommendPrice = $aantallen * $row["RecommendedRetailPrice"];
                                                     $price = (float)$recommendPrice;
@@ -155,7 +153,7 @@ if(!empty($_SESSION["shoppingCart"])) {
                                                                                         <?php
                                                                                         for ($i = 1; $i < 10; $i++) {
                                                                                             print "<option value='" . $i . "'";
-                                                                                            foreach ($_SESSION["aantallen"] as $aantalID => $aantalAantal) {
+                                                                                            foreach (($_SESSION["aantallen"]) as $aantalID => $aantalAantal) {
                                                                                                 if ($aantalAantal == $i && $aantalID == $row["StockItemID"]) {
                                                                                                     print " selected='selected'";
                                                                                                 }
@@ -186,8 +184,8 @@ if(!empty($_SESSION["shoppingCart"])) {
                                     }
                                 }
                                 # opruimen verbinding
-                                mysqli_free_result($result);
-                                mysqli_close($conn);
+                                $db->disconnect();
+                                $db = null;
                                 ?>
                                 </tbody>
                             </table>
