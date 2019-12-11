@@ -4,6 +4,7 @@
 include_once("../src/core/DbHandler.php");
 $pageTitle = "product";
 include_once("../public/includes/header.php");
+
 ?>
 <!doctype html>
 <html lang="Ne" xmlns="http://www.w3.org/1999/html">
@@ -29,10 +30,6 @@ include_once("../public/includes/header.php");
 
 <?php
 
-if(!isset($_COOKIE["PHPSESSID"]))
-{
-    session_start();
-}
 
 // SQL SETUP
 $productNummer=$_GET["pid"];
@@ -72,6 +69,7 @@ if (isset($_GET["pid"])) {
 if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCart"])) {
     array_push($_SESSION["shoppingCart"], $_POST["wagen"]);
 }
+
 
 ?>
 <!--# einde voorwerk-->

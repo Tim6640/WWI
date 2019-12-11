@@ -1,8 +1,11 @@
 <?php
-if(!isset($_COOKIE["PHPSESSID"]))
-{
-    session_start();
-}
+include_once("../src/core/init.php");
+$pageTitle = "Home";
+include_once("../public/includes/header.php");
+
+
+print_r($_SESSION["shoppingCart"]);
+
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
@@ -10,10 +13,12 @@ if (array_key_exists("action", $_GET)) {
 }
 
 # $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
-    if (empty($_SESSION["shoppingCart"])) {
+    if (!isset($_SESSION["shoppingCart"])) {
         $leeg = TRUE;
     }else{
-        $_SESSION["shoppingCart"] = array();
+        print("test");
+        // wordt uitgevoerd ook wanneer er iets in de shopping cart zit ----foute code-----
+//        $_SESSION["shoppingCart"] = array();
         $leeg = FALSE;
     }
 
@@ -59,9 +64,6 @@ if (!empty($_GET)) {
 //    }
 //}
 # dit is de header
-include_once("../src/core/init.php");
-$pageTitle = "Home";
-include_once("../public/includes/header.php");
 # reken bedragen voor het eindbedrag
 $totaal = 0;
 $shipping = 10;

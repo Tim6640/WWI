@@ -1,8 +1,5 @@
 <?php
-if(!isset($_COOKIE["PHPSESSID"]))
-{
-    session_start();
-}
+
 // checking if post has been recieved setting session min max for search
 if(isset($_POST["min"])) {
     $_SESSION["min"] = $_POST["min"];
@@ -203,6 +200,7 @@ print "</div>";
         }
     </script>
 <?php
+
 
 include_once("../public/includes/footer.php");
 ?>
