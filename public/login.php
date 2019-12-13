@@ -52,12 +52,12 @@ if ($_SESSION["logged_in"]) {
         </div>
     </div>
     <div class="px-4 px-lg-0 ">
-        <div class="text-lg-center">
-            <a href="homepage.php">
-                <h5 class="text-center">terug naar homepage</h5>
-            </a>
+            <div class="text-lg-center">
+                <a href="homepage.php">
+                    <h5 class="text-center">terug naar homepage</h5>
+                </a>
+            </div>
         </div>
-    </div>
     </div>
     <?php
 }else {
