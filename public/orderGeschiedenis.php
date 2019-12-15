@@ -7,6 +7,8 @@ print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 
 
 print "<div class='container'>";
+
+
 //placeholder for user ID
 //$userID=$_SESSION["id"];
 $userID=3;
