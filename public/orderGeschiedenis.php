@@ -6,9 +6,6 @@ include_once("../public/includes/header.php");
 print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 
 
-print "<div class='container'>";
-
-
 //placeholder for user ID
 //$userID=$_SESSION["id"];
 $userID=3;
@@ -29,34 +26,33 @@ if (isset($userID)) {
 
 
     $inOrder=null;
+    print "<div class='container'>";
     foreach($results as $result) {
         $recordID=($result["orderrecordID"]);
-        $date = ($result["date"]);
+        $date = date("d-m-Y", strtotime($result["date"]));
 
         //if orderrecordID is the same as previous orderrecord make new div
         if ($recordID!=$inOrder) {
 //            dit komt in een nieuwe div
-            print "<div class='card'>";
-            print "<div class='card-header'>Ordernummer: $recordID";
-            print "&nbsp&nbsp&nbsp datum: $date<br>";
+            print "<div class='card'>".
+            "<div class='card-header'>Ordernummer: $recordID&nbsp&nbsp&nbsp&nbsp".
+            "<span class='mr-auto'>datum: $date</span></div>";
             $totaal=0;
             foreach ($results as $result) {
                 $pid= ($result["productID"]);
                 $amount= ($result["amount"]);
                 $unitPrice= ($result["unitPrice"]);
-                print "<ul class='list-group list-group-flush'>";
+                print "<div><ul class='list-group list-group-flush'>";
                 if ($recordID==$result["orderrecordID"]) {
-                    print "<li class='list-group-item'>Product: ".$pid." &nbsp&nbsp&nbsp aantal: ".$amount." &nbsp&nbsp&nbsp prijs per product: €$unitPrice</li><br>";
+                    print "<li class='m-auto my-auto list-group-item'>".
+                    "Product: ".$pid."&nbsp&nbsp&nbsp".
+                    "aantal: ".$amount." &nbsp&nbsp&nbsp prijs: €$unitPrice</li><br>";
                     $totaal= $totaal+($amount*$unitPrice);
                 }
-                print "</ul>";
+                print "</ul></div>";
             }
-            print "Totaalprijs: €$totaal</div>";
-            print "</div><br>";
+            print "<div class='ml-auto'>Totaalprijs: €$totaal</div></div><br>";
         }
-
-        //insert items into orderrecordID div
-
         //make clear for next loop that previous orderrecord==$inOrder
         $inOrder=$recordID;
     }

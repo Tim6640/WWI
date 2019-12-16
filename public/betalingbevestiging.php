@@ -22,7 +22,6 @@
 <body>
 <div class="container my-5 text-center" role="alert" style="">
     <?php
-
     if (isset ($_POST["unregistered"])) {
         //search in database if e-mail already exists
         $eMail=($_POST["e-mail"]);
