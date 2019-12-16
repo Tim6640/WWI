@@ -158,7 +158,7 @@ else
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required=required>
                     <label class="form-check-label" for="gridCheck">
-                        Check me out
+                        I agree with the terms of agreement
                     </label>
                 </div>
             </div>
