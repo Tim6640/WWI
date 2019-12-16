@@ -29,8 +29,9 @@ if(isset($_SESSION["max"])) {
 include_once("../src/core/DbHandler.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
-print "<link href='css/productOverzicht.css' rel='stylesheet'>";
-print "<script
+?>
+    <link href='css/productOverzicht.css' rel='stylesheet'>
+    <script
             src='https://code.jquery.com/jquery-3.4.1.min.js'
             integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
             crossorigin='anonymous'></script>
@@ -139,7 +140,8 @@ if (isset($products) and !($products == array())) {
         $stmt->execute([':pid'=>$pid]);
         $result = $stmt->fetch();
         if ($result["score"]==0) {
-            print "<h6>Score: onbeoordeeld</h6>";
+            print "<h6>Score: geen rating</h6>";
+
         } else {
             print "<h6> Score: ";
             for ($i=0;$i<(round($result["score"], 0));$i++) {
@@ -162,12 +164,15 @@ if (isset($products) and !($products == array())) {
 // link naar winkelmand en verlanglijstje
         print "<form>
                 <button formmethod='post' name='wagen' type='button' value='" . $pid . "' class='btn' data-toggle='modal' data-target='#banaan' onclick='startAjax($pid)'>
-                    <i style='color:#007BFF' class='color: fas fa-cart-plus fa-2x'></i>
+                    <i style='color:#00BDF3' class='color: fas fa-cart-plus fa-2x'></i>
+                </button>
+            </form>
+            <form>
+                <button formmethod='post' name='wagen' type='button' value='" . $pid . "' class='btn' data-toggle='modal' data-target='#banaan' onclick='startAjax($pid)'>
+                    <i style='color:#00BDF3' class='fas fa-heart fa-2x'></i>
                 </button>
             </form>
             <!--add function to add product to cart-->
-            <a class='verlanglijst' href='wishlist.php?pid=" . $pid . "'>
-            <i class='fas fa-heart fa-2x'></i></a>
             </div>
         </div>
             

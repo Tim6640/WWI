@@ -18,12 +18,28 @@ if (isset($_POST['rating'])) {
 
 //input data to database--------------------------------------------------------------------------------------------
 //get customerId from session
-    if (!empty($_SESSION["id"])) {
-        $customerId = $_SESSION["id"];
-//select productnumber from GET
-        $productNummer = $_GET["pid"];
-        if (!isset($_POST["review"]) || (($_POST["rating"]) < 1 || ($_POST["rating"]) > 5)) {
-            $wrongRate = true;
+//$customerId=$_session["CustomerId"];
+    $customerId = ($_SESSION["id"]);
+//$productNummer = $_GET["pid"];
+    $productNummer = $_GET["pid"];
+    if (!isset($_POST["review"]) || (($_POST["rating"])<1 || ($_POST["rating"])>5)) {
+        $wrongRate = true;
+    } else {
+        $wrongRate = false;
+        //check if review already exists
+        $sql = "SELECT COUNT(*) as count FROM Review WHERE customerId=:cid AND productID=:pid";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':cid' => $customerId, ':pid' => $productNummer]);
+        $result = $stmt->fetch();
+        $count = $result['count'];
+        //insert rating and review
+        $rating = $_POST["rating"];
+        $review = $_POST["review"];
+        if ($count == 0) {
+            //if review doesn't exist yet use insert
+            $sql = "INSERT INTO review (CustomerId, score, description, productID) VALUES (:cid, :sid, :did, :pid)";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':cid' => $customerId, ':sid' => $rating, ':did' => $review, ':pid' => $productNummer]);
         } else {
             $wrongRate = false;
             //check if review already exists
@@ -74,7 +90,6 @@ if (isset($_POST['rating'])) {
             $product = $product[0];
             $name = ($product["StockItemName"]);
             $photo = ($product["Photo"]);
-
             ?>
             <!--        start of form-------------------------------------------------------------------------->
             <div class="container">

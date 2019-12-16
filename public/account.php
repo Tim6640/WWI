@@ -44,7 +44,7 @@ if(isset($_POST['registeren'])) {
 
         <div class="row mt-3">
             <div class="col-12">
-            <a href="homepage.php>">
+            <a href="homepage.php">
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button></a>
             </div>
         </div>
@@ -158,7 +158,7 @@ else
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required=required>
                     <label class="form-check-label" for="gridCheck">
-                        Check me out
+                        I agree with the terms of agreement
                     </label>
                 </div>
             </div>

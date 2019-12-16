@@ -1,5 +1,5 @@
 img {
-    width: 100px;
+    width: 50px;
     height: auto;
     display: block;
 }
@@ -7,7 +7,4 @@ img {
     min-height: auto;
     border: aqua;
     border-style: hidden;
-}
-.button {
-
 }

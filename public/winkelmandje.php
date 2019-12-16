@@ -1,5 +1,8 @@
 <?php
-session_start();
+# dit is de header
+include_once("../src/core/init.php");
+$pageTitle = "Home";
+include_once("../public/includes/header.php");
 
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
@@ -7,20 +10,12 @@ if (array_key_exists("action", $_GET)) {
     unset($_SESSION["shoppingCart"][$delete]);
 }
 
-# $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
-    if (empty($_SESSION["shoppingCart"])) {
-        $leeg = TRUE;
-    }else{
-        $_SESSION["shoppingCart"] = array();
-        $leeg = FALSE;
-    }
 
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
-    $delete = $_GET["id"];
-    unset($_SESSION["shoppingCart"][$delete]);
+    $pos = array_search($_GET["id"], $_SESSION["shoppingCart"]);
+    unset($_SESSION["shoppingCart"][$pos]);
 }
-
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
     if (!in_array($_GET["id"], $_SESSION["verlanglijstje"])) {
@@ -34,47 +29,30 @@ if (array_key_exists("wishlist", $_GET)) {
 if (!empty($_GET)) {
     foreach ($_GET as $number => $aantal) {
         $_SESSION["aantallen"][$number] = $aantal;
-        if (is_int($number)) {
-            $numbers = $number;
-            $aantallen = $aantal;
-        } else {
-            $numbers = 0;
-            $aantallen = 1;
-        }
+
     }
-} else {
-    $numbers = 1;
-    $aantallen = 1;
-    $_SESSION["aantallen"] = array();
 }
-//if(empty($_SESSION["prijs"])){
-//    $_SESSION["prijs"] = array();
-//}else{
-//    foreach ($_SESSION["shoppingCart"] as $ID => $currentPrice){
-//        if (array_key_exists($ID, $_SESSION["aantallen"])){
-//            $_SESSION["prijs"][$ID] = $currentPrice*$_SESSION["aantallen"][$ID];}
+//         else {
+//            $numbers = 0;
+//            $aantallen = 1;
+//        }
 //    }
+//} else {
+//    $numbers = 1;
+//    $aantallen = 1;
 //}
-# dit is de header
-include_once("../src/core/init.php");
-$pageTitle = "Home";
-include_once("../public/includes/header.php");
+print_r($_SESSION);
+print "<br>";
+print_r($_GET);
+
+
 # reken bedragen voor het eindbedrag
 $totaal = 0;
 $shipping = 10;
-
 #connectie met de database
-ini_set('display_errors', 1);
-$host = "localhost";
-$databasename = "wideworldimporters";
-$user = "root";
-$pass = "";
-$port = 3306;
-$conn = new mysqli($host, $user, $pass, $databasename, $port);
-if ($conn->error) {
-    user_error('Onze error ' . $conn->error);
-    die();
-}
+ini_set('display_errors', 6);
+$db = new DbHandler("ERP");
+$connection = $db->connect();
 
 ?>
 <?php
@@ -113,15 +91,17 @@ if(!empty($_SESSION["shoppingCart"])) {
                                 <?php
                                 # De SockITemID loopen door de database
                                 if (!empty($_SESSION["shoppingCart"])) {
-                                    foreach ($_SESSION["shoppingCart"] as $stockNumber => $recommendPrice) {
+                                    foreach ($_SESSION["shoppingCart"] as $key => $stockNumber) {
                                         if (!empty($stockNumber)) {
-                                            $result = $conn->query("SELECT * FROM stockitems where StockItemID = '$stockNumber'");
-                                            foreach ($result as $row) {
-                                                if ($numbers == $row["StockItemID"]) {
-                                                    $recommendPrice = $aantallen * $row["RecommendedRetailPrice"];
+                                            $sql="SELECT * FROM stockitems where StockItemID = '$stockNumber'";
+                                            $stmt = $connection->prepare($sql);
+                                            $stmt->execute();
+                                            $products = $stmt->fetchAll();
+                                            foreach ($products as $row) {
+                                                if (!empty($_SESSION["aantallen"][$row["StockItemID"]])) {
+                                                    $recommendPrice = $_SESSION["aantallen"][$row["StockItemID"]] * $row["RecommendedRetailPrice"];
                                                     $price = (float)$recommendPrice;
-                                                    $_SESSION["shoppingCart"][$numbers] = $price;
-                                                }
+                                                }else{ $recommendPrice = $row["RecommendedRetailPrice"];}
                                                 ?>
                                                 <!-- opmaak voor de foto en naam-->
                                                 <tr>
@@ -155,7 +135,7 @@ if(!empty($_SESSION["shoppingCart"])) {
                                                                                         <?php
                                                                                         for ($i = 1; $i < 10; $i++) {
                                                                                             print "<option value='" . $i . "'";
-                                                                                            foreach ($_SESSION["aantallen"] as $aantalID => $aantalAantal) {
+                                                                                            foreach ((array) $_SESSION["aantallen"] as $aantalID => $aantalAantal) {
                                                                                                 if ($aantalAantal == $i && $aantalID == $row["StockItemID"]) {
                                                                                                     print " selected='selected'";
                                                                                                 }
@@ -186,8 +166,8 @@ if(!empty($_SESSION["shoppingCart"])) {
                                     }
                                 }
                                 # opruimen verbinding
-                                mysqli_free_result($result);
-                                mysqli_close($conn);
+                                $db->disconnect();
+                                $db = null;
                                 ?>
                                 </tbody>
                             </table>
@@ -210,8 +190,9 @@ if(!empty($_SESSION["shoppingCart"])) {
                                 <h5 class="font-weight-bold"><?php $totaliteit = $totaal + $shipping;
                                     print("€" . $totaliteit); ?></h5>
                             </li>
-                            <form method="post" action="betalingbevestiging.php">
+
                         </ul>
+                        <form method="post" action="betalingbevestiging.php">
                         <input type="submit" name="submit" value="proceed to checkout"
                                class="btn btn-primary rounded-pill py-2 btn-block">
                         </form>
@@ -220,7 +201,6 @@ if(!empty($_SESSION["shoppingCart"])) {
             </div>
 
         </div>
-    </div>
     </div>
     <?php
 }
