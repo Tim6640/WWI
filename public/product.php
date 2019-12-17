@@ -8,7 +8,8 @@ include_once("../public/includes/header.php");
 ?>
 <!doctype html>
 <html lang="Ne" xmlns="http://www.w3.org/1999/html">
-<head>
+    <link href='css/wishlist.css' rel='stylesheet'>
+    <head>
     <!--    # benodigde meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -29,7 +30,55 @@ include_once("../public/includes/header.php");
 </head>
 
 <?php
-
+//check if a request to add to wishlist is started
+if (isset($_POST["wadd"])) {
+    //check if the user is logged in through a db check
+    if (!empty($_SESSION["id"])) {
+        $userID = $_SESSION["id"];
+        $wadd = ($_POST["wadd"]);
+        $userID = $_SESSION["id"];
+        $db = new DbHandler("USER");
+        $connection = $db->connect();
+        $sql = "SELECT productId FROM wishlist WHERE customerID=:id AND productId=:pid";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':id' => $userID, ':pid' => $wadd]);
+        $product = $stmt->fetch();
+        //insert if product in not already in db (previous select is empty)
+        if (empty($product["productId"])) {
+            $sql = "INSERT INTO wishlist (customerId, productId) VALUES (:id, :pid)";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':id' => $userID, ':pid' => $wadd]);
+            ?>
+            <div class='holder'>
+                <div id='popupcontent' class='popup'>
+                    <div class='content'>Het product is in uw verlanglijstje geplaatst.</div>
+                </div>
+            </div>
+            <?php
+            //don't insert if product is not in db and show error
+        } else {
+            ?>
+            <div class='holder'>
+                <div id='popupcontent' class='popup'>
+                    <div class='content'>Het product staat al in uw verlanglijstje</div>
+                </div>
+            </div>
+            <?php
+        }
+        //close the database
+        $db->disconnect();
+        $db = null;
+        //if userid is not set then show an error
+    } else {
+        ?>
+        <div class='holder'>
+            <div id='popupcontent' class='popup'>
+                <div class='content'>Sorry, u moet ingelogd zijn om het verlanglijstje te kunnen gebruiken</div>
+            </div>
+        </div>
+        <?php
+    }
+}
 
 // SQL SETUP
 $productNummer=$_GET["pid"];
@@ -111,9 +160,11 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
             <!-- Niet doorsturen maar toevoegen-->
-            <button onclick="startVerlanglijst()">
-                <i class="fas fa-heart fa-2x" ></i>
-            </button>
+            <form method='post'>
+                <button type='submit' formaction='#' name='wadd' type='button' value='<??>' class='btn'>
+                    <i style='color:#00BDF3' class='fas fa-heart fa-2x'></i>
+                </button>
+            </form>
         </div>
     </div>
     <script type="text/javascript">

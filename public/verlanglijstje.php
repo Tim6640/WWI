@@ -3,10 +3,10 @@
 include_once("../src/core/init.php");
 $pageTitle = "verlanglijstje";
 include_once("../public/includes/header.php");
-
 ?>
     <div class='container'></div>
     <link href='css/productOverzicht.css' rel='stylesheet'>
+    <link href='css/wishlist.css' rel='stylesheet'>
     <script
         src='https://code.jquery.com/jquery-3.4.1.min.js'
         integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
@@ -52,13 +52,11 @@ include_once("../public/includes/header.php");
                 </div>
             </div>
         </div>
-
-
 <?php
 //placeholder for user ID
-$_SESSION["id"]=3;
+$_SESSION["id"]=4;
 
-//delete query
+//delete if a delete request comes through via post
 if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
     $userID=$_SESSION["id"];
     $rid=($_POST["remove"]);
@@ -70,11 +68,15 @@ if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
     $stmt->execute([':id' => $userID, ':pid' => $rid]);
     $db->disconnect();
     $db = null;
-
-    print "Het product is uit uw verlanglijstje verwijdert.<br><br>";
+    ?>
+    <div class='holder'>
+        <div id='popupcontent' class='popup'>
+            <div class='content'>Het product is uit uw verlanglijstje verwijdert.</div>
+        </div>
+    </div>
+                    <?php
 }
-
-
+//check if session id is set
 if (isset($_SESSION["id"])) {
     $userID=$_SESSION["id"];
     $db = new DbHandler("USER");
@@ -85,16 +87,17 @@ if (isset($_SESSION["id"])) {
     $products = $stmt->fetchAll();
     $db->disconnect();
     $db = null;
-
+//check if there are products in the previous select
     if (empty($products)) {
-        print "U heeft geen producten in uw verlanglijstje.<img src='images/sad.gif' style='width:90%'>";
+                            ?>
+                    <div class='holder'>
+                        <div id='popupcontent' class='popup'>
+                            <div class='content'>U heeft geen producten in uw verlanglijstje.</div>
+                        </div>
+                    </div> <img src='images/sad.gif' style='width:90%'>
+                    <?php
     } else {
-//        print_r($products);
-//            $pids=($products["0"]);
-//            print "<br><br>".$pids;
-//            $products = implode(', ', ($products["productId"]));
-
-
+        //if wishlist is not empty then print each item
         foreach ($products as $product) {
             $product=($product["productId"]);
             $db = new DbHandler("ERP");
@@ -135,7 +138,6 @@ if (isset($_SESSION["id"])) {
             $result = $stmt->fetch();
             if ($result["score"]==0) {
                 print "<h6>Score: geen rating</h6>";
-
             } else {
                 print "<h6> Score: ";
                 for ($i=0;$i<(round($result["score"], 0));$i++) {
