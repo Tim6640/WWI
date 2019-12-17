@@ -56,10 +56,23 @@ include_once("../public/includes/header.php");
 
 <?php
 //placeholder for user ID
-
 $_SESSION["id"]=3;
 
-//put in delete query
+//delete query
+if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
+    $userID=$_SESSION["id"];
+    $rid=($_POST["remove"]);
+    $userID=$_SESSION["id"];
+    $db = new DbHandler("USER");
+    $connection = $db->connect();
+    $sql = "DELETE FROM wishlist WHERE customerID=:id AND productId=:pid";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([':id' => $userID, ':pid' => $rid]);
+    $db->disconnect();
+    $db = null;
+
+    print "Het product is uit uw verlanglijstje verwijdert.<br><br>";
+}
 
 
 if (isset($_SESSION["id"])) {
@@ -74,7 +87,7 @@ if (isset($_SESSION["id"])) {
     $db = null;
 
     if (empty($products)) {
-        print "U heeft geen producten in uw verlanglijstje.<img src='sad.gif'>";
+        print "U heeft geen producten in uw verlanglijstje.<img src='images/sad.gif' style='width:90%'>";
     } else {
 //        print_r($products);
 //            $pids=($products["0"]);
@@ -148,27 +161,21 @@ if (isset($_SESSION["id"])) {
                     <i style='color:#00BDF3' class='color: fas fa-cart-plus fa-2x'></i>
                 </button>
             </form>
-            <form>
-                <button formmethod='post' name='remove' type='button' value='" . $pid . "' class='btn' data-toggle='modal' data-target='#banaan' onclick=''>
+            <form method='post'>
+                <button type='submit' formaction='verlanglijstje.php' name='remove' type='button' value='".$pid."' class='btn'>
                     <i style='color:#00BDF3' class='fas fa-heart-broken fa-2x'></i>
                 </button>
             </form>
             <!--add function to add product to cart-->
             </div>
-        </div>
+            </div>
             
             </div>
             </div>";
-
-
         }
     }
-
-
-
 } else {
     print "sorry, u moet ingelogd zijn om deze pagina te bekijken";
 }
-
 
 ?>

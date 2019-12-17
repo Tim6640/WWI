@@ -63,6 +63,24 @@ include_once("../public/includes/header.php");
     </div>
 
 <?php
+if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
+    $userID=$_SESSION["id"];
+    $rid=($_POST["remove"]);
+    $userID=$_SESSION["id"];
+    $db = new DbHandler("USER");
+    $connection = $db->connect();
+    $sql = "INSERT INTO wishlist (customerId, productId) VALUES (:aid) FROM wishlist WHERE customerID=:id AND productId=:pid";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([':id' => $userID, ':pid' => $rid]);
+    $db->disconnect();
+    $db = null;
+
+    print "Het product is in uw verlanglijstje geplaatst.<br><br>";
+} else if (!isset($_SESSION["id"])) {
+    print "Sorry, u moet ingelogd zijn om het verlanglijstje te kunnen gebruiken";
+}
+
+
 if(!isset($_SESSION["shoppingCart"])) {
     $_SESSION["shoppingCart"] = array();
 }
@@ -165,8 +183,8 @@ if (isset($products) and !($products == array())) {
                     <i style='color:#00BDF3' class='color: fas fa-cart-plus fa-2x'></i>
                 </button>
             </form>
-            <form>
-                <button formmethod='post' name='wagen' type='button' value='" . $pid . "' class='btn' data-toggle='modal' data-target='#banaan' onclick='startAjax($pid)'>
+            <form method='post'>
+                <button type='submit' formaction='#' name='add' type='button' value='".$pid."' class='btn'>
                     <i style='color:#00BDF3' class='fas fa-heart fa-2x'></i>
                 </button>
             </form>
