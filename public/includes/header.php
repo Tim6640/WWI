@@ -5,7 +5,9 @@
  * Date: 13-11-2019
  * Time: 12:12
  */
+
 session_start();
+
 include_once("../src/core/DbHandler.php");
 $db = new DbHandler("ERP");
 $connection = $db->connect();

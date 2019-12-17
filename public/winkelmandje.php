@@ -1,6 +1,4 @@
 <?php
-# dit is de header
-include_once("../src/core/init.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
 
@@ -10,6 +8,15 @@ if (array_key_exists("action", $_GET)) {
     unset($_SESSION["shoppingCart"][$delete]);
 }
 
+# $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
+    if (!isset($_SESSION["shoppingCart"])) {
+        $leeg = TRUE;
+    }else{
+        print("test");
+        // wordt uitgevoerd ook wanneer er iets in de shopping cart zit ----foute code-----
+//        $_SESSION["shoppingCart"] = array();
+        $leeg = FALSE;
+    }
 
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
@@ -41,10 +48,6 @@ if (!empty($_GET)) {
 //    $numbers = 1;
 //    $aantallen = 1;
 //}
-print_r($_SESSION);
-print "<br>";
-print_r($_GET);
-
 
 # reken bedragen voor het eindbedrag
 $totaal = 0;

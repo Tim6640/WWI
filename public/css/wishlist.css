@@ -1,0 +1,16 @@
+.holder{        
+	width:100%;
+	display:block;
+}
+.popupcontent{
+	padding: 2em 2em 2em 2em;
+}
+.popup{
+	border-radius: 0.5em;
+	background:#00BDF3;
+	margin:1em auto 1em;
+	padding:1em;  
+	// here it comes
+	position:static;
+	width:22em;
+}
