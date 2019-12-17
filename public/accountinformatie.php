@@ -38,8 +38,10 @@ if ($_POST["change"] == "change"){
 
 ?>
 <head>
+    <!-- stylesheets -->
     <title>registration</title>
 </head>
+<body>
 
 <div>
 <?php
@@ -62,6 +64,29 @@ if ($_POST["logout"] == "uitloggen"){
 #de daadwerkelijke registratie pagina
 if($_SESSION["logged_in"]) {
     ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link"style="color: black" href="accountinformatie.php">accountinformatie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="#">verlangijstje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="#">transactiegeschiedenis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="activeren.php">membership</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <form method="post" action="accountinformatie.php">
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
@@ -175,6 +200,9 @@ if($_SESSION["logged_in"]) {
         </div>
     </div>
 </div>
+<!-- javescripts -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
