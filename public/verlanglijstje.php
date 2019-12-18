@@ -29,19 +29,42 @@ include_once("../public/includes/header.php");
             );
         }
     </script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link"style="color: black" href="accountinformatie.php">accountinformatie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="verlanglijstje.php">verlanglijstje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="orderGeschiedenis.php">transactiegeschiedenis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: black" href="activeren.php">membership</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class='container'>
         <div class='modal' tabindex='-1' id='banaan' role='dialog'>
             <div class='modal-dialog modal-dialog-centered' role='document'>
                 <div class='modal-content'>
                     <div class='modal-header'>
-                        <h5 class='modal-title'>Wilt u verder winkelen of doorgaan naar de winkelwagen</h5>
+                        <h5 class='modal-title'>Wilt u verder winkelen of doorgaan naar uw winkelmandje</h5>
                         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
                         </button>
                     </div>
                     <div class='modal-body'>
                         <a type='button' class='btn btn-primary btn-lg bnt-block my-3' href='winkelmandje.php'>
-                            Doorgaan naar de winkelwagen
+                            Doorgaan naar mijn winkelmandje
                         </a>
                         <a type='button' class='btn btn-primary btn-lg bnt-block' href=''>
                             Verder winkelen
@@ -54,7 +77,7 @@ include_once("../public/includes/header.php");
         </div>
 <?php
 //placeholder for user ID
-$_SESSION["id"]=4;
+$_SESSION["id"]=3;
 
 //delete if a delete request comes through via post
 if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
@@ -96,7 +119,9 @@ if (isset($_SESSION["id"])) {
                         </div>
                     </div> <img src='images/sad.gif' style='width:90%'>
                     <?php
-    } else {
+    } else {?>
+        <h1 class="text-lg-center">Mijn verlanglijstje</h1>
+        <?php
         //if wishlist is not empty then print each item
         foreach ($products as $product) {
             $product=($product["productId"]);
@@ -180,4 +205,8 @@ if (isset($_SESSION["id"])) {
     print "sorry, u moet ingelogd zijn om deze pagina te bekijken";
 }
 
+?>
+    </div>
+<?php
+include_once("../public/includes/footer.php");
 ?>

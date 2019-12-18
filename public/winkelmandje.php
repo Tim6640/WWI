@@ -1,34 +1,72 @@
 <?php
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
-
+?>
+    <link href='css/wishlist.css' rel='stylesheet'>
+<?php
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $delete = $_GET["id"];
     unset($_SESSION["shoppingCart"][$delete]);
 }
 
-# $_SESSION["shoppingcart"} wordt gecontroleerd of hij leeg i
-    if (!isset($_SESSION["shoppingCart"])) {
-        $leeg = TRUE;
-    }else{
-        print("test");
-        // wordt uitgevoerd ook wanneer er iets in de shopping cart zit ----foute code-----
-//        $_SESSION["shoppingCart"] = array();
-        $leeg = FALSE;
-    }
 
 # verwijderen van de shopping cart
 if (array_key_exists("action", $_GET)) {
     $pos = array_search($_GET["id"], $_SESSION["shoppingCart"]);
     unset($_SESSION["shoppingCart"][$pos]);
 }
+print_r($_GET);
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
-    if (!in_array($_GET["id"], $_SESSION["verlanglijstje"])) {
-        $verlanglijst = $_GET["id"];
-        array_push($_SESSION["verlanglijstje"], $_GET["id"]);
-    }
+    //check if a request to add to wishlist is started
+        //check if the user is logged in through a db check
+        if (!empty($_SESSION["id"])) {
+            $userID = $_SESSION["id"];
+            $wadd = ($_GET["id"]);
+            $userID = $_SESSION["id"];
+            $db = new DbHandler("USER");
+            $connection = $db->connect();
+            $sql = "SELECT productId FROM wishlist WHERE customerID=:id AND productId=:pid";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([':id' => $userID, ':pid' => $wadd]);
+            $product = $stmt->fetch();
+            //insert if product in not already in db (previous select is empty)
+            if (empty($product["productId"])) {
+                $sql = "INSERT INTO wishlist (customerId, productId) VALUES (:id, :pid)";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([':id' => $userID, ':pid' => $wadd]);
+                ?>
+                <div class='holder'>
+                    <div id='popupcontent' class='popup'>
+                        <div class='content'>Het product is in uw verlanglijstje geplaatst.</div>
+                    </div>
+                </div>
+                <?php
+                //don't insert if product is not in db and show error
+            } else {
+                ?>
+                <div class='holder'>
+                    <div id='popupcontent' class='popup'>
+                        <div class='content'>Het product staat al in uw verlanglijstje</div>
+                    </div>
+                </div>
+                <?php
+            }
+            //close the database
+            $db->disconnect();
+            $db = null;
+            //if userid is not set then show an error
+        } else {
+            ?>
+            <div class='holder'>
+                <div id='popupcontent' class='popup'>
+                    <div class='content'>Sorry, u moet ingelogd zijn om het verlanglijstje te kunnen gebruiken</div>
+                </div>
+            </div>
+            <?php
+        }
+
 } else {
     $_SESSION["verlanglijstje"] = array();
 }
@@ -224,6 +262,7 @@ else{
     </a>
     </div>
 </div>
+
     <?php }
 
     include_once("includes/footer.php")?>
