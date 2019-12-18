@@ -71,7 +71,7 @@ include_once("../public/includes/header.php");
         <div class="text-left" style="padding-left: 0px; padding-top: 0px;">
             <h4>Onze bestsellers</h4>
         </div>
-        <div class="col">
+        <div class="col-auto">
             <div class="carousel-slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <?php
