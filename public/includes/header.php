@@ -101,7 +101,7 @@ if(isset($_SESSION["max"])) {
             </div>
 
             <!-- Search bar -->
-            <form class="col-10 col-md-11 pl-0 input-group" method="post" action="../public/productOverzicht.php">
+            <form name="searchBar" class="col-10 col-md-11 pl-0 input-group" method="post" action="../public/productOverzicht.php">
                 <!--            Javascript for the autocomplete function-->
                 <script type="text/javascript">
                     function startSearch(str) {
@@ -109,28 +109,23 @@ if(isset($_SESSION["max"])) {
                         $.ajax({
                             type: "POST",
                             url: "../public/getproduct.php",
-                            data: "query=" + str,
-                            success: function (result) {
-                                console.log("Yes!");
-                                console.log(str);
-                            }
-                        }).done(function( data, textStatus, jqXHR) {
-                                console.log(data);
-                                console.log(jqXHR.responseText);
+                            data: "query=" + str
+                        }).done(function(data) {
                             // if typed stuff is 0 long disable the box
                             if (str.length===0) {
                                 document.getElementById("display").innerHTML = "";
                                 document.getElementById("display").style.border = "0px";
                                 // javascript isset
                             } else {
-                                try {
+                                if (data) {
                                     // try to get products to display
+                                    console.log(data);
                                     document.getElementById("display").innerHTML= data;
-                                } catch (e) {
+                                } else {
                                     // display no result
                                     document.getElementById("display").innerHTML= "Geen resultaat"
-                                } {
-                                } document.getElementById("display").style.border="1px solid #A5ACB2";
+                                }
+                                document.getElementById("display").style.border="1px solid #A5ACB2";
                             }
                         }
                         )
