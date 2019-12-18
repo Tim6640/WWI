@@ -172,7 +172,6 @@
         </script>
 </div>
 <?php
-
 if (isset($_POST["email"])) {
     $db = new DbHandler("USER");
     $connection = $db->connect();
@@ -185,4 +184,3 @@ if (isset($_POST["email"])) {
 
 include_once("../public/includes/footer.php");
 ?>
-</body>

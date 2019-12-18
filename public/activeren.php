@@ -1,7 +1,6 @@
 <?php
 $pageTitle = "Activeren";
 include_once("../public/includes/header.php");
-$_SESSION["id"] = 2;
 $invalid = false;
 if(isset($_POST['submit']))
 {

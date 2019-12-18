@@ -5,10 +5,12 @@ $pageTitle = "orderGeschiedenis";
 include_once("../public/includes/header.php");
 print "<link href='css/productOverzicht.css' rel='stylesheet'>";
 
+?>
+<div class='container'>
 
+<?php
 //placeholder for user ID
-//$userID=$_SESSION["id"];
-$userID=3;
+$userID=$_SESSION["id"];
 
 if (isset($userID)) {
 //  Hier komt de order geschiedenis van de gebruiker
@@ -26,7 +28,6 @@ if (isset($userID)) {
 
 
     $inOrder=null;
-    print "<div class='container'>";
     foreach($results as $result) {
         $recordID=($result["orderrecordID"]);
         $date = date("d-m-Y", strtotime($result["date"]));
@@ -51,14 +52,16 @@ if (isset($userID)) {
                 }
                 print "</ul></div>";
             }
-            print "<div class='ml-auto'>Totaalprijs: €$totaal</div></div><br>";
+            print "<div class='m-auto'>Totaalprijs: €$totaal</div></div><br>";
         }
         //make clear for next loop that previous orderrecord==$inOrder
         $inOrder=$recordID;
     }
 } else {
     //wanneer er geen geschiedenis is van de bestelling
-    print "Er zijn geen eerdere aankopen gevonden :(";
+    ?>
+    <div zijn geen eerdere aankopen gevonden</div>
+    <?php
 }
 
 ?>
