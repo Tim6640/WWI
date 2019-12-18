@@ -176,7 +176,7 @@
 if (isset($_POST["email"])) {
     $db = new DbHandler("USER");
     $connection = $db->connect();
-    $sql = "INSERT INTO newsletter (email) VALUES (:id)";
+    $sql = "update customer set newsletter = 1 where email = :id";
     $stmt = $connection->prepare($sql);
     $stmt->execute([':id' => $_POST["email"]]);
     $db->disconnect();

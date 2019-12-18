@@ -4,19 +4,43 @@ include_once("../src/core/DbHandler.php");
 $pageTitle = "orderGeschiedenis";
 include_once("../public/includes/header.php");
 print "<link href='css/productOverzicht.css' rel='stylesheet'>";
+?>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-lg-center">
+            <li class="nav-item">
+                <a class="nav-link"style="color: black" href="accountinformatie.php">accountinformatie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="verlanglijstje.php">verlanglijstje</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="orderGeschiedenis.php">transactiegeschiedenis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="activeren.php">membership</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<?php
 
 //placeholder for user ID
-//$userID=$_SESSION["id"];
-$userID=3;
+$userID=$_SESSION["id"];
 
+ini_set('display_errors', 0);
 if (isset($userID)) {
 //  Hier komt de order geschiedenis van de gebruiker
 
     //start db connectie
     $db = new DbHandler("USER");
     $connection = $db->connect();
-    $sql = "SELECT O.orderrecordID, O.date, OP.productID, OP.amount, OP.unitPrice FROM orderrecord O JOIN orderproduct OP ON O.orderrecordID=OP.orderrecordID WHERE O.customerID=:id";
+    $sql = "SELECT O.orderrecordID, O.date, OP.productID, OP.amount FROM orderrecord O JOIN orderproduct OP ON O.orderrecordID=OP.orderrecordID WHERE O.customerID=:id";
     $stmt = $connection->prepare($sql);
     $stmt->execute([':id' => $userID]);
     $results = $stmt->fetchAll();
