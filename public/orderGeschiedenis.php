@@ -26,7 +26,7 @@ if (isset($userID)) {
     $db = null;
 
     if (!empty($results)) {
-        print "<h1 class='text-lg-center'>Order Geschiedenis</h1>";
+        print "<h1 class='display-4 text-center'>Order Geschiedenis</h1>";
         $inOrder=null;
         foreach($results as $result) {
             $recordID=($result["orderrecordID"]);

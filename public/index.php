@@ -39,7 +39,7 @@ include_once("../public/includes/header.php");
                 id="demo"></h5>
         </div>
         <script>
-            var countDownDate = new Date("Dec 9, 2019 00:00:25").getTime();
+            var countDownDate = new Date("Dec 25, 2019 00:00:25").getTime();
 
             // Update the count down every 1 second
             var x = setInterval(function () {
@@ -148,7 +148,7 @@ include_once("../public/includes/header.php");
 
         <!--end of banner carousel-->
         <!--added subscription section-->
-        <br>
+        <hr>
         <h5>Inschrijven Nieuwsbrief&nbsp</h5>
         <form method="post" action="">
             <input type="email" name="email" placeholder="bla@bla.nl">

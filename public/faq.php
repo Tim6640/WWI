@@ -18,8 +18,6 @@
     $pageTitle = "FAQ";
     include_once("../public/includes/header.php");
     ?>
-</head>
-<body>
 <div class="container text-center">
     <h1>FAQ</h1>
 </div>
@@ -43,8 +41,11 @@
     <p>Door een storing bij IDeal kunnen wij daar helaas geen betalingen mee verwerken. Mocht dit probleem blijven voorkomen, stuur ons dan uw creditcardgegevens en pincode, dan helpen wij u graag verder!</p>
     <hr>
     <h5>5. Ik wil graag een klacht indienen, waar kan ik dit doen?</h5>
-    <p>Dit kan onderaan de pagina onder het kopje contact, maar ook via een review onder een product.</p>
-        <hr>
+    <p>Dit kan onderaan de pagina onder het kopje contact, maar ook via een review onder een product.</p><hr>
+
+
     </div>
 </div>
-</body>
+    <?php
+include_once("../public/includes/footer.php");
+?>
