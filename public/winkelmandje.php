@@ -256,7 +256,7 @@ else{
 </div>
 <div class="px-4 px-lg-0 ">
     <div class="text-lg-center">
-    <a href="homepage.php">
+    <a href="index.php">
         <h5 class="text-center">terug naar homepage</h5>
     </a>
     </div>
