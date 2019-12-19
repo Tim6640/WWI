@@ -27,7 +27,7 @@ if(isset($_SESSION["max"])) {
 } else {
     $_SESSION["max"] = 10000;
 }
-
+ini_set('display_errors', 0);
 ?>
 <!DOCTYPE html>
 <html>
