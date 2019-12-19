@@ -169,6 +169,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                     var video = div.find("video").get(0);
                     video.play();
                 }
+
             });
         });
     </script>
@@ -189,7 +190,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                         <img class="img-fluid" src="images/wijn3.png" alt="Third slide">
                     </div>
                     <div class="carousel-item" style="video{ width:100%; height: auto}">
-                        <video width="100%" height="auto" muted>
+                        <video width="100%" height="auto" controls>
                             <source src="images/test.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -348,7 +349,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             </div>
         </div>
     </div>
-</div>
+
 <?PHP
 
 include_once("../public/includes/footer.php");
