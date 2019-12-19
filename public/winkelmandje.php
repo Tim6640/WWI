@@ -16,7 +16,6 @@ if (array_key_exists("action", $_GET)) {
     $pos = array_search($_GET["id"], $_SESSION["shoppingCart"]);
     unset($_SESSION["shoppingCart"][$pos]);
 }
-print_r($_GET);
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
     //check if a request to add to wishlist is started
@@ -91,7 +90,7 @@ if (!empty($_GET)) {
 $totaal = 0;
 $shipping = 10;
 #connectie met de database
-ini_set('display_errors', 6);
+ini_set('display_errors', 0);
 $db = new DbHandler("ERP");
 $connection = $db->connect();
 

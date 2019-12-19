@@ -6,10 +6,8 @@ $pageTitle = "product";
 include_once("../public/includes/header.php");
 
 ?>
-<!doctype html>
-<html lang="Ne" xmlns="http://www.w3.org/1999/html">
+
     <link href='css/wishlist.css' rel='stylesheet'>
-    <head>
     <!--    # benodigde meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -24,7 +22,6 @@ include_once("../public/includes/header.php");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
-</head>
 
 <?php
 //check if a request to add to wishlist is started
@@ -114,8 +111,8 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
 ?>
 <!--# einde voorwerk-->
 <!--# begin pagina-->
-<body>
-<div class="container" style="min-height:100vh">
+
+<div class="container min-vh-100">
     <div class="row">
         <div class="col-12">
             <h6 class="text-center" style="font-size: x-large">
@@ -146,16 +143,20 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         ?>
        </div>
         <!--        Links naar winkelmand en verlanglijstje-->
-        <div class="col-5">
-            <a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
+        <div class="row" style="padding-top: 10px">
+        <div class="col-md-5">
+            </a><a href="winkelmandje.php" class="mr-3 ml-3" data-toggle="modal" data-target="#product" onclick="startAjax();">
                 <i class="fas fa-cart-plus fa-2x"></i>
             </a>
+        </div>
             <!-- Niet doorsturen maar toevoegen-->
+            <div class="col-md-5">
             <form method='post'>
                 <button type='submit' formaction='#' name='wadd' type='button' value='<?php print $nummer ?>' class='btn'>
                     <i style='color:#00BDF3' class='fas fa-heart fa-2x'></i>
                 </button>
             </form>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -172,26 +173,28 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
         });
     </script>
     <!--    Carrousel start-->
-    <div class="row">
+    <div class="row" >
         <div class="col-12">
-            <div id="carousel" class="carousel slide" data-ride="carousel" data-pause="hover" style=" width:100%; height: 100%; !important;">
+        <div class="text-center">
+            <div id="carousel" class="carousel slide" data-ride="carousel"  data-pause="hover" style=" width:100%; height: 100%; !important;">
                 <!--            Carrousel inner items-->
                 <div class="carousel-inner" style="margin-bottom:10%; height: 100%">
                     <div class="carousel-item active">
-                        <img class="img-fluid" src="test1.jpg" alt="First slide">
+                        <img class="img-fluid" src="images/wijn1.jpg" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="img-fluid" src="test2.jpg" alt="Second slide">
+                        <img class="img-fluid" src="images/wijn2.jpg" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="img-fluid" src="test3.jpg" alt="Third slide">
+                        <img class="img-fluid" src="images/wijn3.png" alt="Third slide">
                     </div>
                     <div class="carousel-item" style="video{ width:100%; height: auto}">
                         <video width="100%" height="auto" muted>
-                            <source src="test4.mp4" type="video/mp4">
+                            <source src="images/test.mp4" type="video/mp4">
                         </video>
                     </div>
                 </div>
+            </div>
                 <!--            Carrousel controls-->
                 <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -201,27 +204,28 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-                <!--            Carrousel small indicators !!help me with the scaling!!-->
-                <ol class="carousel-indicators" style="height: available">
+                <!--            Carrousel small indicators-->
+                <ol class="carousel-indicators">
                     <li data-target="#carousel" data-slide-to="0" class="active" style="width: 20%;">
-                        <img class="d-block w-100" src="images/product/test1.jpg">
+                        <img class="d-block w-100" src="images/wijn1.jpg">
                     </li>
-                    <li data-target="#carousel" data-slide-to="1" style="width: 20%">
-                        <img class="d-block w-100" src="images/product/test2.jpg">
+                    <li data-target="#carousel" data-slide-to="1" style="width: 20%;">
+                        <img class="d-block w-100" src="images/wijn2.jpg">
                     </li>
-                    <li data-target="#carousel" data-slide-to="2" style="width: 20%">
-                        <img class="d-block w-100" src="images/product/test3.jpg">
+                    <li data-target="#carousel" data-slide-to="2" style="width: 20%;">
+                        <img class="d-block w-100" src="images/wijn3.png">
                     </li>
-                    <li data-target="#carousel" data-slide-to="3" style="width: 20%">
-                        <img class="d-block w-100" src="images/product/test3.jpg">
+                    <li data-target="#carousel" data-slide-to="3" style="width: 20%;">
+                        <img class="d-block w-100" src="images/video.png">
                     </li>
                 </ol>
             </div>
         </div>
     </div>
-    <div class="h-divider" style="margin-top: 5%; border-top: white ">
+    <div class="h-divider" style=" border-top: white">
+    </div>
         <!--    items under the carrousel-->
-        <div class="row">
+        <div class="row pt-md-5" style="margin-top: 16%">
             <div class="col-4">
                 <h2><?php print("€" . $price); ?></h2>
             </div>
@@ -333,7 +337,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                         <a type="button" class="btn btn-primary btn-lg bnt-block my-3" href="winkelmandje.php">
                             Doorgaan naar de winkelwagen
                         </a>
-                        <a type="button" class="btn btn-primary btn-lg bnt-block" data-dismiss="modal">
+                        <a type="button" class="btn btn-primary btn-lg bnt-block my-3" data-dismiss="modal">
                             Verder winkelen
                         </a>
                     </div>
@@ -346,5 +350,6 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
     </div>
 </div>
 <?PHP
+
 include_once("../public/includes/footer.php");
 ?>

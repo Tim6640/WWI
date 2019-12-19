@@ -10,8 +10,8 @@
 <!-- webpagina code-->
 <!-- Footer -->
 
-<footer class="bg-info page-footer">
-    <div class="container pt-3">
+<footer class="bg-info page-footer" style="margin-top: 20%">
+    <div class="container pt-3 h-100">
         <div class="row">
             <!-- logo -->
             <div class="col-4">
