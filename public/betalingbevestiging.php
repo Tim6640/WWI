@@ -86,9 +86,8 @@
                 sleep(0.25);
                 $orderID=($result["orderrecordID"]);
 
-
                 $productArray=($_SESSION["shoppingCart"]);
-//                $productArray=array(1, 18, 25, 69);
+                print_r($_SESSION["aantallen"]);
 
                 //use foreach to place each product in order
                 foreach ($productArray as $product) {

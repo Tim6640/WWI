@@ -64,7 +64,7 @@ if (isset($_SESSION["logged_in"])) {
     ?>
     <!-- kaartje van alles -->
     <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
+        <div class="d-flex justify-content-md-center h-100">
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <!-- logo plaats -->

@@ -1,6 +1,6 @@
 <?php
 
-include_once("../src/core/init.php");
+include_once("../src/core/dbhandler.php");
 $pageTitle = "verlanglijstje";
 include_once("../public/includes/header.php");
 ?>
@@ -77,7 +77,6 @@ include_once("../public/includes/header.php");
         </div>
 <?php
 //placeholder for user ID
-$_SESSION["id"]=3;
 
 //delete if a delete request comes through via post
 if ((isset($_POST["remove"])) && isset($_SESSION["id"])) {
