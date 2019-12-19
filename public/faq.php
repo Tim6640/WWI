@@ -28,7 +28,6 @@
     $pageTitle = "FAQ";
     include_once("../public/includes/header.php");
     ?>
-
 <div class="container text-center">
     <h1>FAQ</h1>
 </div>
