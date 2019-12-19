@@ -71,9 +71,9 @@
     <?php
     include_once("../src/core/DbHandler.php");
     ?>
-    <div class="text-left" style="padding-left: 0px; padding-top: 0px;">
+    <div class="text-center">
         <h4>Onze bestsellers</h4>
-    </div>
+
     <div class="col">
         <div class="carousel-slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 
     <hr/>
     <!--Company description-->
