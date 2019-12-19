@@ -10,8 +10,9 @@ if(isset($query)) {
     // database connection
     $db = new DbHandler("ERP");
     $connection = $db->connect();
-    $sql = "SELECT StockItemName, RecommendedRetailPrice, StockItemID FROM stockitems WHERE StockItemName like '%$query%' limit 6";
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, StockItemID FROM stockitems WHERE StockItemName like :search limit 6";
     $stmt = $connection->prepare($sql);
+    $stmt->bindValue(":search", "%".$query."%", PDO::PARAM_STR);
     $stmt->execute();
     $productsName = $stmt->fetchAll();
     $db->disconnect();
