@@ -233,7 +233,7 @@ if(!empty($_SESSION["shoppingCart"])) {
 
                         </ul>
                         <form method="post" action="betalingbevestiging.php">
-                        <input type="submit" name="submit" value="proceed to checkout"
+                        <input type="submit" name="bevestiging" value="proceed"
                                class="btn btn-primary rounded-pill py-2 btn-block">
                         </form>
                     </div>
@@ -263,5 +263,4 @@ else{
 </div>
 
     <?php }
-
     include_once("includes/footer.php")?>

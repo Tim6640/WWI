@@ -62,7 +62,7 @@ ini_set('display_errors', 0);
     <div class="container p-3">
         <div class="row">
             <!-- Logo -->
-            <a class="col-2 col-md-1 pr-0" href="homepage.php">
+            <a class="col-2 col-md-1 pr-0" href="index.php">
                 <img class="logo-small m-auto" src="images/wwi_logo_small.png" alt="">
             </a>
             <!-- Title -->

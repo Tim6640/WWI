@@ -1,46 +1,46 @@
 <?php
 #header
-include_once("../src/core/init.php");
+include_once("../src/core/DbHandler.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
+
 if(isset($_POST["email"], $_POST["password"]))
 {
     #connectie
     $email = $_POST["email"];
     $password = hash('sha256', $_POST["password"]);
-    $host = "localhost";
-    $databasename = "wideworldimportersextra";
-    $user = "root";
-    $pass = "";
-    $port = 3306;
-    $conn = new mysqli($host, $user, $pass, $databasename, $port);
-    $result = $conn->query("SELECT firstname, password, email, customerID FROM customer WHERE email = '".$email."' AND  password = '".$password."'");
-    if(mysqli_num_rows($result) > 0 )
-    {
-        $row = mysqli_fetch_assoc($result);
+    $db = new DbHandler("USER");
+    $connection = $db->connect();
+    $sql = "SELECT firstname, password, email, customerID FROM customer WHERE email =:id AND password =:pid";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([':id'=>$email, ':pid'=>$password]);
+    $result = $stmt->fetch();
+    //clear db connectie
+    $db->disconnect();
+    $db = null;
+
+    if(!empty($result)) {
         $_SESSION["logged_in"] = true;
-        $_SESSION["naam"] = $row["firstname"];
-        $_SESSION["id"] = $row["customerID"];
+        $_SESSION["naam"] = ($result["firstname"]);
+        $_SESSION["id"] = ($result["customerID"]);
     }
     else {
-
     }
-    mysqli_free_result($result);
-    mysqli_close($conn);
 
 }
+
 #verwijdert error
-error_reporting(0);
+//error_reporting(0);
 ?>
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <?php
 #als al bent ingelogt krijg je dit scherm
-if ($_SESSION["logged_in"]) {
+if (isset($_SESSION["logged_in"])) {
     ?>
     <div class="container h-100">
     <div class="px-4 px-lg-0">
