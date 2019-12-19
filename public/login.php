@@ -112,7 +112,7 @@ if (isset($_SESSION["logged_in"])) {
                 <!-- registeren -->
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
-                        Heb je nog geen account? <a href="account.php" class="ml-2">Registeren
+                        Heb je nog geen account? <a href="account.php">Registeren
                     </div>
 
                 </div>
