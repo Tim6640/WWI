@@ -5,8 +5,12 @@
  * Date: 7-11-2019
  * Time: 09:52
  */
+
 ini_set('display_errors', 0);
-include_once("../src/core/init.php");
+
+
+include_once("../src/core/dbhandler.php");
+
 $pageTitle = "Homepage";
 include_once("../public/includes/header.php");
 ?>
