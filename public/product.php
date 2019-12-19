@@ -339,7 +339,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
                         <a type="button" class="btn btn-primary btn-lg bnt-block my-3" href="winkelmandje.php">
                             Doorgaan naar de winkelwagen
                         </a>
-                        <a type="button" class="btn btn-primary btn-lg bnt-block" href="productpagina.php">
+                        <a type="button" class="btn btn-primary btn-lg bnt-block" href="product.php?pid=<?=$productNummer?>">
                             Verder winkelen
                         </a>
                     </div>

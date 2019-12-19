@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 #headers
-include_once("../src/core/init.php");
+include_once("../src/core/DbHandler.php");
 $pageTitle = "Home";
 include_once("../public/includes/header.php");
 
@@ -60,7 +60,7 @@ if(isset($_POST['registeren'])) {
         $housenumber = mb_strtoupper($_POST["Huisnr"]);
         $tel = $_POST["Tel"];
 
-        $result = $conn->query("INSERT INTO customer(email, password, firstname, ln_prefix, lastname, city, street, postalcode, housenumber, tel) values ('$email', '$password', '$firstName', '$inPrefix', '$lastName', '$city', '$street', '$postcalcode', '$housenumber', '$tel');");
+        $result = $conn->query("INSERT INTO customer(email, password, firstname, ln_prefix, lastname, city, street, postalcode, housenumber, tel, newsletter) values ('$email', '$password', '$firstName', '$inPrefix', '$lastName', '$city', '$street', '$postcalcode', '$housenumber', '$tel', 0);");
         mysqli_close($conn);
         ?>
 
