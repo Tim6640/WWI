@@ -7,48 +7,58 @@ include_once("../public/includes/header.php");
 
 //ini_set('display_errors', 0);
 if (isset($_POST["change"])) {
-
-    //check password-----------------------------------------------------------------------------
-//use email and password to compare passwords
-
-    //if correct then execute update-------------------------------------------------------------
-    if (!empty($_POST["PassNew"])) {
-        $password = hash('sha256', $_POST["PassNew"]);
-    }
-    //defining variables to use in insert
-    $passwordOld= hash('sha256', $_POST['Pass']);
-    $email= ($_POST["Email"]);
-    $firstName = ucfirst(mb_strtolower($_POST["Voornaam"]));
-    $inPrefix = ucfirst(mb_strtolower($_POST["Tussenvoegsel"]));
-    $lastName = ucfirst(mb_strtolower($_POST["Achternaam"]));
-    $city = ucfirst(mb_strtolower($_POST["Woonplaats"]));
-    $street = ucfirst(mb_strtolower($_POST["Straatnaam"]));
-    $postcalcode = mb_strtoupper($_POST["Postcode"]);
-    $housenumber = mb_strtoupper($_POST["Huisnr"]);
-    $tel = $_POST["Tel"];
-    $id = $_SESSION["id"];
-
+    //start db connection
     $db = new DbHandler("USER");
     $connection = $db->connect();
-    $sql = "UPDATE customer SET email = '$email', password = '$password', firstname = '$firstName', ln_prefix = '$inPrefix', lastname = '$lastName', city = '$lastName', city = '$city', street = '$street', postalcode = '$postcalcode', housenumber = '$housenumber', tel = '$tel' WHERE customerID = :id;";
-    $stmt = $connection->prepare($sql);
-    $stmt->execute([':id' => $id]);
 
-    if (isset($_POST["nieuwsbrief"])) {
-        if ($_POST["nieuwsbrief"] == "nieuwsbrief") {
-            $sql = "UPDATE customer SET newsletter=1 WHERE email= ':id'";
-            $stmt = $connection->prepare($sql);
-            $stmt->execute([':id' => $email]);
-        } else {
-            $sql = "UPDATE customer SET newsletter=0 WHERE email = ':id'";
-            $stmt = $connection->prepare($sql);
-            $stmt->execute([':id' => $email]);
+    //use email and password to compare passwords-----------------------------------------------------------
+    $enteredPassword= hash('sha256', $_POST['Pass']);
+    $email= ($_POST["Email"]);
+
+    //check password
+    $sql = "SELECT customerID FROM customer WHERE email=:id AND password=:pid";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([':id' => $email, ':pid' => $enteredPassword]);
+    $result = $stmt->fetch();
+
+    //if correct then execute update-------------------------------------------------------------
+    if (!empty($result)) {
+        $wrongPassword=false;
+        if (!empty($_POST["PassNew"])) {
+            $enteredPassword = hash('sha256', $_POST["PassNew"]);
+        }
+        //defining variables to use in insert
+        $firstName = ucfirst(mb_strtolower($_POST["Voornaam"]));
+        $inPrefix = ucfirst(mb_strtolower($_POST["Tussenvoegsel"]));
+        $lastName = ucfirst(mb_strtolower($_POST["Achternaam"]));
+        $city = ucfirst(mb_strtolower($_POST["Woonplaats"]));
+        $street = ucfirst(mb_strtolower($_POST["Straatnaam"]));
+        $postcalcode = mb_strtoupper($_POST["Postcode"]);
+        $housenumber = mb_strtoupper($_POST["Huisnr"]);
+        $tel = $_POST["Tel"];
+        $id = $_SESSION["id"];
+
+        //update the record corresponding to customerID
+        $sql = "UPDATE customer SET email = '$email', password = '$enteredPassword', firstname = '$firstName', ln_prefix = '$inPrefix', lastname = '$lastName', city = '$lastName', city = '$city', street = '$street', postalcode = '$postcalcode', housenumber = '$housenumber', tel = '$tel' WHERE customerID = :id;";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([':id' => $id]);
+
+        if (isset($_POST["nieuwsbrief"])) {
+            if ($_POST["nieuwsbrief"] == "nieuwsbrief") {
+                $sql = "UPDATE customer SET newsletter=1 WHERE email= ':id'";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([':id' => $email]);
+            } else {
+                $sql = "UPDATE customer SET newsletter=0 WHERE email = ':id'";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([':id' => $email]);
+            }
         }
     } else {
-        $wrongpassword = true;
-        print "sorry verkeerde gegevens";
+        $wrongPassword=true;
     }
     //clear db connectie
+
     $db->disconnect();
     $db = null;
 
@@ -64,7 +74,7 @@ if (isset($_POST["change"])) {
 </head>
 <div>
     <?php
-    //start displaying user information
+//start displaying user information---------------------------------------------------------------
     //call on dbhandler
     if (isset($_SESSION["id"])){
     $db = new DbHandler("USER");
@@ -92,6 +102,15 @@ if (isset($_POST["change"])) {
             <!-- For demo purpose -->
             <div class="text-lg-center">
                 <h1 class="display-4 text-center" STYLE="margin-bottom: 0.2cm">Account informatie </h1>
+                <?php
+                if (isset($wrongPassword)){
+                    if ($wrongPassword==true){
+                        print "<h5 class='text-center' style='color:red'>Verkeerd wachtwoord gebruikt</h5>";
+                    } else {
+                        print "<h5 class='text-center' style='color:green'>Wijzigingen zijn verwerkt</h5>";
+                    }
+                }
+                ?>
 
             </div>
             <div class="container">
@@ -154,7 +173,15 @@ if (isset($_POST["change"])) {
                     </div>
                     <div class="form-group col-md-5">
                         <label>Huidige wachtwoord</label>
-                        <input type="password" name="Pass" required=required class="form-control">
+                        <input type="password" name="Pass" required=required class="form-control"
+                            <?php
+                            if (isset($wrongPassword)){
+                                if ($wrongPassword==true){
+                                    print "placeholder=\"Verkeerd wachtwoord\"";
+                                }
+                            }
+                            ?>
+                        >
                     </div>
                     <div class="form-group col-md-5">
                         <label>Nieuwe wachtwoord(optioneel)</label>
