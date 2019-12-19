@@ -44,6 +44,29 @@ else {
 }
 
 ?>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-lg-center">
+            <li class="nav-item">
+                <a class="nav-link"style="color: black" href="accountinformatie.php">accountinformatie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="verlanglijstje.php">verlanglijstje</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="orderGeschiedenis.php">transactiegeschiedenis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color: black" href="activeren.php">membership</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
         <div id="accountModal" class="modal" tabindex="-1" role="dialog">

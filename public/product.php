@@ -85,7 +85,7 @@ $productNummer=$_GET["pid"];
 
 $db = new DbHandler("ERP");
 $connection = $db->connect();
-$sql = "SELECT StockItemName, RecommendedRetailPrice FROM stockitems WHERE StockItemID=:pid";
+$sql = "SELECT StockItemName, RecommendedRetailPrice, StockItemID FROM stockitems WHERE StockItemID=:pid";
 $stmt = $connection->prepare($sql);
 $stmt->execute([':pid' => $productNummer]);
 $result = $stmt->fetch();
@@ -94,15 +94,9 @@ $db = null;
 
 $name = $result["StockItemName"];
 $price = $result["RecommendedRetailPrice"];
+$nummer = $result["StockItemID"];
 
-// Logica
-if(!isset($_SESSION["verlanglijstje"])) {
-    $_SESSION["verlanglijstje"] = array();
-}
 
-if(isset($_POST["verlang"]) AND !in_array($_POST["verlang"] , $_SESSION["verlanglijstje"])) {
-    array_push($_SESSION["verlanglijstje"], $_POST["verlang"]);
-}
 
 if(!isset($_SESSION["shoppingCart"])) {
     $_SESSION["shoppingCart"] = array();
@@ -161,7 +155,7 @@ if(isset($_POST["wagen"]) AND !in_array($_POST["wagen"] , $_SESSION["shoppingCar
             </a>
             <!-- Niet doorsturen maar toevoegen-->
             <form method='post'>
-                <button type='submit' formaction='#' name='wadd' type='button' value='<??>' class='btn'>
+                <button type='submit' formaction='#' name='wadd' type='button' value='<?php print $nummer ?>' class='btn'>
                     <i style='color:#00BDF3' class='fas fa-heart fa-2x'></i>
                 </button>
             </form>
