@@ -87,7 +87,6 @@
                 $orderID=($result["orderrecordID"]);
 
                 $productArray=($_SESSION["shoppingCart"]);
-
                 //use foreach to place each product in order
                 foreach ($productArray as $product) {
                     if (isset($_SESSION["aantallen"])){
@@ -97,10 +96,11 @@
                     }
 
                     //check the amount and set if exists
-                    if ($product ==$amountArray))) {
-                        $amount = 1;
-                    } else {
+                    print ($amountArray["$product"]);
+                    if ($product == (array_key_exists($product, $amountArray))) {
                         $amount = ($amountArray["$product"]);
+                    } else {
+                        $amount = 1;
                     }
 
                     //start of inserting into orderproduct
