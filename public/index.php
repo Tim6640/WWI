@@ -5,7 +5,7 @@
  * Date: 7-11-2019
  * Time: 09:52
  */
-
+ini_set('display_errors', 0);
 include_once("../src/core/init.php");
 $pageTitle = "Homepage";
 include_once("../public/includes/header.php");
@@ -71,6 +71,7 @@ include_once("../public/includes/header.php");
         <div class="text-left" style="padding-left: 0px; padding-top: 0px;">
             <h4>Onze bestsellers</h4>
         </div>
+        <div class="text-center">
         <div class="col-auto">
             <div class="carousel-slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
@@ -106,7 +107,7 @@ include_once("../public/includes/header.php");
                 </div>
             </div>
         </div>
-
+        </div>
         <hr/>
         <!--Company description-->
         <div class="row" style="padding-right: 38px; padding-left: 38px;">

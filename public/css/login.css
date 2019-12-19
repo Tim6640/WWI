@@ -1,21 +1,10 @@
 
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: white ;
-}
 .user_card {
     height: 400px;
     width: 350px;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-top: 100px;
     background: lightblue;
     position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -51,15 +40,9 @@ html {
     box-shadow: none ;
     outline: 0px ;
 }
-.login_container {
-    padding: 0 2rem;
-}
 
 .input_user,
 .input_pass:focus {
     box-shadow: none ;
     outline: 0px ;
-}
-.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: #c0392b ;
 }
