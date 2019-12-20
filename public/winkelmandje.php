@@ -16,7 +16,6 @@ if (array_key_exists("action", $_GET)) {
     $pos = array_search($_GET["id"], $_SESSION["shoppingCart"]);
     unset($_SESSION["shoppingCart"][$pos]);
 }
-print_r($_GET);
 # toevoegen aan verlanglijstje
 if (array_key_exists("wishlist", $_GET)) {
     //check if a request to add to wishlist is started
@@ -91,7 +90,7 @@ if (!empty($_GET)) {
 $totaal = 0;
 $shipping = 10;
 #connectie met de database
-ini_set('display_errors', 6);
+ini_set('display_errors', 0);
 $db = new DbHandler("ERP");
 $connection = $db->connect();
 
@@ -234,7 +233,7 @@ if(!empty($_SESSION["shoppingCart"])) {
 
                         </ul>
                         <form method="post" action="betalingbevestiging.php">
-                        <input type="submit" name="submit" value="proceed to checkout"
+                        <input type="submit" name="bevestiging" value="proceed"
                                class="btn btn-primary rounded-pill py-2 btn-block">
                         </form>
                     </div>
@@ -257,12 +256,11 @@ else{
 </div>
 <div class="px-4 px-lg-0 ">
     <div class="text-lg-center">
-    <a href="homepage.php">
+    <a href="index.php">
         <h5 class="text-center">terug naar homepage</h5>
     </a>
     </div>
 </div>
 
     <?php }
-
     include_once("includes/footer.php")?>

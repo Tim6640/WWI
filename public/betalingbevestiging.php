@@ -18,10 +18,9 @@
     $pageTitle = "Home";
     include_once("../public/includes/header.php");
     ?>
-</head>
-<body>
 <div class="container my-5 text-center" role="alert" style="">
     <?php
+
     if (isset ($_POST["unregistered"])) {
         //search in database if e-mail already exists
         $eMail=($_POST["e-mail"]);
@@ -50,16 +49,17 @@
             $result = $stmt->fetch();
             sleep(0.25);
             $userID=($result["customerID"]);
+            $_POST['bevestiging']="proceed";
         }
     }
-
     //check if bevestiging is set else 404 page
-    if(isset($_GET['bevestiging'])) {
+    if(isset($_POST['bevestiging'])) {
         //check if bestiging is set to "proceed" else set error
-        $bevestiging = $_GET['bevestiging'];
+        $bevestiging = $_POST['bevestiging'];
         if ($bevestiging == "proceed") {
             if (isset($_SESSION["id"])) {
                 $userID=$_SESSION["id"];
+
             } else if (!isset($userID)) {
                 //if account is not set show a form to enter e-mail
                 print "<p>Gebruik een account of vul hier uw gegevens in om een bestelling te plaatsen.</p>";
@@ -86,14 +86,14 @@
                 sleep(0.25);
                 $orderID=($result["orderrecordID"]);
 
-
                 $productArray=($_SESSION["shoppingCart"]);
-//                $productArray=array(1, 18, 25, 69);
-
                 //use foreach to place each product in order
                 foreach ($productArray as $product) {
-                $amountArray=($_SESSION["aantallen"]);
-//                    $amountArray= array(25=>6, 69=>69);
+                    if (isset($_SESSION["aantallen"])){
+                        $amountArray=($_SESSION["aantallen"]);
+                    } else {
+                        $amountArray = array();
+                    }
 
                     //check the amount and set if exists
                     if ($product == (array_key_exists($product, $amountArray))) {
@@ -123,22 +123,23 @@
                     $pStmt->execute([':oid' => $orderID, ':pid' => ($pResult["StockItemName"]), ':amount' => $amount, ':price' => ($pResult["RecommendedRetailPrice"])]);
                     $pDb->disconnect();
                     $pDb = null;
-
                 }
 
                 //close connection
                 $db->disconnect();
                 $db = null;
 
-//                unset($_SESSION["shoppingcart"]);
-//                unset($_SESSION["aantallen"]);
+                unset($_SESSION["aantallen"]);
+                unset($_SESSION["shoppingCart"]);
 
                 print('
         <div class="row">
             <div class="col-12">
                 <div class="m-auto alert alert-success">
+                    <a href="index.php">
                     <p class="text-center">U heeft succesvol betaald</p>
                     <img src="images/betaald.png" class="img-fluid m-auto" alt="Responsive image">
+                    </a>
                 </div>
             </div>
         </div>
@@ -148,9 +149,7 @@
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
             </div>
         </div>');
-
             }
-
 
         } else {
             print('
@@ -167,18 +166,17 @@
             <div class="col-12">
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
             </div>
-        </div>');
+        </div>
+        </div>
+        ');
         }
-    }
-    else
+    } else
     {
         print("404");
     }
 
-        ?>
+    include_once("../public/includes/footer.php");
 
+    ?>
 
-
-</body>
-</html>
 
