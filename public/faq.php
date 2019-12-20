@@ -24,7 +24,7 @@
         }
     </style>
     <?php
-    include_once("../src/core/init.php");
+    include_once("../src/core/dbhandler.php");
     $pageTitle = "FAQ";
     include_once("../public/includes/header.php");
     ?>

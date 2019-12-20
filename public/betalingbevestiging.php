@@ -20,7 +20,6 @@
     ?>
 <div class="container my-5 text-center" role="alert" style="">
     <?php
-
     if (isset ($_POST["unregistered"])) {
         //search in database if e-mail already exists
         $eMail=($_POST["e-mail"]);
@@ -161,12 +160,10 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-12">
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
             </div>
-        </div>
         </div>
         ');
         }
@@ -175,6 +172,7 @@
         print("404");
     }
 
+    print "</div>";
     include_once("../public/includes/footer.php");
 
     ?>
