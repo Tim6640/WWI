@@ -59,7 +59,7 @@ if (isset($_POST['rating'])) {
 }
 
 // check if review is set. if not then show form---------------------------------------------------------------------
-if (isset($succesfulReview) && (isset($_SESSION["id"]))) {
+if (($succesfulReview==false) && (isset($_SESSION["id"]))) {
     if (!empty($_GET["pid"])) {
         $pid = $_GET["pid"];
         $db = new DbHandler("ERP");
@@ -112,10 +112,11 @@ if (isset($succesfulReview) && (isset($_SESSION["id"]))) {
         print "<div style='text-align:center'>Deze pagina bestaat niet<br>
         klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
     }
-} else {
+} else if (!isset($_SESSION["id"])) {
     print "<div style='text-align:center'>Log in of maak een account aan om een review te kunnen plaatsen<br>
-        klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
+        klik <a href='/wwi/public/product.php?pid=\" . $productNummer . \"'>hier</a> om terug te gaan naar de productpagina</div>";
 }
+
 
 include_once("../public/includes/footer.php");
 ?>

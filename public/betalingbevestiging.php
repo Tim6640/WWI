@@ -96,7 +96,6 @@
                     }
 
                     //check the amount and set if exists
-                    print ($amountArray["$product"]);
                     if ($product == (array_key_exists($product, $amountArray))) {
                         $amount = ($amountArray["$product"]);
                     } else {
@@ -168,12 +167,14 @@
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
             </div>
         </div>
+        </div>
         ');
         }
     } else
     {
         print("404");
     }
+
     include_once("../public/includes/footer.php");
 
     ?>
