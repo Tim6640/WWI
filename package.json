@@ -1,0 +1,23 @@
+{
+  "name": "wwi",
+  "version": "1.0.0",
+  "description": "Wide World Importers",
+  "main": "index.js",
+  "scripts": {
+    "build": "node-sass assets/scss/app.scss public/css/bootstrap.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tim6640/WWI.git"
+  },
+  "author": "Tim van Beek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tim6640/WWI/issues"
+  },
+  "homepage": "https://github.com/Tim6640/WWI#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "node-sass": "^4.13.0"
+  }
+}
