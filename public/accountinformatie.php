@@ -145,7 +145,7 @@ if (isset($_POST["change"])) {
                                value="<?php print($result["firstname"]); ?>">
                     </div>
                     <div class="form-group col-md-2">
-                        <label>Tussenvooegsel</label>
+                        <label>Tussenvoegsel</label>
                         <input type="text" name="Tussenvoegsel" class="form-control" pattern="[A-Za-z]{1,10}"
                                value="<?php print($result["ln_prefix"]); ?>">
                     </div>
@@ -245,7 +245,7 @@ if (isset($_POST["change"])) {
         </div>
         <div class="px-4 px-lg-0 ">
             <div class="text-lg-center">
-                <a href="homepage.php">
+                <a href="index.php">
                     <h5 class="text-center">terug naar homepage</h5>
                 </a>
             </div>

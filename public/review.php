@@ -1,12 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: tim11
+ * Date: 7-11-2019
+ * Time: 09:52
+ */
 
-ini_set('display_errors',0);
 include_once("../src/core/DbHandler.php");
 $pageTitle = "overzicht";
 include_once("../public/includes/header.php");
-$customerId = ($_SESSION["id"]);
-if (!empty($customerId)){
-    if (isset($_POST['rating'])) {
+
+
+if (isset($_POST['rating'])) {
     //start connection---------------
     $db = new DbHandler("USER");
     $connection = $db->connect();
@@ -54,7 +59,7 @@ if (!empty($customerId)){
 }
 
 // check if review is set. if not then show form---------------------------------------------------------------------
-if (!$succesfulReview && (isset($_SESSION["id"]))) {
+if (($succesfulReview==false) && (isset($_SESSION["id"]))) {
     if (!empty($_GET["pid"])) {
         $pid = $_GET["pid"];
         $db = new DbHandler("ERP");
@@ -89,9 +94,12 @@ if (!$succesfulReview && (isset($_SESSION["id"]))) {
                             }
                         }
                         ?>
+                    </div>
+                    <div>
                         <label for="review">Opmerking</label>
-                        <textarea class="form-control rounded-0" id="review" name="review" rows="5"
-                                  placeholder="(optioneel) Vul hier uw mening in over dit product"></textarea>
+                        <textarea class="form-control rounded-0" id="review" name="review" rows="3"
+                                  placeholder="(optioneel) Vul hier uw mening in over dit product"
+                                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></textarea>
                     </div>
                     <input style="margin-bottom:10px" type="submit" value="verwerken">
                 </form>
@@ -104,9 +112,11 @@ if (!$succesfulReview && (isset($_SESSION["id"]))) {
         print "<div style='text-align:center'>Deze pagina bestaat niet<br>
         klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
     }
-} else {
+} else if (!isset($_SESSION["id"])) {
     print "<div style='text-align:center'>Log in of maak een account aan om een review te kunnen plaatsen<br>
-        klik <a href='/wwi/public'>hier</a> om terug te gaan naar de thuispagina</div>";
+        klik <a href='/wwi/public/product.php?pid=\" . $productNummer . \"'>hier</a> om terug te gaan naar de productpagina</div>";
 }
+
+
 include_once("../public/includes/footer.php");
 ?>

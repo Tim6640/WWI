@@ -20,7 +20,6 @@
     ?>
 <div class="container my-5 text-center" role="alert" style="">
     <?php
-
     if (isset ($_POST["unregistered"])) {
         //search in database if e-mail already exists
         $eMail=($_POST["e-mail"]);
@@ -86,10 +85,7 @@
                 sleep(0.25);
                 $orderID=($result["orderrecordID"]);
 
-
                 $productArray=($_SESSION["shoppingCart"]);
-//                $productArray=array(1, 18, 25, 69);
-
                 //use foreach to place each product in order
                 foreach ($productArray as $product) {
                     if (isset($_SESSION["aantallen"])){
@@ -164,7 +160,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-12">
                 <button type="button" class="btn btn-lg btn-primary center-block">home <i class="fas fa-home"></i></button>
@@ -176,6 +171,8 @@
     {
         print("404");
     }
+
+    print "</div>";
     include_once("../public/includes/footer.php");
 
     ?>

@@ -27,8 +27,7 @@ if (empty($_SESSION["id"])) {
         </script>
     ");
 
-}
-else {
+} else {
     $customerID = $_SESSION["id"];
     $db = new DbHandler("USER");
     $connection = $db->connect();

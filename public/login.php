@@ -53,7 +53,7 @@ if (isset($_SESSION["logged_in"])) {
     </div>
     <div class="px-4 px-lg-0 ">
             <div class="text-lg-center">
-                <a href="homepage.php">
+                <a href="index.php">
                     <h5 class="text-center">terug naar homepage</h5>
                 </a>
             </div>
@@ -64,7 +64,7 @@ if (isset($_SESSION["logged_in"])) {
     ?>
     <!-- kaartje van alles -->
     <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
+        <div class="d-flex justify-content-md-center h-100">
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <!-- logo plaats -->
@@ -112,7 +112,7 @@ if (isset($_SESSION["logged_in"])) {
                 <!-- registeren -->
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
-                        Heb je nog geen account? <a href="account.php" class="ml-2">Registeren
+                        Heb je nog geen account? <a href="account.php">Registeren
                     </div>
 
                 </div>

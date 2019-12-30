@@ -15,8 +15,10 @@
         <div class="row">
             <!-- logo -->
             <div class="col-4">
-                <img class="footer-logo " src="images/wwi_logo_small.png">
+                <a href="index.php">
+                <img class="footer-logo " src="images/logo.png">
                 <h6 class="footer-title">Wide World <span class="text-secondary">Importers</span></h6>
+                </a>
             </div>
             <!-- logo -->
             <!-- Over ons -->
